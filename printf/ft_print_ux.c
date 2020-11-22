@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:18 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/18 19:35:12 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/22 15:25:35 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char			*change_base_to_string(unsigned long long num, char *base)
 
 int					ft_print_ux(t_flags *flag, va_list ap, char *base)
 {
-	int				i;
+	int				t_len;
 	unsigned int	num;
 	char			*str;
 	char			*tmp[2];
@@ -41,26 +41,29 @@ int					ft_print_ux(t_flags *flag, va_list ap, char *base)
 
 	num = va_arg(ap, unsigned int);
 	str = change_base_to_string(num, base);
-	if (num == 0 && flag->precision == 0)
-		str[0] = '0';
-	i = flag->precision - ft_strlen(str);
-	if (i > 0)
+	if (num == 0 && flag->precision == 0 && flag->dot == 1)
 	{
-		tmp[0] = init_c_malloc('0', i);
+		free(str);
+		str = ft_strdup("");
+	}
+	t_len = flag->precision - ft_strlen(str);
+	if (t_len > 0)
+	{
+		tmp[0] = init_c_malloc('0', t_len);
 		str = ft_free_strjoin(tmp[0], str);
 	}
-	i = flag->width - (int)ft_strlen(str);
-	if (i > 0)
+	t_len = flag->width - ft_strlen(str);
+	if (t_len > 0)
 	{
 		if (flag->minus)
 		{
 			tmp[0] = str;
-			tmp[1] = init_c_malloc(' ', i);
+			tmp[1] = init_c_malloc(' ', t_len);
 		}
 		else
 		{
 			c = flag->zero && flag->pf == 0 ? '0' : ' ';
-			tmp[0] = init_c_malloc(c, i);
+			tmp[0] = init_c_malloc(c, t_len);
 			tmp[1] = str;
 		}
 		str = ft_free_strjoin(tmp[0], tmp[1]);
