@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:07 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/18 19:17:26 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/22 17:52:38 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int			ft_print_digit(t_flags *flag, va_list ap)
 {
 	int		slen;
 	int		mf;
-	int		para_int;
+	long long	para_int;
 	char	*istr;
 	char	*mstr;
 

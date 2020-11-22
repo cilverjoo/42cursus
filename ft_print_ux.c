@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:18 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/22 15:25:35 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/22 18:06:57 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static char			*change_base_to_string(unsigned long long num, char *base)
 	len = ull_length(num, base_len);
 	if (!(str = (char*)malloc(sizeof(char) * (len + 1))))
 		return (0);
-	str[len] = '\0';
+	str[len--] = '\0';
 	while (num > 0)
 	{
-		str[len] = base[num % base_len];
+		str[len--] = base[num % base_len];
 		num /= base_len;
 	}
 	return (str);

@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 21:23:18 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/18 18:28:43 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/22 18:01:19 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,16 @@ static int          str_print(char *str)
 int     			str_print_minus(t_flags *flag, char *str)
 {
     char			*result;
+	int				len;
 
     if (flag->minus == 0)
         result = ft_left_strcat(str, ' ', (flag->width - ft_strlen(str)));
     else
         result = ft_right_strcat(str, ' ', (flag->width - ft_strlen(str)));
     ft_putstr(result);
+	len = ft_strlen(result);
     free(result);
-    return (ft_strlen(result));
+    return (len);
 }
 
 static int          str_precision_width_flag(t_flags *flag, char *str)

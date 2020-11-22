@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 21:00:29 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/18 19:14:43 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/22 17:40:02 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int			ft_print_c(t_flags *flag, va_list ap)
 	char	*str;
 	int		i;
 
+	i = 0;
 	if (!(c = va_arg(ap, int)))
 		return (0);
 	if (flag->width <= 0)

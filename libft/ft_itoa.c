@@ -6,13 +6,13 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 20:02:53 by ekim              #+#    #+#             */
-/*   Updated: 2020/10/14 22:41:48 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/22 17:50:11 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		get_power(long n)
+static int		get_power(long long n)
 {
 	int			length;
 
@@ -25,12 +25,12 @@ static int		get_power(long n)
 	return (length + 1);
 }
 
-char			*ft_itoa(int n)
+char			*ft_itoa(long long n)
 {
 	char		*result;
 	int			minus;
 	int			len;
-	long		nb;
+	long long		nb;
 
 	nb = n;
 	minus = 0;
