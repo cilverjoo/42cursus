@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:35:44 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/23 15:01:54 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/23 16:43:13 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,13 +170,6 @@ int				ft_printf(const char *format, ...)
 		if (*save == '%')
 		{
 			save++;
-			if (*save == '%')
-			{
-				write(1, "%", 1);
-				save++;
-				g_len++;
-				continue;
-			}
 			init_flag(&flag);
 			zero_minus(&flag, &save);
 			set_flag(&flag, &save, ap);
