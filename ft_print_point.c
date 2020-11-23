@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:13 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/18 19:18:05 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/23 14:48:00 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int						ft_print_point(t_flags *flag, va_list ap)
 
 	tmp = (void *)va_arg(ap, void *);
 	if (tmp == NULL)
-		conv_point = ft_strdup("(nil)");
+		conv_point = ft_strdup("0x0");
 	else
 	{
 		pointer = (unsigned long long)tmp;

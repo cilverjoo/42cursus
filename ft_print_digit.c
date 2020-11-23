@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:07 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/22 17:52:38 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/23 14:33:09 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,16 @@ void		add_zero(char **istr, int minus, t_flags *fg)
 	int 	x;
 
 	nlen = ft_strlen(*istr);
-	if (fg->precision >= 0)
+	if (fg->precision > 0)
 	{
 		x = fg->precision - nlen;
-		if (x > 0)
+		if (x >= 0)
 			*istr = ft_free_strjoin(init_c_malloc('0', x), *istr);
 	}
 	else
 	{
 		x = fg->width - nlen;
-		if (!fg->minus && fg->zero && x > 0)
+		if (!fg->minus && fg->zero && x > 0 && fg->pf == 0)
 			*istr = ft_free_strjoin(init_c_malloc('0', x + minus), *istr);
 	}
 }

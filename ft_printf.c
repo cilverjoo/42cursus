@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:35:44 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/18 17:31:18 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/23 15:01:54 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static char			what_flag(t_flags *fg, char *fm, va_list ap)
 			if (star < 0)
 			{
 				fg->pf = 0;
+				fg->precision = star;
 				return (10);
 			}
 			fg->precision = star;
@@ -74,7 +75,7 @@ static char			what_flag(t_flags *fg, char *fm, va_list ap)
 		fg->dot = 1;
 		return ('.');
 	}
-	else if (*fm <= '9' && *fm >= '0')
+	else if ((*fm <= '9' && *fm >= '0') || *fm == '-')
 		return (1);
 	return (10);
 }
@@ -140,15 +141,18 @@ static int				do_op(t_flags *flag, char *fm, va_list ap)
 static void			zero_minus(t_flags *fg, char **sv)
 {
 
-	if (**sv == '-')
+	while (**sv == '-' || **sv == '0')
 	{
-		fg->minus = 1;
-		(*sv)++;
-	}
-	else if (**sv == '0')
-	{
-		fg->zero = 1;
-		(*sv)++;
+		if (**sv == '-')
+		{
+			fg->minus = 1;
+			(*sv)++;
+		}
+		else if (**sv == '0')
+		{
+			fg->zero = 1;
+			(*sv)++;
+		}
 	}
 }
 
@@ -188,28 +192,3 @@ int				ft_printf(const char *format, ...)
 	va_end(ap);
 	return (g_len);
 }
-// 
-// int			main()
-// {
-// 	char	*str;
-// 	str = "haha";
-	
-// 	ft_printf("print_this:%-*.*x$\n", 3, -4, 0);
-// 	printf("print_this:%-*.*x$\n", 3, -4, 0);
-// 	ft_printf("print_this:%--*.0x$\n",-12,-12345);
-// 	printf("print_this:%--*.0x$\n",-12,-12345);
-// 	ft_printf("print_this:%--*.*X$\n",16,13,-12345);
-// 	printf("print_this:%--*.*X$\n",16,13,-12345);
-// 	ft_printf("print_this:%-4.1X$\n", -12345);
-// 	printf("print_this:%-4.1X$\n", -12345);
-// 	ft_printf("print_this:%0*.*x$\n", 6, -4, 123);
-// 	printf("print_this:%0*.*x$\n", 6, -4, 123);
-// 	ft_printf("print_this:%*.*s$\n", -20, -10, "competition");
-// 	printf("print_this:%*.*s$\n", -20, -10, "competition");
-// 	ft_printf("print_this:%*p$\n", 20, str);
-// 	printf("print_this:%*p$\n", 20, str);
-// 	ft_printf("print_this:%*.*d$\n", -10, 5, 382727);
-// 	printf("print_this:%*.*d$\n", -10, 5, 382727);
-// 	ft_printf("print_this:%*.*u$\n", -10, 5, 38273489);
-// 	printf("print_this:%*.*u$\n", -10, 5, 38273489);
-// }ls
