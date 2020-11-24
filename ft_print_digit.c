@@ -6,22 +6,11 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:07 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/24 20:21:33 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/24 20:52:02 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char			*init_c_malloc(char c, int i)
-{
-	char		*str;
-
-	str = malloc(i + 1);
-	str[i] = 0;
-	while (i--)
-		str[i] = c;
-	return (str);
-}
 
 char			*ft_free_strjoin(char *s1, char *s2)
 {
@@ -67,6 +56,24 @@ void			add_zero(char **istr, int minus, t_flags *fg)
 	}
 }
 
+int				int_to_istr(char **istr, t_flags *flag, va_list ap, int *mf)
+{
+	int			para_int;
+
+	para_int = va_arg(ap, int);
+	if (para_int < 0)
+	{
+		*mf = -1;
+		para_int *= -1;
+	}
+	*istr = ft_itoa(para_int);
+	if (para_int == 0 && flag->precision == 0 && flag->dot == 1)
+	{
+		free(*istr);
+		*istr = ft_strdup("");
+	}
+}
+
 int				ft_print_digit(t_flags *flag, va_list ap)
 {
 	int			slen;
@@ -76,18 +83,7 @@ int				ft_print_digit(t_flags *flag, va_list ap)
 	char		*mstr;
 
 	mf = 0;
-	para_int = va_arg(ap, int);
-	if (para_int < 0)
-	{
-		mf = -1;
-		para_int *= -1;
-	}
-	istr = ft_itoa(para_int);
-	if (para_int == 0 && flag->precision == 0 && flag->dot == 1)
-	{
-		free(istr);
-		istr = ft_strdup("");
-	}
+	para_int = int_to_istr(&istr, flag, &mf);
 	slen = ft_strlen(istr);
 	add_zero(&istr, mf, flag);
 	if (mf == -1)

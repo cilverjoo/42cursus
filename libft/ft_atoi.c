@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:26:59 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/18 17:50:10 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/24 20:41:14 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int						ft_atoi(char **str)
 {
-	unsigned long long   num;
+	unsigned long long	num;
 	int					sign;
-	
+
 	num = 0;
 	sign = 1;
 	if (**str == '-' || **str == '+')

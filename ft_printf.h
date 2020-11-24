@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 17:19:47 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/24 20:21:06 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/24 21:00:10 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,13 @@ typedef struct	s_flags
 extern int		g_len;
 extern char		*g_base_10;
 extern char		*g_base_x;
-extern char		*g_base_XX;
 
 int				ft_printf(const char *format, ...);
 int				ft_print_c(t_flags *flag, va_list ap);
 int				ft_print_digit(t_flags *flag, va_list ap);
 int				ft_print_str(t_flags *flag, va_list ap);
 int				ft_print_point(t_flags *flag, va_list ap);
-int				ft_print_ux(t_flags *flag, va_list ap, char *base);
+int				ft_print_ux(t_flags *flag, va_list ap, char *base, int capital);
 int				ft_print_percent(t_flags *flag);
 
 void			add_zero(char **istr, int minus, t_flags *fg);
@@ -53,8 +52,8 @@ char			*ft_right_strcat(char *str, char c, int width);
 void			ft_putstr(char *str);
 int				ull_length(unsigned long long ull, int base);
 
-void      		init_flag(t_flags *tf);
+void			init_flag(t_flags *tf);
 char			what_flag(t_flags *fg, char *fm, va_list ap);
-void			set_flag(t_flags *fg ,char **fm, va_list ap);
+void			set_flag(t_flags *fg, char **fm, va_list ap);
 
 #endif

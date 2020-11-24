@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 20:02:53 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/22 17:50:11 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/24 20:41:31 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char			*ft_itoa(long long n)
 	char		*result;
 	int			minus;
 	int			len;
-	long long		nb;
+	long long	nb;
 
 	nb = n;
 	minus = 0;

@@ -6,16 +6,27 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:24:19 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/24 20:21:25 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/24 20:43:48 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char			*ft_right_strcat(char *str, char c, int width)
+char					*init_c_malloc(char c, int i)
 {
-	int			i;
-	char		*result;
+	char				*str;
+
+	str = malloc(i + 1);
+	str[i] = 0;
+	while (i--)
+		str[i] = c;
+	return (str);
+}
+
+char					*ft_right_strcat(char *str, char c, int width)
+{
+	int					i;
+	char				*result;
 
 	if (!c || !str)
 		return (0);
@@ -33,11 +44,11 @@ char			*ft_right_strcat(char *str, char c, int width)
 	return (result);
 }
 
-char			*ft_left_strcat(char *str, char c, int width)
+char					*ft_left_strcat(char *str, char c, int width)
 {
-	int			i;
-	int			j;
-	char		*result;
+	int					i;
+	int					j;
+	char				*result;
 
 	if (!c || !str)
 		return (0);
@@ -53,10 +64,10 @@ char			*ft_left_strcat(char *str, char c, int width)
 	return (result);
 }
 
-int				ull_length(unsigned long long ull, int base)
+int						ull_length(unsigned long long ull, int base)
 {
-	int			length;
-	unsigned long long tmp;
+	int					length;
+	unsigned long long	tmp;
 
 	tmp = ull;
 	length = 0;
@@ -68,9 +79,9 @@ int				ull_length(unsigned long long ull, int base)
 	return (length);
 }
 
-void			ft_putstr(char *str)
+void					ft_putstr(char *str)
 {
-	int			len;
+	int					len;
 
 	if (!str)
 		return ;

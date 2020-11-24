@@ -6,11 +6,26 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:18 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/24 20:21:28 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/24 21:01:17 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static void			char_to_uppercase(char **str)
+{
+	int				i;
+	char			*tmp;
+
+	tmp = *str;
+	i = 0;
+	while (tmp[i])
+	{
+		if (tmp[i] >= 'a' && tmp[i] <= 'f')
+			tmp[i] -= 32;
+		i++;
+	}
+}
 
 static char			*change_base_to_string(unsigned long long num, char *base)
 {
@@ -33,7 +48,7 @@ static char			*change_base_to_string(unsigned long long num, char *base)
 	return (str);
 }
 
-void				ux_width_flag(t_flags *flag, int t_len, char **str)
+static void			ux_width_flag(t_flags *flag, int t_len, char **str)
 {
 	char			c;
 	char			*tmp[2];
@@ -55,7 +70,8 @@ void				ux_width_flag(t_flags *flag, int t_len, char **str)
 	}
 }
 
-int					ft_print_ux(t_flags *flag, va_list ap, char *base)
+int					ft_print_ux(t_flags *flag, va_list ap, char *base, \
+		int capital)
 {
 	int				t_len;
 	unsigned int	num;
@@ -77,6 +93,8 @@ int					ft_print_ux(t_flags *flag, va_list ap, char *base)
 		str = ft_free_strjoin(tmp[0], str);
 	}
 	ux_width_flag(flag, (flag->width - ft_strlen(str)), &str);
+	if (capital == 1)
+		char_to_upper(&str);
 	ft_putstr(str);
 	return (ft_strlen(str));
 }
