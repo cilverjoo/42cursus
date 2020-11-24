@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 17:19:47 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/24 20:01:04 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/24 20:13:22 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,9 @@ char			*ft_left_strcat(char *str, char c, int width);
 char			*ft_right_strcat(char *str, char c, int width);
 void			ft_putstr(char *str);
 int				ull_length(unsigned long long ull, int base);
+
+void      		init_flag(t_flags *tf);
+char			what_flag(t_flags *fg, char *fm, va_list ap);
+void			set_flag(t_flags *fg ,char **fm, va_list ap);
 
 #endif
