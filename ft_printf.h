@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 17:19:47 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/18 18:43:24 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/23 18:00:06 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ int	        ft_print_digit(t_flags *flag, va_list ap);
 int			ft_print_str(t_flags *flag, va_list ap);
 int			ft_print_point(t_flags *flag, va_list ap);
 int			ft_print_ux(t_flags *flag, va_list ap, char *base);
+int			ft_print_percent(t_flags *flag);
 
 void		add_zero(char **istr, int minus, t_flags *fg);
 char		*ft_free_strjoin(char *s1, char *s2);
 char		*init_c_malloc(char c, int i);
-int     	str_print_minus(t_flags *flag, char *str);
+int     	str_print_minus(t_flags *flag, char *str, char c);
 
 char		*ft_left_strcat(char *str, char c, int width);
 char		*ft_right_strcat(char *str, char c, int width);

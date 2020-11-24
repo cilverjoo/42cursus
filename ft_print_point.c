@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:13 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/23 14:48:00 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/24 16:56:47 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static char				*change_to_char_base(unsigned long long pointer, int base, int count)
 {
 	char    			*hexa;
-	char				*prefix;
 	unsigned long long	ull;
 
     ull = pointer;
@@ -27,38 +26,85 @@ static char				*change_to_char_base(unsigned long long pointer, int base, int co
 		hexa[count--] = g_base_x[ull % base];
 		ull /= base;
 	}
+	return (hexa);
+}
+
+static char				*point_precision_width_flag(t_flags *flag, char *conv_point)
+{
+	int					len;
+	char				*tmp[2];
+	char				*result;
+	char				*prefix;
+	
 	prefix = ft_strdup("0x");
-	return (ft_free_strjoin(prefix, hexa));
-}
-
-static int				point_width_flag(t_flags *flag, char *conv_point)
-{
-	int					length;
-
-	if ((length = flag->width - ft_strlen(conv_point)) > 0)
-		return (str_print_minus(flag, conv_point));
-	else
-		ft_putstr(conv_point);
-	return (ft_strlen(conv_point));
-}
-
-int						ft_print_point(t_flags *flag, va_list ap)
-{
-	int					count;
-	void				*tmp;
-	unsigned long long	pointer;
-	char				*conv_point;
-
-	tmp = (void *)va_arg(ap, void *);
-	if (tmp == NULL)
-		conv_point = ft_strdup("0x0");
-	else
+	len = flag->precision - ft_strlen(conv_point);
+	if (flag->pf == 1 && len > 0)
 	{
-		pointer = (unsigned long long)tmp;
-		count = ull_length(pointer, 16);
-		conv_point = change_to_char_base(pointer, 16, count);
+		tmp[0] = init_c_malloc('0', len);
+		tmp[1] = ft_free_strjoin(tmp[0], conv_point);
+		result = ft_free_strjoin(prefix, tmp[1]);
 	}
-	count = point_width_flag(flag, conv_point);
-	free(conv_point);
-	return (count);
+	else
+		result = ft_free_strjoin(prefix, conv_point);
+	len = flag->width - ft_strlen(result);
+	if (len > 0)
+	{
+		tmp[0] = init_c_malloc(' ', len);
+		if (flag->minus == 0)
+			tmp[1] = ft_free_strjoin(tmp[0], result);
+		else
+			tmp[1] = ft_free_strjoin(result, tmp[0]);
+		return (tmp[1]);
+	}
+	return (result);
+}
+
+char						*change_to_char_null(t_flags *flag)
+{
+	int						len;
+	char					*tmp[2];
+	char					*prefix;
+	char					*result;
+
+	if (flag->pf == 1 || flag->dot == 1)
+	{
+		prefix = ft_strdup("0x");
+		tmp[0] = init_c_malloc('0', flag->precision);
+		tmp[1] = ft_free_strjoin(prefix, tmp[0]);
+	}
+	else
+		tmp[1] = ft_strdup("0x0");
+	len = flag->width - ft_strlen(tmp[1]);
+	if (len > 0)
+	{
+		tmp[0] = init_c_malloc(' ', len);
+		if (flag->minus == 0)
+			result = ft_free_strjoin(tmp[0], tmp[1]);
+		else
+			result = ft_free_strjoin(tmp[1], tmp[0]);
+		return (result);
+	}
+	return (tmp[1]);
+}
+
+int							ft_print_point(t_flags *flag, va_list ap)
+{
+		char				*result;
+		unsigned long long	pointer;
+		int					count;
+		char				*conv_point;
+
+		pointer = va_arg(ap, unsigned long long);
+		count = ull_length(pointer, 16);
+		if (pointer)
+		{
+			conv_point = change_to_char_base(pointer, 16, count);
+			result = point_precision_width_flag(flag, conv_point);
+		}
+		else
+			result = change_to_char_null(flag);
+		ft_putstr(result);
+		count = ft_strlen(result);
+		free(result);
+		return (count);
 }

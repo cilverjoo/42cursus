@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 21:23:18 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/22 18:01:19 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/24 17:07:47 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,15 @@ static char         *make_trim(char *str, int length)
     return (trim);
 }
 
-static int          str_print(char *str)
-{
-    write(1, str, ft_strlen(str));
-    return (ft_strlen(str));
-}
-
-int     			str_print_minus(t_flags *flag, char *str)
+int     			str_print_minus(t_flags *flag, char *str, char c)
 {
     char			*result;
 	int				len;
 
     if (flag->minus == 0)
-        result = ft_left_strcat(str, ' ', (flag->width - ft_strlen(str)));
+        result = ft_left_strcat(str, c, (flag->width - ft_strlen(str)));
     else
-        result = ft_right_strcat(str, ' ', (flag->width - ft_strlen(str)));
+        result = ft_right_strcat(str, c, (flag->width - ft_strlen(str)));
     ft_putstr(result);
 	len = ft_strlen(result);
     free(result);
@@ -68,26 +62,43 @@ static int          str_precision_width_flag(t_flags *flag, char *str)
             free(trim);
             return (t_len);
         }
-        t_len = str_print_minus(flag, trim);
+        t_len = str_print_minus(flag, trim, ' ');
         free(trim);
         return (t_len);
     }
     else if (flag->width > len)
-        return (str_print_minus(flag, str));
-    return (str_print(str));
+        return (str_print_minus(flag, str, ' '));
+	ft_putstr(str);
+    return (ft_strlen(str));
 }
 
 static int			str_width_flag(t_flags *flag, char *str)
 {
     int				len;
+	char			*result;
 
     len = ft_strlen(str);
-    if (flag->width != 0)
+    if (flag->width)
     {
         if (flag->width > len)
-            return (str_print_minus(flag, str));
-    }
-    return (str_print(str));
+		{
+			if (flag->zero == 0)
+           		return (str_print_minus(flag, str, ' '));
+			else
+			{
+				if (flag->minus == 0)
+					result = ft_left_strcat(str, '0', (flag->width - len));
+				else
+					result = ft_right_strcat(str, ' ', (flag->width - len));
+			}
+			ft_putstr(result);
+			len = ft_strlen(result);
+			free(result);
+			return (len);
+		}
+	}
+	ft_putstr(str);
+    return (ft_strlen(str));
 }
 
 int				ft_print_str(t_flags *flag, va_list ap)

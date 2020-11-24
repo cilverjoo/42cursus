@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:35:44 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/23 16:43:13 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/23 17:59:38 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ static int				do_op(t_flags *flag, char *fm, va_list ap)
 		g_len += ft_print_point(flag, ap);
 	else if (c == 's')
 		g_len += ft_print_str(flag, ap);
+	else if (c == '%')
+		g_len += ft_print_percent(flag);
 	return (0);
 }
 
