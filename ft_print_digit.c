@@ -6,15 +6,15 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:07 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/23 14:33:09 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/24 20:02:47 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*init_c_malloc(char c, int i)
+char			*init_c_malloc(char c, int i)
 {
-	char *str;
+	char		*str;
 
 	str = malloc(i + 1);
 	str[i] = 0;
@@ -23,9 +23,9 @@ char		*init_c_malloc(char c, int i)
 	return (str);
 }
 
-char		*ft_free_strjoin(char *s1, char *s2)
+char			*ft_free_strjoin(char *s1, char *s2)
 {
-	char	*str;
+	char		*str;
 
 	str = ft_strjoin(s1, s2);
 	free(s1);
@@ -33,9 +33,9 @@ char		*ft_free_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-static void	add_space(char **istr, t_flags *fg)
+static void		add_space(char **istr, t_flags *fg)
 {
-	int x;
+	int			x;
 
 	x = fg->width - ft_strlen(*istr);
 	if (x > 0)
@@ -47,10 +47,10 @@ static void	add_space(char **istr, t_flags *fg)
 	}
 }
 
-void		add_zero(char **istr, int minus, t_flags *fg)
+void			add_zero(char **istr, int minus, t_flags *fg)
 {
-	int 	nlen;
-	int 	x;
+	int			nlen;
+	int			x;
 
 	nlen = ft_strlen(*istr);
 	if (fg->precision > 0)
@@ -67,13 +67,13 @@ void		add_zero(char **istr, int minus, t_flags *fg)
 	}
 }
 
-int			ft_print_digit(t_flags *flag, va_list ap)
+int				ft_print_digit(t_flags *flag, va_list ap)
 {
-	int		slen;
-	int		mf;
+	int			slen;
+	int			mf;
 	long long	para_int;
-	char	*istr;
-	char	*mstr;
+	char		*istr;
+	char		*mstr;
 
 	mf = 0;
 	para_int = va_arg(ap, int);
@@ -93,7 +93,7 @@ int			ft_print_digit(t_flags *flag, va_list ap)
 	if (mf == -1)
 	{
 		mstr = ft_strdup("-");
-		istr = ft_free_strjoin(mstr,istr);
+		istr = ft_free_strjoin(mstr, istr);
 	}
 	add_space(&istr, flag);
 	ft_putstr(istr);

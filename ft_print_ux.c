@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:18 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/23 15:17:52 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/24 19:27:39 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,28 @@ static char			*change_base_to_string(unsigned long long num, char *base)
 	return (str);
 }
 
+void				ux_width_flag(t_flags *flag, int t_len, char **str)
+{
+	char			c;
+	char			*tmp[2];
+
+	if (t_len > 0)
+	{
+		if (flag->minus)
+		{
+			tmp[0] = *str;
+			tmp[1] = init_c_malloc(' ', t_len);
+		}
+		else
+		{
+			c = flag->zero && flag->pf == 0 ? '0' : ' ';
+			tmp[0] = init_c_malloc(c, t_len);
+			tmp[1] = *str;
+		}
+		*str = ft_free_strjoin(tmp[0], tmp[1]);
+	}
+}
+
 int					ft_print_ux(t_flags *flag, va_list ap, char *base)
 {
 	int				t_len;
@@ -54,22 +76,7 @@ int					ft_print_ux(t_flags *flag, va_list ap, char *base)
 		tmp[0] = init_c_malloc('0', t_len);
 		str = ft_free_strjoin(tmp[0], str);
 	}
-	t_len = flag->width - ft_strlen(str);
-	if (t_len > 0)
-	{
-		if (flag->minus)
-		{
-			tmp[0] = str;
-			tmp[1] = init_c_malloc(' ', t_len);
-		}
-		else
-		{
-			c = flag->zero && flag->pf == 0 ? '0' : ' ';
-			tmp[0] = init_c_malloc(c, t_len);
-			tmp[1] = str;
-		}
-		str = ft_free_strjoin(tmp[0], tmp[1]);
-	}
+	ux_width_flag(flag, (flag->width - ft_strlen(str)), &str);
 	ft_putstr(str);
 	return (ft_strlen(str));
 }

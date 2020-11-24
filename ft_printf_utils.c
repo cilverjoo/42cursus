@@ -6,17 +6,17 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:24:19 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/17 21:17:57 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/24 20:00:28 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*ft_right_strcat(char *str, char c, int width)
+char			*ft_right_strcat(char *str, char c, int width)
 {
-	int		i;
-	char	*result;
-	
+	int			i;
+	char		*result;
+
 	if (!c || !str)
 		return (0);
 	i = 0;
@@ -33,11 +33,11 @@ char		*ft_right_strcat(char *str, char c, int width)
 	return (result);
 }
 
-char		*ft_left_strcat(char *str, char c, int width)
+char			*ft_left_strcat(char *str, char c, int width)
 {
-	int		i;
-	int		j;
-	char	*result;
+	int			i;
+	int			j;
+	char		*result;
 
 	if (!c || !str)
 		return (0);
@@ -53,24 +53,24 @@ char		*ft_left_strcat(char *str, char c, int width)
 	return (result);
 }
 
-int     	ull_length(unsigned long long ull, int base)
+int				ull_length(unsigned long long ull, int base)
 {
-    int     length;
-    unsigned long long tmp;
+	int			length;
+	unsigned long long tmp;
 
-    tmp = ull;
-    length = 0;
-    while (tmp > 0)
-    {
-        tmp = tmp / base;
-        length++;
-    }
-    return (length);
+	tmp = ull;
+	length = 0;
+	while (tmp > 0)
+	{
+		tmp = tmp / base;
+		length++;
+	}
+	return (length);
 }
 
-void	ft_putstr(char *str)
+void			ft_putstr(char *str)
 {
-	int	len;
+	int			len;
 
 	if (!str)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:35:44 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/23 17:59:38 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/24 20:02:13 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 int				g_len = 0;
 char			*g_base_10 = "0123456789";
 char			*g_base_x = "0123456789abcdef";
-char			*g_base_X = "0123456789ABCDEF";
+char			*g_base_XX = "0123456789ABCDEF";
 
-static void		init_flag(t_flags *tf)
+static void			init_flag(t_flags *tf)
 {
 	tf->minus = 0;
 	tf->precision = 0;
 	tf->width = 0;
 	tf->zero = 0;
-	tf->star = 0;
 	tf->dot = 0;
 	tf->wf = 0;
 	tf->pf = 0;
@@ -130,7 +129,7 @@ static int				do_op(t_flags *flag, char *fm, va_list ap)
 	else if (c == 'x')
 		g_len += ft_print_ux(flag, ap, g_base_x);
 	else if (c == 'X')
-		g_len += ft_print_ux(flag, ap, g_base_X);
+		g_len += ft_print_ux(flag, ap, g_base_XX);
 	else if (c == 'p')
 		g_len += ft_print_point(flag, ap);
 	else if (c == 's')
