@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:35:44 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/24 20:02:13 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/24 20:20:34 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,6 @@ char			*g_base_10 = "0123456789";
 char			*g_base_x = "0123456789abcdef";
 char			*g_base_XX = "0123456789ABCDEF";
 
-static void			init_flag(t_flags *tf)
-{
-	tf->minus = 0;
-	tf->precision = 0;
-	tf->width = 0;
-	tf->zero = 0;
-	tf->dot = 0;
-	tf->wf = 0;
-	tf->pf = 0;
-}
-
 static char			is_option(char *fm)
 {
 	if (*fm == 'c' || *fm == 's'|| *fm == 'i'
@@ -35,83 +24,6 @@ static char			is_option(char *fm)
 	 || *fm == 'X' || *fm == 'p' || *fm == '%')
 		return (*fm);
 	return (0);
-}
-
-static char			what_flag(t_flags *fg, char *fm, va_list ap)
-{
-	int			star;
-
-	if (is_option(fm))
-		return (0);
-	else if (*fm == '*')
-	{
-		star = va_arg(ap, int);
-		if (fg->dot == 1)
-		{
-			if (star < 0)
-			{
-				fg->pf = 0;
-				fg->precision = star;
-				return (10);
-			}
-			fg->precision = star;
-			fg->pf = 1;
-		}
-		else
-		{
-			if (star < 0)
-			{
-				fg->minus = 1;
-				star *= -1;
-			}
-			fg->width = star;
-			fg->wf = 1;
-		}
-		return ('*');
-	}
-	else if (*fm == '.')
-	{
-		fg->dot = 1;
-		return ('.');
-	}
-	else if ((*fm <= '9' && *fm >= '0') || *fm == '-')
-		return (1);
-	return (10);
-}
-
-static void			set_flag(t_flags *fg ,char **fm, va_list ap)
-{
-	char	c;
-	int		wf;
-	int		pf;
-
-	c = 1;
-	wf = 1;
-	pf = 0;
-	while ((c = what_flag(fg, *fm, ap)))
-	{
-		if (c == '.')
-		{
-			fg->wf = 0;
-			fg->pf = 1;
-			wf = 0;
-			pf = 1;
-		}
-		if (c == 1 && wf == 1 && pf != 1)
-		{
-			fg->width = ft_atoi(fm);
-			fg->wf = 1;
-			wf = 0;
-			continue;
-		}
-		else if (c == 1 && wf == 0 && pf == 1)
-		{
-			fg->precision = ft_atoi(fm);
-			fg->pf = 1;
-			continue;
-		}
-		(*fm)++;
-	}
 }
 
 static int				do_op(t_flags *flag, char *fm, va_list ap)
