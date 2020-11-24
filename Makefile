@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-SRCS = ft_printf.c ft_printf_utils.c ft_print_c.c ft_print_str.c \
+SRCS = ft_printf.c ft_printf_utils.c ft_print_c.c ft_print_str.c ft_setflag.c \
 	   ft_print_digit.c ft_print_point.c ft_print_ux.c ft_print_percent.c
 OBJS = ${SRCS:.c=.o}
 NAME = libftprintf.a
