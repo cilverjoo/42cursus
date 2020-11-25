@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 16:35:44 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/24 21:00:27 by ekim             ###   ########.fr       */
+/*   Created: 2020/11/25 13:33:53 by ekim              #+#    #+#             */
+/*   Updated: 2020/11/25 15:44:47 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int					g_len = 0;
 char				*g_base_10 = "0123456789";
 char				*g_base_x = "0123456789abcdef";
 
-static char			is_option(char *fm)
+char				is_option(char *fm)
 {
 	if (*fm == 'c' || *fm == 's' || *fm == 'i'
 			|| *fm == 'd' || *fm == 'u' || *fm == 'x'
@@ -50,23 +50,6 @@ static int			do_op(t_flags *flag, char *fm, va_list ap)
 	return (0);
 }
 
-static void			zero_minus(t_flags *fg, char **sv)
-{
-	while (**sv == '-' || **sv == '0')
-	{
-		if (**sv == '-')
-		{
-			fg->minus = 1;
-			(*sv)++;
-		}
-		else if (**sv == '0')
-		{
-			fg->zero = 1;
-			(*sv)++;
-		}
-	}
-}
-
 int					ft_printf(const char *format, ...)
 {
 	char			*save;
@@ -78,10 +61,10 @@ int					ft_printf(const char *format, ...)
 	save = (char *)format;
 	while (*save)
 	{
-		if (*save++ == '%')
+		if (*save == '%')
 		{
+			save++;
 			init_flag(&flag);
-			zero_minus(&flag, &save);
 			set_flag(&flag, &save, ap);
 			do_op(&flag, save, ap);
 		}
@@ -90,6 +73,7 @@ int					ft_printf(const char *format, ...)
 			write(1, save, 1);
 			g_len++;
 		}
+		save++;
 	}
 	va_end(ap);
 	return (g_len);

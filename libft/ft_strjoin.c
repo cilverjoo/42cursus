@@ -6,13 +6,13 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 15:18:48 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/18 18:47:53 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/25 19:16:42 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*return_str(char const *s1, char const *s2, int len)
+static char	*return_str(char *s1, char *s2, int len)
 {
 	char	*result;
 	size_t	i;
@@ -36,7 +36,7 @@ static char	*return_str(char const *s1, char const *s2, int len)
 	return (result);
 }
 
-char		*ft_strjoin(char const *s1, char const *s2)
+char		*ft_strjoin(char *s1, char *s2)
 {
 	char	*result;
 	int		len;

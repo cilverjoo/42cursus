@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/12 20:02:53 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/24 20:41:31 by ekim             ###   ########.fr       */
+/*   Created: 2020/11/25 15:56:14 by ekim              #+#    #+#             */
+/*   Updated: 2020/11/25 19:14:22 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		get_power(long long n)
+static int		get_power(long n)
 {
 	int			length;
 
@@ -25,7 +25,7 @@ static int		get_power(long long n)
 	return (length + 1);
 }
 
-char			*ft_itoa(long long n)
+char			*ft_itoa(int n)
 {
 	char		*result;
 	int			minus;

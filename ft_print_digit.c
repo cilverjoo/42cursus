@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/11 19:25:07 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/24 20:52:02 by ekim             ###   ########.fr       */
+/*   Created: 2020/11/25 14:13:36 by ekim              #+#    #+#             */
+/*   Updated: 2020/11/25 15:55:23 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,35 +56,26 @@ void			add_zero(char **istr, int minus, t_flags *fg)
 	}
 }
 
-int				int_to_istr(char **istr, t_flags *flag, va_list ap, int *mf)
+static char		*int_to_istr(t_flags *flag, va_list ap)
 {
-	int			para_int;
+	char		*istr;
+	char		*mstr;
+	int			mf;
+	long long	para_int;
 
+	mf = 0;
 	para_int = va_arg(ap, int);
 	if (para_int < 0)
 	{
-		*mf = -1;
+		mf = -1;
 		para_int *= -1;
 	}
-	*istr = ft_itoa(para_int);
+	istr = ft_itoa(para_int);
 	if (para_int == 0 && flag->precision == 0 && flag->dot == 1)
 	{
-		free(*istr);
-		*istr = ft_strdup("");
+		free(istr);
+		istr = ft_strdup("");
 	}
-}
-
-int				ft_print_digit(t_flags *flag, va_list ap)
-{
-	int			slen;
-	int			mf;
-	long long	para_int;
-	char		*istr;
-	char		*mstr;
-
-	mf = 0;
-	para_int = int_to_istr(&istr, flag, &mf);
-	slen = ft_strlen(istr);
 	add_zero(&istr, mf, flag);
 	if (mf == -1)
 	{
@@ -92,6 +83,17 @@ int				ft_print_digit(t_flags *flag, va_list ap)
 		istr = ft_free_strjoin(mstr, istr);
 	}
 	add_space(&istr, flag);
+	return (istr);
+}
+
+int				ft_print_digit(t_flags *flag, va_list ap)
+{
+	int			slen;
+	char		*istr;
+
+	istr = int_to_istr(flag, ap);
 	ft_putstr(istr);
-	return (ft_strlen(istr));
+	slen = ft_strlen(istr);
+	free(istr);
+	return (slen);
 }

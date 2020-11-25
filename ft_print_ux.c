@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/11 19:25:18 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/24 21:01:17 by ekim             ###   ########.fr       */
+/*   Created: 2020/11/25 14:12:27 by ekim              #+#    #+#             */
+/*   Updated: 2020/11/25 14:12:32 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int					ft_print_ux(t_flags *flag, va_list ap, char *base, \
 	unsigned int	num;
 	char			*str;
 	char			*tmp[2];
-	char			c;
 
 	num = va_arg(ap, unsigned int);
 	str = change_base_to_string(num, base);
@@ -94,7 +93,7 @@ int					ft_print_ux(t_flags *flag, va_list ap, char *base, \
 	}
 	ux_width_flag(flag, (flag->width - ft_strlen(str)), &str);
 	if (capital == 1)
-		char_to_upper(&str);
+		char_to_uppercase(&str);
 	ft_putstr(str);
 	return (ft_strlen(str));
 }

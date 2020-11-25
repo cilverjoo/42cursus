@@ -6,13 +6,13 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 20:49:28 by ekim              #+#    #+#             */
-/*   Updated: 2020/10/12 22:34:29 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/25 19:15:35 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strdup(const char *s1)
+char		*ft_strdup(char *s1)
 {
 	int		len;
 	char	*copy;

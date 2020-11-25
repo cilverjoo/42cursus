@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 20:28:47 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/24 20:31:13 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/25 15:43:54 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,24 @@ void			init_flag(t_flags *fg)
 	fg->pf = 0;
 }
 
-char			set_star_as_flag(t_flags *fg, int star)
+static void		zero_minus(t_flags *fg, char **fm)
+{
+	while (**fm == '-' || **fm == '0')
+	{
+		if (**fm == '-')
+		{
+			fg->minus = 1;
+			(*fm)++;
+		}
+		else if (**fm == '0')
+		{
+			fg->zero = 1;
+			(*fm)++;
+		}
+	}
+}
+
+static char		set_star_as_flag(t_flags *fg, int star)
 {
 	if (fg->dot == 1)
 	{
@@ -31,7 +48,7 @@ char			set_star_as_flag(t_flags *fg, int star)
 		{
 			fg->pf = 0;
 			fg->precision = star;
-			return (10);
+			return (0);
 		}
 		fg->precision = star;
 		fg->pf = 1;
@@ -46,16 +63,14 @@ char			set_star_as_flag(t_flags *fg, int star)
 		fg->width = star;
 		fg->wf = 1;
 	}
-	return ('*');
+	return (0);
 }
 
-char			what_flag(t_flags *fg, char *fm, va_list ap)
+static char		what_flag(t_flags *fg, char *fm, va_list ap)
 {
 	int			star;
 
-	if (is_option(fm))
-		return (0);
-	else if (*fm == '*')
+	if (*fm == '*')
 	{
 		star = va_arg(ap, int);
 		return (set_star_as_flag(fg, star));
@@ -63,35 +78,33 @@ char			what_flag(t_flags *fg, char *fm, va_list ap)
 	else if (*fm == '.')
 	{
 		fg->dot = 1;
-		return ('.');
+		return (0);
 	}
-	else if ((*fm <= '9' && *fm >= '0') || *fm == '-')
+	else if (*fm <= '9' && *fm >= '0')
 		return (1);
-	return (10);
+	return (0);
 }
 
 void			set_flag(t_flags *fg, char **fm, va_list ap)
 {
-	char		c;
-	int			dot;
-
-	dot = 0;
-	while ((c = what_flag(fg, *fm, ap)))
+	zero_minus(fg, fm);
+	while (!is_option(*fm))
 	{
-		if (c == '.')
-			dot = 1;
-		else if (c == 1 && dot == 0 && fg->wf == 0)
+		if (what_flag(fg, *fm, ap))
 		{
-			fg->width = ft_atoi(fm);
-			fg->wf = 1;
-		}
-		else if (c == 1 && dot == 1 && fg->pf == 0)
-		{
-			fg->precision = ft_atoi(fm);
-			if (fg->precision < 0)
-				fg->pf = 0;
-			else
-				fg->pf = 1;
+			if (fg->dot == 0 && fg->wf == 0)
+			{
+				fg->width = ft_atoi(fm);
+				fg->wf = 1;
+			}
+			else if (fg->dot == 1 && fg->pf == 0)
+			{
+				fg->precision = ft_atoi(fm);
+				if (fg->precision < 0)
+					fg->pf = 0;
+				else
+					fg->pf = 1;
+			}
 		}
 		(*fm)++;
 	}
