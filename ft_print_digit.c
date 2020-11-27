@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_digit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 14:13:36 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/27 12:01:52 by ukim             ###   ########.fr       */
+/*   Created: 2020/11/27 18:59:30 by ekim              #+#    #+#             */
+/*   Updated: 2020/11/27 18:59:41 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+
 char			*ft_free_strjoin(char *s1, char *s2)
 {
 	char		*str;
