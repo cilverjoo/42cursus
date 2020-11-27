@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 19:00:09 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/27 19:00:11 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/27 19:13:08 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,27 +77,4 @@ int					ft_printf(const char *format, ...)
 	}
 	va_end(ap);
 	return (g_len);
-}
-
-int main()
-{
-	int a = -135;
-	ft_printf("Hello World %-*.*d$\n",4,4,a);
-	printf("Hello World %-*.*d$\n",4,4,a);
-
-	ft_printf("Hello World %-4.4d$\n",a);
-	printf("Hello World %-4.4d$\n",a);
-	a = -12;
-	ft_printf("Hello World %0*.d$\n",4,a);
-	printf("Hello World %0*.d$\n",4,a);
-
-	ft_printf("Hello World %0*.0d$\n",4,a);
-	printf("Hello World %0*.*d$\n",4,0,a);
-	ft_printf("Hello World %0*.4d$\n",4,a);
-	printf("Hello World %0*.4d$\n",4,a);
-	ft_printf("Hello World %0*.*d$\n",4,-3,a);
-	printf("Hello World %0*.*d$\n",4,-3,a);
-	a = -2147483648;
-	ft_printf("Hello World %d$\n",a);
-	printf("Hello World %d$\n",a);
 }

@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:13:00 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/25 14:13:03 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/27 20:24:15 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,13 @@ char					*change_to_char_null(t_flags *flag)
 	char				*tmp[2];
 	char				*prefix;
 	char				*result;
+	int					n_zero;
 
 	if (flag->pf == 1 || flag->dot == 1)
 	{
+		n_zero = flag->precision < 0 ? 1 : flag->precision;
 		prefix = ft_strdup("0x");
-		tmp[0] = init_c_malloc('0', flag->precision);
+		tmp[0] = init_c_malloc('0', n_zero);
 		tmp[1] = ft_free_strjoin(prefix, tmp[0]);
 	}
 	else
