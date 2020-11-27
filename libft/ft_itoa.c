@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ukim <ukim@42SEOUL.KR>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 15:56:14 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/25 19:14:22 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/27 03:32:34 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		get_power(long n)
 	return (length + 1);
 }
 
-char			*ft_itoa(int n)
+char			*ft_itoa(long long n)
 {
 	char		*result;
 	int			minus;

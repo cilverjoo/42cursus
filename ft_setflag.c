@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_setflag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ukim <ukim@42SEOUL.KR>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 20:28:47 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/25 15:43:54 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/27 03:12:35 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,10 @@ static char		what_flag(t_flags *fg, char *fm, va_list ap)
 	else if (*fm == '.')
 	{
 		fg->dot = 1;
+		fg->pf = 1;
 		return (0);
 	}
-	else if (*fm <= '9' && *fm >= '0')
+	else if ((*fm <= '9' && *fm >= '0') || *fm == '-')
 		return (1);
 	return (0);
 }
@@ -96,14 +97,16 @@ void			set_flag(t_flags *fg, char **fm, va_list ap)
 			{
 				fg->width = ft_atoi(fm);
 				fg->wf = 1;
+				continue;
 			}
-			else if (fg->dot == 1 && fg->pf == 0)
+			else if (fg->dot == 1)
 			{
 				fg->precision = ft_atoi(fm);
 				if (fg->precision < 0)
 					fg->pf = 0;
 				else
 					fg->pf = 1;
+				continue;
 			}
 		}
 		(*fm)++;

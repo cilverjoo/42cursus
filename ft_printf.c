@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 13:33:53 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/25 15:44:47 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/27 12:08:25 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "ft_printf.h"
 
 int					g_len = 0;
@@ -77,4 +78,27 @@ int					ft_printf(const char *format, ...)
 	}
 	va_end(ap);
 	return (g_len);
+}
+
+int main()
+{
+	int a = -135;
+	ft_printf("Hello World %-*.*d$\n",4,4,a);
+	printf("Hello World %-*.*d$\n",4,4,a);
+
+	ft_printf("Hello World %-4.4d$\n",a);
+	printf("Hello World %-4.4d$\n",a);
+	a = -12;
+	ft_printf("Hello World %0*.d$\n",4,a);
+	printf("Hello World %0*.d$\n",4,a);
+
+	ft_printf("Hello World %0*.0d$\n",4,a);
+	printf("Hello World %0*.*d$\n",4,0,a);
+	ft_printf("Hello World %0*.4d$\n",4,a);
+	printf("Hello World %0*.4d$\n",4,a);
+	ft_printf("Hello World %0*.*d$\n",4,-3,a);
+	printf("Hello World %0*.*d$\n",4,-3,a);
+	a = -2147483648;
+	ft_printf("Hello World %d$\n",a);
+	printf("Hello World %d$\n",a);
 }
