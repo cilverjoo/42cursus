@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 18:59:30 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/27 18:59:41 by ekim             ###   ########.fr       */
+/*   Updated: 2020/11/27 20:27:30 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ static char		*int_to_istr(t_flags *flag, va_list ap)
 		mstr = ft_strdup("-");
 		istr = ft_free_strjoin(mstr, istr);
 	}
-	add_space(&istr, flag);
 	return (istr);
 }
 
@@ -92,6 +91,7 @@ int				ft_print_digit(t_flags *flag, va_list ap)
 	char		*istr;
 
 	istr = int_to_istr(flag, ap);
+	add_space(&istr, flag);
 	ft_putstr(istr);
 	slen = ft_strlen(istr);
 	free(istr);
