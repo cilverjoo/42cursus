@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/04 01:21:41 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/08 20:06:29 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/03 23:34:23 by ukim              #+#    #+#             */
+/*   Updated: 2020/10/21 20:18:22 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	char	*s2;
-	int		len;
-	int		i;
+	size_t	i;
 
-	len = ft_strlen(s1);
-	if (!(s2 = (char *)malloc(sizeof(char) * len + 1)))
-		return (NULL);
 	i = 0;
-	while (s1[i])
+	if (!dst)
+		return (0);
+	if (size > 0)
 	{
-		s2[i] = s1[i];
-		i += 1;
+		while (src[i] && i < (size - 1))
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = 0;
 	}
-	s2[i] = '\0';
-	return (s2);
+	while (src[i])
+		i++;
+	return (i);
 }

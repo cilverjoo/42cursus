@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/04 01:21:41 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/08 20:06:29 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/04 22:46:00 by ukim              #+#    #+#             */
+/*   Updated: 2020/10/05 17:32:12 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*s2;
-	int		len;
-	int		i;
+	size_t	i;
+	char	*buf;
 
-	len = ft_strlen(s1);
-	if (!(s2 = (char *)malloc(sizeof(char) * len + 1)))
+	if (s == NULL || !f)
+		return (NULL);
+	buf = (char *)malloc(sizeof(*buf) * (ft_strlen(s) + 1));
+	if (buf == NULL)
 		return (NULL);
 	i = 0;
-	while (s1[i])
+	while (s[i])
 	{
-		s2[i] = s1[i];
-		i += 1;
+		buf[i] = f(i, s[i]);
+		i++;
 	}
-	s2[i] = '\0';
-	return (s2);
+	buf[i] = '\0';
+	return (buf);
 }

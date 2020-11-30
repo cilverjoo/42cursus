@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/03 19:41:09 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/12 19:43:47 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/03 23:27:23 by ukim              #+#    #+#             */
+/*   Updated: 2020/10/21 20:32:18 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_atoi(char **str)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	unsigned long long	num;
-	int					sign;
+	int	i;
 
-	num = 0;
-	sign = 1;
-	
-	if (**str == '-' || **str == '+')
+	if (!dst && !src)
+		return (0);
+	if (dst > src)
 	{
-		if (**str == '-')
-			sign *= -1;
-		(*str)++;
+		i = (int)n - 1;
+		while (i >= 0)
+		{
+			*(char*)(dst + i) = *(char*)(src + i);
+			i--;
+		}
 	}
-	while (**str && ft_isdigit(**str))
+	else
 	{
-		num *= 10;
-		num += **str - '0';
-		(*str)++;
+		i = 0;
+		while (i < (int)n)
+		{
+			*(char*)(dst + i) = *(char*)(src + i);
+			i++;
+		}
 	}
-	return (sign * num);
+	return (dst);
 }

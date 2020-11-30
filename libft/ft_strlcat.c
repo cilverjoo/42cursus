@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/04 01:21:41 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/08 20:06:29 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/03 23:34:26 by ukim              #+#    #+#             */
+/*   Updated: 2020/10/04 00:03:44 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	char	*s2;
-	int		len;
-	int		i;
+	size_t	i;
+	size_t	j;
+	size_t	dst_length;
+	size_t	src_length;
 
-	len = ft_strlen(s1);
-	if (!(s2 = (char *)malloc(sizeof(char) * len + 1)))
-		return (NULL);
+	src_length = ft_strlen(src);
+	dst_length = ft_strlen(dst);
+	j = dst_length;
 	i = 0;
-	while (s1[i])
+	if (dst_length < size - 1 && size > 0)
 	{
-		s2[i] = s1[i];
-		i += 1;
+		while (src[i] && dst_length + i < size - 1)
+		{
+			dst[j] = src[i];
+			j++;
+			i++;
+		}
+		dst[j] = 0;
 	}
-	s2[i] = '\0';
-	return (s2);
+	if (dst_length >= size)
+		dst_length = size;
+	return (dst_length + src_length);
 }

@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/04 01:21:41 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/08 20:06:29 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/03 23:30:34 by ukim              #+#    #+#             */
+/*   Updated: 2020/10/07 14:17:53 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+void	*ft_memchr(const void *src, int val, size_t n)
 {
-	char	*s2;
-	int		len;
-	int		i;
+	size_t	i;
 
-	len = ft_strlen(s1);
-	if (!(s2 = (char *)malloc(sizeof(char) * len + 1)))
-		return (NULL);
 	i = 0;
-	while (s1[i])
+	while (i < n)
 	{
-		s2[i] = s1[i];
-		i += 1;
+		if (*(unsigned char*)(src + i) == (unsigned char)val)
+			return ((void*)(src + i));
+		i++;
 	}
-	s2[i] = '\0';
-	return (s2);
+	return (NULL);
 }

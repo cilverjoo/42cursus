@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/03 19:41:09 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/12 19:43:47 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/04 18:49:52 by ukim              #+#    #+#             */
+/*   Updated: 2020/10/21 20:25:15 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_atoi(char **str)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned long long	num;
-	int					sign;
+	char	*dest;
+	int		i;
 
-	num = 0;
-	sign = 1;
-	
-	if (**str == '-' || **str == '+')
+	if (!s || ft_strlen(s) < start)
 	{
-		if (**str == '-')
-			sign *= -1;
-		(*str)++;
+		dest = malloc(sizeof(char));
+		*dest = '\0';
+		return (dest);
 	}
-	while (**str && ft_isdigit(**str))
+	dest = malloc(len * sizeof(char) + 1);
+	if (dest == NULL)
+		return (NULL);
+	i = 0;
+	while (len > 0 && s[start])
 	{
-		num *= 10;
-		num += **str - '0';
-		(*str)++;
+		dest[i] = s[start];
+		i++;
+		start++;
+		len--;
 	}
-	return (sign * num);
+	dest[i] = '\0';
+	return (dest);
 }
