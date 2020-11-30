@@ -1,0 +1,75 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/04 17:32:12 by ekim              #+#    #+#             */
+/*   Updated: 2020/11/06 14:17:04 by ekim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line_bonus.h"
+
+char				*ft_strdup(char *str)
+{
+	int				i;
+	char			*result;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	result = (char *)malloc(sizeof(char) * (i + 1));
+	i = 0;
+	while (*str)
+		result[i++] = *str++;
+	result[i] = '\0';
+	return (result);
+}
+
+char				*ft_strjoin(char *s1, char *s2)
+{
+	int				i;
+	int				j;
+	char			*result;
+
+	i = 0;
+	j = 0;
+	if (!s1)
+	{
+		if (!s2)
+			return (ft_strdup(""));
+		return (ft_strdup(s2));
+	}
+	while (s1[i])
+		i++;
+	while (s2[j])
+		j++;
+	result = (char *)malloc(sizeof(char) * (i + j + 1));
+	i = 0;
+	while (*s1)
+		result[i++] = *s1++;
+	while (*s2)
+		result[i++] = *s2++;
+	result[i] = '\0';
+	return (result);
+}
+
+int					newline_check(char *str)
+{
+	int				i;
+
+	if (!str)
+		return (-1);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
