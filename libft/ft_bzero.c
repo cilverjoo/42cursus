@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/03 21:37:20 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/07 14:16:21 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/07 19:15:07 by ekim              #+#    #+#             */
+/*   Updated: 2020/10/07 19:36:06 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t i;
+	unsigned char	*s1;
 
-	i = 0;
-	while (i < n)
-	{
-		*(unsigned char *)(s + i) = 0;
-		i++;
-	}
+	s1 = (unsigned char *)s;
+	while (n--)
+		*s1++ = 0x00;
 }

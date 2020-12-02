@@ -3,34 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/03 19:41:09 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/12 19:43:47 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/07 17:26:59 by ekim              #+#    #+#             */
+/*   Updated: 2020/10/14 22:39:21 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_atoi(char **str)
+static int			ft_isspace(char c)
 {
-	unsigned long long	num;
-	int					sign;
+	if (c == '\v' || c == '\n' || c == '\t' ||
+			c == '\r' || c == '\f' || c == ' ')
+		return (1);
+	return (0);
+}
 
-	num = 0;
-	sign = 1;
-	
-	if (**str == '-' || **str == '+')
+int					ft_atoi(const char *str)
+{
+	int				i;
+	int				minus;
+	unsigned long	result;
+
+	i = 0;
+	minus = 1;
+	result = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		if (**str == '-')
-			sign *= -1;
-		(*str)++;
+		if (str[i] == '-')
+			minus = -1;
+		i++;
 	}
-	while (**str && ft_isdigit(**str))
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		num *= 10;
-		num += **str - '0';
-		(*str)++;
+		result = result * 10 + str[i] - '0';
+		i++;
 	}
-	return (sign * num);
+	if (i > 19 || result >= 9223372036854775808ULL)
+		return (minus == 1 ? -1 : 0);
+	return (minus * result);
 }

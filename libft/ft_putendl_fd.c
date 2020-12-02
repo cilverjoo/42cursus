@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 17:48:43 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/05 22:02:14 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/12 22:54:48 by ekim              #+#    #+#             */
+/*   Updated: 2020/10/12 23:29:14 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void		ft_putendl_fd(char *s, int fd)
 {
-	if (fd < 0)
-		return ;
+	size_t	len;
+
 	if (!s)
 		return ;
-	ft_putstr_fd(s, fd);
+	len = ft_strlen(s);
+	write(fd, s, len);
 	write(fd, "\n", 1);
 }

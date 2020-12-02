@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 17:48:34 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/05 21:30:45 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/12 22:52:32 by ekim              #+#    #+#             */
+/*   Updated: 2020/10/14 21:41:03 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void		ft_putstr_fd(char *s, int fd)
 {
-	if (fd < 0 || !s)
+	size_t	len;
+
+	if (!s)
 		return ;
-	while (*s)
-	{
-		ft_putchar_fd(*s, fd);
-		s++;
-	}
+	len = ft_strlen(s);
+	write(fd, s, len);
 }

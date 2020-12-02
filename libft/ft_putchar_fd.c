@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 17:48:47 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/08 20:07:41 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/12 22:48:34 by ekim              #+#    #+#             */
+/*   Updated: 2020/10/14 22:35:03 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+void		ft_putchar_fd(char c, int fd)
 {
-	if (fd < 0)
+	if (!fd)
 		return ;
 	write(fd, &c, 1);
 }

@@ -3,35 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/04 00:34:02 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/08 20:06:55 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/07 17:32:16 by ekim              #+#    #+#             */
+/*   Updated: 2020/10/14 17:02:12 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *str, const char *to_find, size_t len)
+char		*ft_strnstr(const char *str, const char *to_find, size_t len)
 {
-	unsigned int pos;
-	unsigned int i;
+	size_t	i;
+	size_t	find_len;
 
+	i = 0;
 	if (!*to_find)
-		return ((char*)str);
-	pos = 0;
-	while (str[pos] != '\0' && (size_t)pos < len)
+		return ((char *)str);
+	find_len = ft_strlen(to_find);
+	while (str[i] && i + find_len <= len)
 	{
-		if (str[pos] == to_find[0])
+		if (str[i] == to_find[0])
 		{
-			i = 1;
-			while (to_find[i] != '\0' && str[pos + i] == to_find[i] &&
-					(size_t)(pos + i) < len)
-				++i;
-			if (to_find[i] == '\0')
-				return ((char*)&str[pos]);
+			if (ft_strncmp(str + i, to_find, find_len) == 0)
+				return ((char *)(str + i));
 		}
-		++pos;
+		i++;
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/03 23:27:23 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/21 20:32:18 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/07 20:11:33 by ekim              #+#    #+#             */
+/*   Updated: 2020/10/19 19:09:08 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,24 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	int	i;
+	unsigned char			*tmp;
+	const unsigned char		*s;
+	size_t					i;
 
+	tmp = (unsigned char *)dst;
+	s = (unsigned char *)src;
+	i = n;
 	if (!dst && !src)
-		return (0);
-	if (dst > src)
+		return (NULL);
+	if (dst <= src)
 	{
-		i = (int)n - 1;
-		while (i >= 0)
-		{
-			*(char*)(dst + i) = *(char*)(src + i);
-			i--;
-		}
+		while (n--)
+			*tmp++ = *s++;
 	}
 	else
 	{
-		i = 0;
-		while (i < (int)n)
-		{
-			*(char*)(dst + i) = *(char*)(src + i);
-			i++;
-		}
+		while (i--)
+			tmp[i] = s[i];
 	}
 	return (dst);
 }

@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 22:01:17 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/06 16:07:40 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/13 00:20:51 by ekim              #+#    #+#             */
+/*   Updated: 2020/10/14 21:27:59 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_lstsize(t_list *lst)
+int			ft_lstsize(t_list *lst)
 {
-	int		cnt;
+	t_list	*a;
+	int		length;
 
-	cnt = 0;
-	while (lst)
+	a = lst;
+	length = 0;
+	while (a)
 	{
-		lst = lst->next;
-		cnt++;
+		a = a->next;
+		length++;
 	}
-	return (cnt);
+	return (length);
 }

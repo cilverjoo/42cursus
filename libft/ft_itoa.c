@@ -5,58 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/04 22:45:49 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/17 17:29:03 by ekim             ###   ########.fr       */
+/*   Created: 2020/10/12 20:02:53 by ekim              #+#    #+#             */
+/*   Updated: 2020/10/14 22:41:48 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	void	check_nega(int *n, int *negative)
+static int		get_power(long n)
 {
-	if (*n < 0)
+	int			length;
+
+	length = 0;
+	while (n / 10 > 0)
 	{
-		*n *= -1;
-		*negative = 1;
+		length++;
+		n /= 10;
 	}
+	return (length + 1);
 }
 
 char			*ft_itoa(int n)
 {
-	int		tmpn;
-	int		len;
-	int		negative;
-	char	*str;
+	char		*result;
+	int			minus;
+	int			len;
+	long		nb;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	tmpn = n;
-	len = 2;
-	negative = 0;
-	check_nega(&n, &negative);
-	while (tmpn /= 10)
-		len++;
-	len += negative;
-	if ((str = (char*)malloc(sizeof(char) * len)) == NULL)
-		return (NULL);
-	str[--len] = '\0';
-	while (len--)
+	nb = n;
+	minus = 0;
+	if (nb < 0)
 	{
-		str[len] = n % 10 + '0';
-		n = n / 10;
+		minus = 1;
+		nb *= -1;
 	}
-	if (negative)
-		str[0] = '-';
-	return (str);
+	len = get_power(nb) + minus;
+	if (!(result = (char *)malloc(sizeof(char) * (len + 1))))
+		return (0);
+	if (minus == 1)
+		result[0] = '-';
+	result[len--] = '\0';
+	while (nb > 0 || len >= minus)
+	{
+		result[len--] = nb % 10 + '0';
+		nb /= 10;
+	}
+	return (result);
 }
-/*
-** int main(int ac , char **av)
-** {
-**  	if(ac == 2)
-**  	{
-**  		char *ans = ft_itoa(ft_atoi(av[1]));
-**  		printf("%s\n",ans);
-**  	}
-** }
-** cc ft_itoa.c ft_atoi.c ft_strdup.c ft_strlen.c  libft.h
-*/

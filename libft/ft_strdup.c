@@ -3,30 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/04 01:21:41 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/08 20:06:29 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/09 20:49:28 by ekim              #+#    #+#             */
+/*   Updated: 2020/10/12 22:34:29 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char		*ft_strdup(const char *s1)
 {
-	char	*s2;
 	int		len;
+	char	*copy;
 	int		i;
 
-	len = ft_strlen(s1);
-	if (!(s2 = (char *)malloc(sizeof(char) * len + 1)))
-		return (NULL);
+	len = 0;
 	i = 0;
+	while (s1[len])
+		len++;
+	copy = (char *)malloc(sizeof(char) * (len + 1));
+	if (copy == NULL)
+		return (0);
 	while (s1[i])
 	{
-		s2[i] = s1[i];
-		i += 1;
+		copy[i] = s1[i];
+		i++;
 	}
-	s2[i] = '\0';
-	return (s2);
+	copy[i] = 0x00;
+	return (copy);
 }

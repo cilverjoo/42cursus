@@ -3,42 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/04 18:49:46 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/23 16:45:25 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/12 15:52:13 by ekim              #+#    #+#             */
+/*   Updated: 2020/10/14 22:46:35 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	char	*mk_null_str(char *ans)
+static int	trim_check(char c, char const *set)
 {
-	if (!(ans = (char*)malloc(sizeof(char))))
-		return (NULL);
-	ans[0] = '\0';
-	return (ans);
+	int		i;
+
+	i = 0;
+	while (set[i])
+	{
+		if (set[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
-char			*ft_strtrim(char const *s1, char const *set)
+char		*ft_strtrim(char const *s1, char const *set)
 {
-	size_t		size_s;
-	char		*dest;
-	char		*ans;
+	char	*result;
+	int		start;
+	int		end;
+	int		idx;
 
-	ans = NULL;
-	if (!s1 || !set)
+	if (!s1)
 		return (NULL);
-	while (*s1 && ft_strchr(set, *s1))
-		s1++;
-	size_s = ft_strlen(s1);
-	if (size_s == 0)
-		return (mk_null_str(ans));
-	size_s--;
-	while (size_s && ft_strchr(set, s1[size_s]))
-		size_s--;
-	dest = ft_substr((char*)s1, 0, size_s + 1);
-	if (!dest)
-		return (mk_null_str(ans));
-	return (dest);
+	if (!set)
+		return (ft_strdup(s1));
+	start = 0;
+	while (trim_check(s1[start], set))
+		start++;
+	end = ft_strlen(s1) - 1;
+	while (trim_check(s1[end], set) && end > 0)
+		end--;
+	if (start > end)
+		return (ft_strdup(""));
+	if (!(result = (char *)malloc(sizeof(char) * (end - start + 2))))
+		return (0);
+	idx = 0;
+	while (start <= end)
+		result[idx++] = s1[start++];
+	result[idx] = '\0';
+	return (result);
 }

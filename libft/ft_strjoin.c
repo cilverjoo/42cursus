@@ -3,40 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/04 18:50:05 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/04 20:10:08 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/12 15:18:48 by ekim              #+#    #+#             */
+/*   Updated: 2020/10/14 22:51:17 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static char	*return_str(char const *s1, char const *s2, size_t len)
 {
-	int		i;
-	int		s1_len;
-	int		s2_len;
-	char	*str;
+	char	*result;
+	size_t	i;
+	size_t	j;
 
-	if (s1 && s2)
+	i = 0;
+	j = 0;
+	if (!(result = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	while (s1[i])
 	{
-		s1_len = ft_strlen(s1);
-		s2_len = ft_strlen(s2);
-		str = (char*)malloc(sizeof(char) * (s1_len + s2_len + 1));
-		if (str == NULL)
-			return (NULL);
-		i = -1;
-		while (s1[++i])
-			str[i] = s1[i];
-		i = -1;
-		while (s2[++i])
-		{
-			str[s1_len] = s2[i];
-			s1_len++;
-		}
-		str[s1_len] = '\0';
-		return (str);
+		result[i] = s1[i];
+		i++;
 	}
-	return (NULL);
+	while (s2[j])
+	{
+		result[i + j] = s2[j];
+		j++;
+	}
+	result[i + j] = '\0';
+	return (result);
+}
+
+char		*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*result;
+	size_t	len;
+
+	if (!s1 || !s2)
+	{
+		if (!s1)
+			return (ft_strdup(s2));
+		return (ft_strdup(s1));
+	}
+	len = ft_strlen(s1) + ft_strlen(s2);
+	result = return_str(s1, s2, len);
+	return (result);
 }
