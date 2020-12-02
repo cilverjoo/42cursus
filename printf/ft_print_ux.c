@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:12:27 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/27 20:31:51 by ekim             ###   ########.fr       */
+/*   Updated: 2020/12/02 15:02:48 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,7 @@ int					ft_print_ux(t_flags *flag, va_list ap, char *base, \
 	if (capital == 1)
 		char_to_uppercase(&str);
 	ft_putstr(str);
-	return (ft_strlen(str));
+	t_len = ft_strlen(str);
+	free(str);
+	return (t_len);
 }
