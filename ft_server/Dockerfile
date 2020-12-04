@@ -11,20 +11,38 @@
 # **************************************************************************** #
 
 FROM debian:buster
+LABEL maintainer="ekim@student.42seoul.kr"
 
-RUN apt-get update \
-	&& apt-get upgrade \
-	&& apt-get -y install nginx mariadb-server php7.3-fpm php7.3-mysql \
-	openssl wget vim
+COPY srcs tmp
 
+#download requirements
+RUN apt-get update && apt-get upgrade
+RUN apt-get -y install nginx php7.3-fpm php7.3-mysql mariadb-server openssl wget
+
+#nginx ssl certificate
 RUN openssl req -newkey rsa:4096 -days 365 -nodes -x509 \
 	-subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=ekim/CN=localhost" \
 	-keyout localhost.dev.key -out localhost.dev.crt
 RUN mv localhost.dev.crt etc/ssl/certs/
 RUN mv localhost.dev.key etc/ssl/private/
 
-COPY srcs tmp
+#wget run
+RUN wget https://wordpress.org/latest.tar.gz && \
+	tar -xvf latest.tar.gz && \
+	mv wordpress/ var/www/html/ && \
+	rm latest.tar.gz
 
-RUN mv /tmp/default /etc/nginx/sites-available/default
+RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz && \
+	tar -xvf phpMyAdmin-5.0.2-all-languages.tar.gz && \
+	mv phpMyAdmin-5.0.2-all-languages phpmyadmin && \
+	mv phpmyadmin /var/www/html/
 
-ENTRYPOINT ["/tmp/docker.sh", "/bin/bash"]
+#move conf files from tmp
+RUN mv tmp/default etc/nginx/sites-available/
+RUN mv tmp/wp-config.php var/www/html/wordpress/
+RUN mv tmp/config.inc.php var/www/html/phpmyadmin/
+
+#remove unused html
+RUN rm /var/www/html/index.nginx-debian.html
+
+ENTRYPOINT ["/bin/bash", "tmp/setsql.sh"]
