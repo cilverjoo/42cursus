@@ -16,7 +16,7 @@ LABEL maintainer="ekim@student.42seoul.kr"
 COPY srcs tmp
 
 #download requirements
-RUN apt-get update && apt-get upgrade
+RUN apt-get update
 RUN apt-get -y install nginx php7.3-fpm php7.3-mysql mariadb-server openssl wget
 
 #nginx ssl certificate
@@ -35,7 +35,8 @@ RUN wget https://wordpress.org/latest.tar.gz && \
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz && \
 	tar -xvf phpMyAdmin-5.0.2-all-languages.tar.gz && \
 	mv phpMyAdmin-5.0.2-all-languages phpmyadmin && \
-	mv phpmyadmin /var/www/html/
+	mv phpmyadmin /var/www/html/ && \
+	rm phpMyAdmin-5.0.2-all-languages.tar.gz
 
 #move conf files from tmp
 RUN mv tmp/default etc/nginx/sites-available/
