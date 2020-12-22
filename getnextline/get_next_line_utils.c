@@ -6,13 +6,13 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 18:30:09 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/06 14:25:57 by ekim             ###   ########.fr       */
+/*   Updated: 2020/12/16 22:17:47 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char				*ft_strdup(char *str)
+char				*ft_gnl_strdup(char *str)
 {
 	int				i;
 	char			*result;
@@ -30,7 +30,7 @@ char				*ft_strdup(char *str)
 	return (result);
 }
 
-char				*ft_strjoin(char *s1, char *s2)
+char				*ft_gnl_strjoin(char *s1, char *s2)
 {
 	int				i;
 	int				j;
@@ -41,8 +41,8 @@ char				*ft_strjoin(char *s1, char *s2)
 	if (!s1)
 	{
 		if (!s2)
-			return (ft_strdup(""));
-		return (ft_strdup(s2));
+			return (ft_gnl_strdup(""));
+		return (ft_gnl_strdup(s2));
 	}
 	while (s1[i])
 		i++;

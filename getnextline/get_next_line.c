@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 17:53:20 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/06 14:25:18 by ekim             ###   ########.fr       */
+/*   Updated: 2020/12/16 22:18:00 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static int			return_line(char **stack, char **line, int check)
 	i = newline_check(tmp_stack);
 	if (check == 0 && i < 0)
 	{
-		*line = ft_strdup(*stack);
+		*line = ft_gnl_strdup(*stack);
 		free(*stack);
 		*stack = 0;
 		return (0);
 	}
 	tmp_stack[i] = '\0';
-	*line = ft_strdup(*stack);
-	*stack = ft_strdup(&tmp_stack[i + 1]);
+	*line = ft_gnl_strdup(*stack);
+	*stack = ft_gnl_strdup(&tmp_stack[i + 1]);
 	free(tmp_stack);
 	if (check == 0 && !**stack)
 		return (0);
@@ -49,7 +49,7 @@ static int			repeat_read(int fd, char **stack, char **line, char *buf)
 	{
 		buf[check] = '\0';
 		tmp_stack = *stack;
-		*stack = ft_strjoin(tmp_stack, buf);
+		*stack = ft_gnl_strjoin(tmp_stack, buf);
 		free(tmp_stack);
 		tmp_stack = NULL;
 		if (newline_check(buf) >= 0)
@@ -78,7 +78,7 @@ int					get_next_line(int fd, char **line)
 	if (check == 0 && (!stack[fd] || !*stack[fd]))
 	{
 		if (!*line)
-			*line = ft_strdup("");
+			*line = ft_gnl_strdup("");
 		return (0);
 	}
 	return (check);
