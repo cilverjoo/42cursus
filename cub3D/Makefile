@@ -2,10 +2,8 @@ NAME					= cub3D
 LIBFT					= libft.a
 CC						= gcc
 CFLAGS 					= -Wall -Wextra -Werror
-
 MLX						= -lmlx -lm -framework OpenGL -framework Appkit
 LIBFT_PATH				= ./includes/libft/
-
 SRCS =					./includes/getnextline/get_next_line.c\
 						./includes/getnextline/get_next_line_utils.c \
 						./srcs/main.c \
@@ -31,7 +29,7 @@ $(NAME):	$(OBJS)
 			@echo "\033[33m[Cub3D compilation...]"
 			@$(MAKE) -C ${LIBFT_PATH}
 			@echo "\033[33m[Cub3D compilation...]"
-			@$(CC) $(CFLAGS) $(OBJS) -I./includes -I./usr/include  $(MLX) $(LIBFT_PATH)$(LIBFT) -o $(NAME)
+			@$(CC) $(CFLAGS) $(OBJS) -I./includes -I./usr/include $(MLX) $(LIBFT_PATH)$(LIBFT) -o $(NAME)
 			@echo "\033[33m[Done!]"
 
 all:		$(NAME)
