@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 23:36:02 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/05 00:43:14 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/05 00:53:25 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ int				**make_visited_array(t_window *window)
 		exit_program(MEMORY_ALLOC_ERROR);
 	while (i < window->cub->map_row)
 	{
-		if (!(visited[i++] = (int *)malloc(sizeof(int) * window->cub->map_col)))
+		if (!(visited[i++] = \
+			(int *)malloc(sizeof(int) * window->cub->map_col)))
 			exit_program(MEMORY_ALLOC_ERROR);
 	}
 	x = -1;
