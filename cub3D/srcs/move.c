@@ -56,9 +56,9 @@ void			move_player_forward
 	new_pos_x = (player->pos.x + player->dir.x * moveSpeed);
 	new_pos_y = (player->pos.y + player->dir.y * moveSpeed);
 	if (cub->worldmap[(int)new_pos_x][(int)(player->pos.y)] == '0')
-		player->pos.x += player->dir.x * moveSpeed;
+		player->pos.x = new_pos_x;
 	if (cub->worldmap[(int)(player->pos.x)][(int)new_pos_y] == '0')
-		player->pos.y += player->dir.y * moveSpeed;
+		player->pos.y = new)pos_y;
 }
 
 void		move_player_backward
@@ -74,9 +74,9 @@ void		move_player_backward
 	new_pos_x = (player->pos.x - player->dir.x * moveSpeed);
 	new_pos_y = (player->pos.y - player->dir.y * moveSpeed);
 	if (cub->worldmap[(int)new_pos_x][(int)(player->pos.y)] == '0')
-		player->pos.x -= player->dir.x * moveSpeed;
+		player->pos.x = new_pos_x;
 	if (cub->worldmap[(int)(player->pos.x)][(int)new_pos_y] == '0')
-		player->pos.y -= player->dir.y * moveSpeed;
+		player->pos.y = new_pos_y;
 }
 
 void		move_player_right(t_player *player, t_cub *cub, double moveSpeed)
@@ -87,9 +87,9 @@ void		move_player_right(t_player *player, t_cub *cub, double moveSpeed)
 	new_pos_x = (player->pos.x + player->dir.x * moveSpeed);
 	new_pos_y = (player->pos.y - player->dir.y * moveSpeed);
 	if (cub->worldmap[(int)new_pos_x][(int)(player->pos.y)] == '0')
-		player->pos.x += player->dir.y * moveSpeed;
+		player->pos.x = new_pos_x;
 	if (cub->worldmap[(int)(player->pos.x)][(int)new_pos_y] == '0')
-		player->pos.y -= player->dir.x * moveSpeed;
+		player->pos.y = new_pos_y;
 }
 
 void		move_player_left(t_player *player, t_cub *cub, double moveSpeed)
@@ -100,7 +100,7 @@ void		move_player_left(t_player *player, t_cub *cub, double moveSpeed)
 	new_pos_x = (player->pos.x - player->dir.x * moveSpeed);
 	new_pos_y = (player->pos.y + player->dir.y * moveSpeed);
 	if (cub->worldmap[(int)new_pos_x][(int)(player->pos.y)] == '0')
-		player->pos.x -= player->dir.y * moveSpeed;
+		player->pos.x = new_pos_x;
 	if (cub->worldmap[(int)(player->pos.x)][(int)new_pos_y] == '0')
-		player->pos.y += player->dir.x * moveSpeed;
+		player->pos.y = new_pos_y;
 }
