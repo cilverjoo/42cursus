@@ -12,7 +12,7 @@
 
 #include "../includes/cub3d.h"
 
-void		rotate_player(t_player *player, int rotSpeed, int keycode)
+void		rotate_player(t_player *player, double rotSpeed, int keycode)
 {
 	double	oldDir_x;
 	double	oldPlane_x;
@@ -22,7 +22,7 @@ void		rotate_player(t_player *player, int rotSpeed, int keycode)
 	if (keycode == KEY_LEFT)
 	{
 		player->dir.x = player->dir.x * cos(rotSpeed) \
-			- (player->dir.y * sin(rotSpeed);
+			- (player->dir.y * sin(rotSpeed));
 		player->dir.y = (oldDir_x * sin(rotSpeed)) \
 			+ (player->dir.y * cos(rotSpeed));
 		player->plane.x = (player->plane.x *cos(rotSpeed)) \
@@ -33,7 +33,7 @@ void		rotate_player(t_player *player, int rotSpeed, int keycode)
 	else if (keycode == KEY_RIGHT)
 	{
 		player->dir.x = player->dir.x * cos(-rotSpeed) \
-			- (player->dir.y * sin(-rotSpeed);
+			- (player->dir.y * sin(-rotSpeed));
 		player->dir.y = (oldDir_x * sin(-rotSpeed)) \
 			+ (player->dir.y * cos(-rotSpeed));
 		player->plane.x = (player->plane.x *cos(-rotSpeed)) \
@@ -43,54 +43,64 @@ void		rotate_player(t_player *player, int rotSpeed, int keycode)
 	}
 }
 
-void		move_player_forward(t_player *player, t_cub *cub, int moveSpeed)
+void			move_player_forward
+(
+	t_player *player,
+	t_cub *cub,
+	double moveSpeed
+)
 {
-	int		new_pos_x;
-	int		new_pos_y;
+	double		new_pos_x;
+	double		new_pos_y;
 
-	new_pos_x = (int)(player->pos.x + player->dir.x * moveSpeed);
-	new_pos_y = (int)(player->pos.y + player->dir.y * moveSpeed);
-	if (cub->worldmap[new_pos_x][(int)(player->pos.y)] == '0')
+	new_pos_x = (player->pos.x + player->dir.x * moveSpeed);
+	new_pos_y = (player->pos.y + player->dir.y * moveSpeed);
+	if (cub->worldmap[(int)new_pos_x][(int)(player->pos.y)] == '0')
 		player->pos.x += player->dir.x * moveSpeed;
-	if (cub->worldmap[(int)(player->pos.x)][new_pos_y]) == '0')
+	if (cub->worldmap[(int)(player->pos.x)][(int)new_pos_y] == '0')
 		player->pos.y += player->dir.y * moveSpeed;
 }
 
-void		move_player_backword(t_player *player, t_cub *cub, int moveSpeed)
+void		move_player_backward
+(
+	t_player *player,
+	t_cub *cub,
+	double moveSpeed
+)
 {
-	int		new_pos_x;
-	int		new_pos_y;
+	double		new_pos_x;
+	double		new_pos_y;
 
-	new_pos_x = (int)(player->pos.x - player->dir.x * moveSpeed);
-	new_pos_y = (int)(player->pos.y - player->dir.y * moveSpeed);
-	if (cub->worldmap[new_pos_x][(int)(player->pos.y)] == '0')
+	new_pos_x = (player->pos.x - player->dir.x * moveSpeed);
+	new_pos_y = (player->pos.y - player->dir.y * moveSpeed);
+	if (cub->worldmap[(int)new_pos_x][(int)(player->pos.y)] == '0')
 		player->pos.x -= player->dir.x * moveSpeed;
-	if (cub->worldmap[(int)(player->pos.x)][new_pos_y]) == '0')
+	if (cub->worldmap[(int)(player->pos.x)][(int)new_pos_y] == '0')
 		player->pos.y -= player->dir.y * moveSpeed;
 }
 
-void		move_player_right(t_player *player, t_cub *cub, int moveSpeed)
+void		move_player_right(t_player *player, t_cub *cub, double moveSpeed)
 {
-	int		new_pos_x;
-	int		new_pos_y;
+	double		new_pos_x;
+	double		new_pos_y;
 
-	new_pos_x = (int)(player->pos.x + player->dir.x * moveSpeed);
-	new_pos_y = (int)(player->pos.y - player->dir.y * moveSpeed);
-	if (cub->worldmap[new_pos_x][(int)(player->pos.y)] == '0')
+	new_pos_x = (player->pos.x + player->dir.x * moveSpeed);
+	new_pos_y = (player->pos.y - player->dir.y * moveSpeed);
+	if (cub->worldmap[(int)new_pos_x][(int)(player->pos.y)] == '0')
 		player->pos.x += player->dir.y * moveSpeed;
-	if (cub->worldmap[(int)(player->pos.x)][new_pos_y]) == '0')
+	if (cub->worldmap[(int)(player->pos.x)][(int)new_pos_y] == '0')
 		player->pos.y -= player->dir.x * moveSpeed;
 }
 
-void		move_player_left(t_player *player, t_cub *cub, int moveSpeed)
+void		move_player_left(t_player *player, t_cub *cub, double moveSpeed)
 {
-	int		new_pos_x;
-	int		new_pos_y;
+	double		new_pos_x;
+	double		new_pos_y;
 
-	new_pos_x = (int)(player->pos.x - player->dir.x * moveSpeed);
-	new_pos_y = (int)(player->pos.y + player->dir.y * moveSpeed);
-	if (cub->worldmap[new_pos_x][(int)(player->pos.y)] == '0')
+	new_pos_x = (player->pos.x - player->dir.x * moveSpeed);
+	new_pos_y = (player->pos.y + player->dir.y * moveSpeed);
+	if (cub->worldmap[(int)new_pos_x][(int)(player->pos.y)] == '0')
 		player->pos.x -= player->dir.y * moveSpeed;
-	if (cub->worldmap[(int)(player->pos.x)][new_pos_y]) == '0')
+	if (cub->worldmap[(int)(player->pos.x)][(int)new_pos_y] == '0')
 		player->pos.y += player->dir.x * moveSpeed;
 }
