@@ -58,7 +58,7 @@ void			move_player_forward
 	if (cub->worldmap[(int)new_pos_x][(int)(player->pos.y)] == '0')
 		player->pos.x = new_pos_x;
 	if (cub->worldmap[(int)(player->pos.x)][(int)new_pos_y] == '0')
-		player->pos.y = new)pos_y;
+		player->pos.y = new_pos_y;
 }
 
 void		move_player_backward

@@ -201,9 +201,12 @@ void					free_window(t_window *window);
 void					set_cub_worldmap(char **line, t_window *window);
 int						set_cub(t_window *window, char *path);
 
-//player
-
-void					set_player(t_cub *cub);
+//check
+int						check_color_valid(char **tmp);
+int						map_size_check(t_window* window, int x, int y);
+void					DFS(int **v , int x, int y , t_window *window, int* res);
+int						**make_visited_array(t_window *window);
+int						check_wall_valid(t_window *window);
 
 //init
 void					init_coord_d(t_coord_d coord_d);

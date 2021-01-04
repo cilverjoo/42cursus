@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 23:36:02 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/04 23:53:50 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/05 00:43:14 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,12 @@ int				map_size_check(t_window* window, int x, int y)
 
 void			DFS(int **v , int x, int y , t_window *window, int* res)
 {
-	int			dx[4];
-	int			dy[4];
+	int			dx[4] = {0, 0, 1, -1};
+	int			dy[4] = {-1, 1, 0, 0};
 	int			i;
 	int			tx;
 	int			ty;
 
-	dx = {0, 0, 1, -1};
-	dy = {-1, 1, 0, 0};
 	if (window->cub->worldmap[x][y] == 'N' || map_size_check(window,x,y))
 	{
 		*res = 0;
@@ -80,7 +78,9 @@ int				**make_visited_array(t_window *window)
 	int			**visited;
 	int			x;
 	int			y;
+	int			i;
 
+	i = 0;
 	if (!(visited = (int**)malloc(sizeof(int*) * window->cub->map_row)))
 		exit_program(MEMORY_ALLOC_ERROR);
 	while (i < window->cub->map_row)
