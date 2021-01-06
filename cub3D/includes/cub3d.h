@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 20:59:59 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/06 21:30:14 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/06 21:44:00 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ void					init_cub(t_cub *cub);
 void					init_key(t_key *key);
 void					init_ray(t_ray *ray);
 void					init_window(t_window *window, char *path);
+
 
 int						key_manager(t_window *window);
 void					rotate_player(t_player *player, double	rot_spee,

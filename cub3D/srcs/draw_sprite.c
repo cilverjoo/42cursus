@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 20:23:22 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/06 21:26:14 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/06 23:51:45 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void			sprite_raycast(t_window *window, t_d_sprites *sprites)
 								(double)window->cub->res_width,
 								(double)window->cub->res_height);
 		stripe = window->d_sprites->draw_start_x;
-		while (stripe < window->d_sprites->draw_end_y)
+		while (stripe < window->d_sprites->draw_end_x)
 		{
 			window->d_sprites->tex_x =
 				(int)((256.0 * ((double)stripe -
