@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 19:53:08 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/06 21:31:19 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/06 23:56:18 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void			calc_transform_x_y
 	int idx
 )
 {
-	double			sprite_x;
-	double			sprite_y;
-	double			inv_det;
+	double		sprite_x;
+	double		sprite_y;
+	double		inv_det;
 
 	sprite_x = window->sprites[idx]->x - window->player->pos.x;
 	sprite_y = window->sprites[idx]->y - window->player->pos.y;
@@ -66,7 +66,7 @@ void			calc_screenx_height_draw
 		sprites->draw_end_x = (int)s_width - 1;
 }
 
-void		do_raycasting(t_window *window)
+void			do_raycasting(t_window *window)
 {
 	double		camera_x;
 	int			x;

@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 20:23:22 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/06 23:51:45 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/06 23:56:27 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void			pick_sprites_texture_color
 	}
 }
 
-void			sprite_raycast(t_window *window, t_d_sprites *sprites)
+void				sprite_raycast(t_window *window, t_d_sprites *sprites)
 {
 	int				i;
 	int				stripe;
