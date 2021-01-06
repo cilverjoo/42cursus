@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 23:36:02 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/05 00:53:25 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/06 20:45:47 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,39 +38,13 @@ int				check_color_valid(char **tmp)
 	return (SUCCESS);
 }
 
-int				map_size_check(t_window* window, int x, int y)
+int				map_size_check(t_window *window, int x, int y)
 {
 	if (x <= 0 || x > window->cub->map_col)
 		return (1);
 	if (y <= 0 || y > window->cub->map_row)
 		return (1);
 	return (0);
-}
-
-void			DFS(int **v , int x, int y , t_window *window, int* res)
-{
-	int			dx[4] = {0, 0, 1, -1};
-	int			dy[4] = {-1, 1, 0, 0};
-	int			i;
-	int			tx;
-	int			ty;
-
-	if (window->cub->worldmap[x][y] == 'N' || map_size_check(window,x,y))
-	{
-		*res = 0;
-		return;
-	}
-	i = -1;
-	while (++i < 4)
-	{
-		tx = x + dx[i];
-		ty = y + dy[i];
-		if (v[tx][ty] == 0 && window->cub->worldmap[tx][ty] != '1')
-		{
-			v[tx][ty] = 1;
-			DFS(v, tx, ty, window, res);
-		}
-	}
 }
 
 int				**make_visited_array(t_window *window)
@@ -85,7 +59,7 @@ int				**make_visited_array(t_window *window)
 		exit_program(MEMORY_ALLOC_ERROR);
 	while (i < window->cub->map_row)
 	{
-		if (!(visited[i++] = \
+		if (!(visited[i++] =
 			(int *)malloc(sizeof(int) * window->cub->map_col)))
 			exit_program(MEMORY_ALLOC_ERROR);
 	}
@@ -97,6 +71,32 @@ int				**make_visited_array(t_window *window)
 			visited[x][y] = 0;
 	}
 	return (visited);
+}
+
+void			dfs(int **v, int x, int y, t_window *window, int *res)
+{
+	int			dx[4] = {0, 0, 1, -1};
+	int			dy[4] = {-1, 1, 0, 0};
+	int			i;
+	int			tx;
+	int			ty;
+
+	if (window->cub->worldmap[x][y] == 'N' || map_size_check(window, x, y))
+	{
+		*res = 0;
+		return ;
+	}
+	i = -1;
+	while (++i < 4)
+	{
+		tx = x + dx[i];
+		ty = y + dy[i];
+		if (v[tx][ty] == 0 && window->cub->worldmap[tx][ty] != '1')
+		{
+			v[tx][ty] = 1;
+			dfs(v, tx, ty, window, res);
+		}
+	}
 }
 
 int				check_wall_valid(t_window *window)
@@ -113,7 +113,7 @@ int				check_wall_valid(t_window *window)
 	px = (int)window->player->pos.x;
 	py = (int)window->player->pos.y;
 	visited[px][py] = 1;
-	DFS(visited, px, py, window ,&res);
+	dfs(visited, px, py, window, &res);
 	i = 0;
 	while (i < window->cub->map_row)
 		free(visited[i++]);

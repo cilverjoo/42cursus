@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 19:28:56 by ekim              #+#    #+#             */
-/*   Updated: 2020/12/23 16:49:23 by ukim             ###   ########.fr       */
+/*   Updated: 2021/01/06 20:26:09 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,15 @@ static void		check_cub_file(char **lines)
 	}
 }
 
-static char		**read_map_file_to_array(int fd)
+static char		**read_map_file_to_array(char *path)
 {
+	int			fd;
 	char		*line;
 	char		*one_line;
 	char		**stack;
 	char		*tmp;
 
+	fd = open(path, O_RDONLY);
 	one_line = ft_strdup("");
 	while (get_next_line(fd, &line))
 	{
@@ -54,6 +56,7 @@ static char		**read_map_file_to_array(int fd)
 	stack = ft_split(tmp, '\n');
 	free(tmp);
 	close(fd);
+	check_cub_file(stack);
 	return (stack);
 }
 
@@ -98,16 +101,13 @@ static void		set_cub_backgrounds(char **tmp, t_cub *cub)
 	free_array(color);
 }
 
-int				set_cub(t_window *window, char *path)
+void			set_cub(t_window *window, char *path)
 {
 	char		**cub_file;
 	int			i;
 	char		**tmp;
-	int			fd;
 
-	fd = open(path, O_RDONLY);
-	cub_file = read_map_file_to_array(fd);
-	check_cub_file(cub_file);
+	cub_file = read_map_file_to_array(path);
 	i = -1;
 	while (++i < 8)
 	{
@@ -127,7 +127,4 @@ int				set_cub(t_window *window, char *path)
 	}
 	set_cub_worldmap(cub_file, window);
 	free_array(cub_file);
-	if (!check_wall_valid(window))
-		exit_program("Map is invalid!");
-	return (SUCCESS);
 }

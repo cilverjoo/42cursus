@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 17:15:34 by ukim              #+#    #+#             */
-/*   Updated: 2021/01/05 00:52:58 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/06 20:46:06 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static int			data_to_bitmap(t_img *pimg, int fd)
 	i = pimg->width * pimg->height * 4 - 1;
 	while (i >= 3)
 	{
-		write(fd, &((unsigned char*)(pimg->data))[i-3], 1);
-		write(fd, &((unsigned char*)(pimg->data))[i-2], 1);
-		write(fd, &((unsigned char*)(pimg->data))[i-1], 1);
-		write(fd, &((unsigned char*)(pimg->data))[i], 1);
+		write(fd, &((unsigned char *)(pimg->data))[i - 3], 1);
+		write(fd, &((unsigned char *)(pimg->data))[i - 2], 1);
+		write(fd, &((unsigned char *)(pimg->data))[i - 1], 1);
+		write(fd, &((unsigned char *)(pimg->data))[i], 1);
 		i = i - 4;
 	}
 	return (SUCCESS);
@@ -75,7 +75,7 @@ static int			bitmap_info_header(t_img *pimg, int fd)
 	return (SUCCESS);
 }
 
-static int			create_bitmap(t_img *pimg, char *name)
+int					create_bitmap(t_img *pimg, char *name)
 {
 	int				fd;
 	int				file_size;
@@ -103,7 +103,7 @@ void				take_screenshot(t_window *window, char *cub_path)
 	init_window(window, cub_path);
 	raycasting(window);
 	draw(window);
-	create_bitmap(window->pimg,	"save");
+	create_bitmap(window->pimg, "save");
 	free_window(window);
 	printf("save compelete");
 	exit(0);
