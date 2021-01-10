@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 20:59:59 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/10 18:45:01 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/10 19:45:07 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,8 +233,6 @@ void					calc_transform_x_y(t_window *window, t_player *player,
 	t_d_sprites *sprites, int idx);
 void					calc_screenx_height_draw(t_window *window,
 	t_d_sprites *sprites, double s_width, double s_height);
-void					sprite_raycast(t_window *window, t_d_sprites *sprites);
-void					do_raycasting(t_window *window);
 void					draw_sprite(t_window *window);
 int						raycasting(t_window *window);
 

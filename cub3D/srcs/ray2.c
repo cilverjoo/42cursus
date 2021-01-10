@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 19:53:08 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/10 18:45:01 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/10 19:37:49 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void			calc_screenx_height_draw
 		sprites->draw_end_x = (int)s_width - 1;
 }
 
-void			do_raycasting(t_window *window)
+static void		do_raycasting(t_window *window)
 {
 	double		camera_x;
 	int			x;

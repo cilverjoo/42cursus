@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 20:09:26 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/10 18:46:46 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/10 20:09:41 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static int		fill_player_and_worldmap_space
 	return (pos_cnt);
 }
 
-static void		fill_one_line_worldmap(
+static void		fill_one_line_worldmap
+(
 	char *line,
 	t_window *window,
 	int idx,
