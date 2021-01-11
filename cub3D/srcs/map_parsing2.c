@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 20:09:26 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/10 20:09:41 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/11 20:43:59 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,18 @@ static int		fill_player_and_worldmap_space
 	return (pos_cnt);
 }
 
-static void		fill_one_line_worldmap
+static int		fill_one_line_worldmap
 (
 	char *line,
 	t_window *window,
-	int idx,
-	int *pos_cnt)
+	int idx
+)
 {
 	int			i;
+	int			pos_cnt;
 
 	i = 0;
+	pos_cnt = 0;
 	while (i < window->cub->map_col)
 	{
 		if (i < (int)ft_strlen(line) && ft_isdigit(line[i]))
@@ -71,10 +73,11 @@ static void		fill_one_line_worldmap
 				window->cub->sprite_cnt++;
 		}
 		else
-			*pos_cnt += fill_player_and_worldmap_space(line, window, idx, i);
+			pos_cnt += fill_player_and_worldmap_space(line, window, idx, i);
 		i++;
 	}
 	window->cub->worldmap[idx - 8][i] = '\0';
+	return (pos_cnt);
 }
 
 static void		make_worldmap(char **line, t_window *window)
@@ -94,7 +97,7 @@ static void		make_worldmap(char **line, t_window *window)
 		if (!(window->cub->worldmap[i++] = (char *)malloc(sizeof(char) *
 			(window->cub->map_col + 1))))
 			exit_program(MEMORY_ALLOC_ERROR);
-		fill_one_line_worldmap(line[idx], window, idx, &pos_cnt);
+		pos_cnt += fill_one_line_worldmap(line[idx], window, idx);
 		idx++;
 	}
 	if (pos_cnt > 1 || pos_cnt <= 0)
