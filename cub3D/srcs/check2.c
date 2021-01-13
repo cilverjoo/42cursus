@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/13 18:03:33 by kim-eunju         #+#    #+#             */
+/*   Updated: 2021/01/13 18:08:51 by kim-eunju        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void			set_screen_size(char *line, t_cub *cub)
 {
-	int		width;
-	int		height;
-	int		idx;
+	int			width;
+	int			height;
+	int			idx;
 
 	idx = 0;
 	width = ft_atoi(line, &idx);
@@ -21,7 +33,7 @@ void			set_screen_size(char *line, t_cub *cub)
 		exit_program("Screen size error");
 }
 
-void		check_cub_file(char **lines)
+void			check_cub_file(char **lines)
 {
 	int			i;
 	int			j;
