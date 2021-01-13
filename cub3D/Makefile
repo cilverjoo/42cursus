@@ -19,7 +19,8 @@ SRCS =					./includes/getnextline/get_next_line.c\
 						./srcs/event.c \
 						./srcs/draw_sprite.c \
 						./srcs/bitmap.c \
-						./srcs/check.c
+						./srcs/check.c \
+						./srcs/check2.c
 
 OBJS =		${SRCS:.c=.o}
 

@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 17:30:48 by ukim              #+#    #+#             */
-/*   Updated: 2021/01/07 21:58:14 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/13 16:47:58 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int					ft_atoi(char *str, int *idx);
 int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
-int					ft_isalpha(int c);
+int					ft_isalpha(char c);
 int					ft_isalnum(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);

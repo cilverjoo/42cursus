@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 20:59:59 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/10 19:45:07 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/13 16:45:20 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,8 @@ void					set_cub(t_window *window, char *path);
 int						check_color_valid(char *cub_line);
 int						map_size_check(t_window *window, int x, int y);
 int						check_wall_valid(t_window *window);
+void					set_screen_size(char *line, t_cub *cub);
+void					check_cub_file(char **lines);
 
 void					load_texture(t_window *window);
 void					calc_wall_texture(t_window *window, t_ray *ray);

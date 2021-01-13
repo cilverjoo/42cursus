@@ -6,30 +6,11 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 19:28:56 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/10 20:00:44 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/13 16:49:23 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-static void		check_cub_file(char **lines)
-{
-	int			i;
-	int			j;
-
-	i = 0;
-	while (lines[i])
-	{
-		j = 0;
-		while (lines[i][j])
-		{
-			if (ft_isascii(lines[i][j]) == 0)
-				lines[i][j] = '\0';
-			j++;
-		}
-		i++;
-	}
-}
 
 static char		**read_map_file_to_array(char *path)
 {
@@ -109,10 +90,7 @@ void			set_cub(t_window *window, char *path)
 	{
 		tmp = ft_split(cub_file[i], ' ');
 		if (*tmp[0] == 'R')
-		{
-			window->cub->res_width = ft_atoi(tmp[1], 0);
-			window->cub->res_height = ft_atoi(tmp[2], 0);
-		}
+			set_screen_size(&cub_file[i][1], window->cub);
 		else if (ft_strlen(tmp[0]) == 2 || *tmp[0] == 'S')
 			set_cub_textures_path(tmp, window->cub);
 		else if (*tmp[0] == 'F' || *tmp[0] == 'C')
