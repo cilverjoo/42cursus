@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 19:41:09 by ukim              #+#    #+#             */
-/*   Updated: 2021/01/13 16:46:44 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/13 23:32:10 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int						ft_atoi(char *str, int *idx)
 	num = 0;
 	sign = 1;
 	j = 0;
-	if (str[j] == ' ' || str[j] == ',' || str[j] == '-' || ft_isalpha(str[j]))
+	while (!ft_isdigit(str[j]))
 		j++;
 	while (str[j] && ft_isdigit(str[j]))
 	{

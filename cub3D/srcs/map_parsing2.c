@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 20:09:26 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/11 20:43:59 by ekim             ###   ########.fr       */
+/*   Updated: 2021/01/14 00:00:17 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int		fill_player_and_worldmap_space
 	int			pos_cnt;
 
 	pos_cnt = 0;
-	if (check_player_in_map(line[i]))
+	if (i <= (int)ft_strlen(line) && check_player_in_map(line[i]))
 	{
 		window->cub->p_direction = line[i];
 		window->player->pos.y = (double)i + 0.5;

@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:57:37 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/10 19:38:09 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/14 00:47:35 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void		free_buffer_img_sprite_cub(t_window *window)
 	i = 0;
 	while (i < window->cub->sprite_cnt)
 		free(window->sprites[i++]);
+	free(window->sprites);
 	free(window->d_sprites);
 	free(window->cub->ea_path);
 	free(window->cub->we_path);

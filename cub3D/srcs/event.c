@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 02:22:57 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/10 18:59:00 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/14 00:07:55 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int				destroy_window(void *param)
 	window = (t_window *)param;
 	mlx_destroy_window(window->mlx, window->win);
 	free_window(window);
+	system("leaks cub3D");
 	exit(0);
 	return (SUCCESS);
 }

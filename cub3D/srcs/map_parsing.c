@@ -6,11 +6,32 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 19:28:56 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/13 16:49:23 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/14 00:30:16 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void			set_screen_size(char *line, t_cub *cub)
+{
+	int			width;
+	int			height;
+	int			idx;
+
+	idx = 0;
+	width = ft_atoi(line, &idx);
+	if (width > 2560)
+		cub->res_width = 2560;
+	else
+		cub->res_width = width;
+	height = ft_atoi(&line[idx], &idx);
+	if (height > 1440)
+		cub->res_height = 1440;
+	else
+		cub->res_height = height;
+	if (height <= 0 || width <= 0)
+		exit_program("Screen size error");
+}
 
 static char		**read_map_file_to_array(char *path)
 {
@@ -37,7 +58,6 @@ static char		**read_map_file_to_array(char *path)
 	stack = ft_split(tmp, '\n');
 	free(tmp);
 	close(fd);
-	check_cub_file(stack);
 	return (stack);
 }
 
@@ -54,7 +74,7 @@ static void		set_cub_textures_path(char **tmp, t_cub *cub)
 	else if (ft_strcmp(tmp[0], "S") == 0)
 		cub->sprite_path = ft_strdup(tmp[1]);
 	else
-		exit_program(ARGUMENT_ERROR);
+		exit_program("Direction in map file is not correct");
 }
 
 static void		set_cub_backgrounds(char *cub_line, t_cub *cub)
@@ -96,7 +116,7 @@ void			set_cub(t_window *window, char *path)
 		else if (*tmp[0] == 'F' || *tmp[0] == 'C')
 			set_cub_backgrounds(cub_file[i], window->cub);
 		else
-			exit_program(ARGUMENT_ERROR);
+			exit_program("Argument in map file is not correct");
 		free_array(tmp);
 	}
 	set_cub_worldmap(cub_file, window);
