@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int			ft_strlen(char *str)
 {
@@ -16,6 +17,5 @@ int			main(void)
 	int		len;
 
 	len = ft_strlen(str);
-	printf("%d\n", len);
-	return (0);
+	return (len);
 }

@@ -1,15 +1,15 @@
 section .text
-	global _start
+	global _ft_strlen
 
-_start:
+_ft_strlen:
 	mov rax, 0
-	jmp	ft_strlen
+	jmp	count
 
-ft_strlen:
+count:
 	cmp BYTE [rdi + rax], 0
 	je	exit
 	inc	rax
-	jmp	ft_strlen
+	jmp	count
 
 exit:
-	retld
+	ret
