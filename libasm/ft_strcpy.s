@@ -3,16 +3,16 @@ section .text
 
 _ft_strcpy:
 	mov	rcx, 0
-	cmp [rsi + rcx], 0
-	jg	while
+	cmp	[rsi + rcx], 0
+	jg	copy
 	jmp	exit
 
-while:
+copy:
 	mov	al, BYTE[rsi + rcx]
-	mov BYTE[rdi + rcx], al
+	mov	BYTE[rdi + rcx], al
 	inc	rcx
 	cmp	BYTE[rsi + rcx], 0
-	jg	while
+	jg	copy
 	jmp	exit
 
 exit:
