@@ -1,4 +1,4 @@
-section .text
+section	.text
 	global _ft_write
 	extern ___error
 

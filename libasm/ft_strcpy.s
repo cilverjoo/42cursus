@@ -1,9 +1,10 @@
 section .text
 	global _ft_strcpy
 
+;dst(rdi), src(rsi)
 _ft_strcpy:
 	mov	rcx, 0
-	cmp	[rsi + rcx], 0
+	cmp	BYTE[rsi + rcx], 0
 	jg	copy
 	jmp	exit
 
