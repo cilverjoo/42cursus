@@ -4,7 +4,7 @@ SRCS = ft_strlen.s ft_strcpy.s ft_strcmp.s \
 OBJS = $(SRCS:.s=.o)
 
 %.o		: %.s
-	nasm -f elf64 $<
+	nasm -f elf64 $< -o $@
 # nasm -f macho64 $< -o $@
 
 all		: $(NAME)
@@ -14,8 +14,10 @@ $(NAME)	: $(OBJS)
 
 test	: re
 	gcc -o test -L. -lasm main.c
+	touch testfile
 	./test
 	rm test
+	rm testfile
 
 clean	:
 	rm -rf $(OBJS)
