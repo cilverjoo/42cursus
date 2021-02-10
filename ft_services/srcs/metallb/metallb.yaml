@@ -8,5 +8,5 @@ data:
     address-pools:
     - name: default
       protocol: layer2
-      addresses:`
-      - ? : 대략 100정도 여유를 두고 설정.
+      addresses:
+      - 192.168.49.0-192.168.49.10
