@@ -11,9 +11,8 @@ RUN apk update && \
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.2/phpMyAdmin-4.9.2-all-languages.tar.gz && \
     tar -xvf phpMyAdmin-4.9.2-all-languages.tar.gz && \
     rm phpMyAdmin-4.9.2-all-languages.tar.gz && \
-    mv phpMyAdmin-4.9.2-all-languages phpmyadmin
+    mv phpMyAdmin-4.9.2-all-languages /var/www/phpmyadmin
 
-RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.15.2_linux_amd64.tar.gz && \
-    tar -zxf telegraf-1.15.2_linux_amd64.tar.gz && \
-    rm telegraf-1.15.2_linux_amd64.tar.gz && \
-    mv mv telegraf-1.15.2 telegraf
+EXPOSE 5000
+
+ENTRYPOINT sh sratr.sh

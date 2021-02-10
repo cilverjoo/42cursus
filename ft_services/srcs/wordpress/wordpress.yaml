@@ -3,9 +3,9 @@ kind: Service
 metadata:
   annotations:
     metallb.universe.tf/allow-shared-ip: shared
-  name: wordpress-svc
+  name: wordpress
   labels:
-    app: wordpress-app
+    app: wordpress
 spec:
   selector:
     app: wordpress
@@ -13,30 +13,28 @@ spec:
   ports:
     - name: wordpress
       port: 5050
+      protocol: TCP
       targetPort: 5050
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress-deployment
+  name: wordpress
   labels:
-    app: wordpress-app
+    app: wordpress
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: wordpress-app
+      app: wordpress
   template:
     metadata:
       labels:
-        app: wordpress-app
+        app: wordpress
     spec:
       containers:
         - name : wordpress
-          image: service-wordpress
+          image: my_wordpress
           imagePullPolicy: Never
           ports:
             - containerPort: 5050
-          env:
-            - name: MYSQL_IP
-              value: ?
