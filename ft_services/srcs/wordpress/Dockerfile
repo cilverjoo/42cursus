@@ -10,10 +10,9 @@ RUN     apk update && \
         rm -rf /var/cache/apk/*
 
 RUN	mkdir -p /var/www && mv /wordpress /var/www/
-RUN     mkdir -p /etc/telegraf
 
 RUN     mv ./tmp/wp-config.php /var/www/wordpress/
 
 EXPOSE  5050
 
-ENTRYPOINT sh start.sh
+ENTRYPOINT sh /tmp/start.sh
