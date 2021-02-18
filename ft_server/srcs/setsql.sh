@@ -1,5 +1,4 @@
 #!/bin/bash
-
 service mysql start
 
 #allow access
