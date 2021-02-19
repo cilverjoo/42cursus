@@ -1,0 +1,14 @@
+#https://grafana.com/docs/grafana/latest/datasources/influxdb/
+apiVersion: 1
+datasources:
+  - name: Influxdb
+    type: influxdb
+    access: proxy
+    database: site
+    user: grafana
+    password: grafana
+    url: http://localhost:8086
+    jsonData:
+      httpMode: GET
+    basicAuthUser: ekim
+    basicAuthPassword: password

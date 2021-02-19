@@ -6,7 +6,7 @@
 #    By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/02 19:59:41 by ekim              #+#    #+#              #
-#    Updated: 2021/01/14 16:08:40 by kim-eunju        ###   ########.fr        #
+#    Updated: 2021/02/15 15:47:05 by kim-eunju        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,4 +46,4 @@ RUN mv tmp/config.inc.php var/www/html/phpmyadmin/
 #remove unused html
 RUN rm /var/www/html/index.nginx-debian.html
 
-ENTRYPOINT ["/bin/bash", "tmp/setsql.sh"]
+ENTRYPOINT ["/bin/sh", "tmp/setsql.sh"]

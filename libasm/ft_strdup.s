@@ -17,7 +17,7 @@ _ft_strdup:
     mov     rdi, rax    ;give malloc space's address
 	mov		rsi, r9
     call    _ft_strcpy  ;rdi : dest(malloc space), rsi : src
-    mov     rax, rdi
+	ret
 
 exit:
     ret

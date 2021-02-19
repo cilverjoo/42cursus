@@ -1,0 +1,29 @@
+FROM alpine:latest
+
+RUN apk add nginx 
+RUN apk add openssh openssl
+
+RUN adduser -D ekim && \
+    echo 'ekim:password' | chpasswd && \
+    mkdir -p /run/nginx && \
+    ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa && \
+    ssh-keygen -f /etc/ssh/ssh_host_dsa_key -N '' -t dsa && \
+    mkdir -p /run/sshd && \
+    openssl dhparam -dsaparam -out /etc/ssl/certs/dhparam.pem 2048
+
+
+#nginx ssl certificate
+RUN openssl req -x509 -nodes -days 365 \
+	-newkey rsa:2048 -subj  "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=ekim/CN=127.0.0.1" \
+	-keyout /etc/ssl/private/nginx.key -out /etc/ssl/certs/nginx.crt
+
+RUN mkdir -p /var/www
+COPY ./srcs/index.html /var/www/
+COPY ./srcs/ssl_params.conf /etc/nginx/
+COPY ./srcs/nginx.conf /etc/nginx/
+COPY ./srcs/sshd_config /etc/ssh/
+COPY ./srcs/start.sh /tmp/
+
+EXPOSE 80 443 22
+
+ENTRYPOINT sh /tmp/start.sh
