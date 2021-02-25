@@ -48,9 +48,9 @@ spec:
           name: ftps
         - containerPort: 50021
           name: ftps-pasv
-        livenessProbe:
-          initialDelaySeconds: 15
-          periodSeconds: 10
-          timeoutSeconds: 5
-          tcpSocket:
-            port: 21
+        # livenessProbe:
+        #   initialDelaySeconds: 15
+        #   periodSeconds: 15
+        #   timeoutSeconds: 15
+        #   tcpSocket:
+        #     port: 21

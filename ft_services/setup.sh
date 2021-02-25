@@ -1,47 +1,45 @@
 #!/bin/bash
 
+# export MINIKUBE_HOME=~/goinfre
+SETUP_LOG=/Users/kim-eunju/42cursus/ft_services/setup.log
+
 minikube delete
 
 #start minikube with docker.
-minikube start --driver=docker
+minikube start --driver=virtualbox
 
 minikube addons enable metrics-server
 minikube addons enable dashboard
 minikube addons enable metallb
 
-kubectl apply -f srcs/metallb/metallb-system.yaml > /dev/null
-kubectl apply -f srcs/metallb/metallb.yaml > /dev/null
+# kubectl apply -f srcs/metallb/metallb-system.yaml > $SETUP_LOG
+kubectl apply -f srcs/metallb/metallb.yaml >> $SETUP_LOG
+
+minikube ip > minikube_ip
+export MINIKUBE_IP=$(cat < minikube_ip)
+rm minikube_ip
 
 #use docker daemon from minikube.
 eval $(minikube docker-env)
 
 #build docker images.
 echo "**********Docker images build**************"
-	
-docker build -t my_nginx srcs/nginx/ > /dev/null
-docker build -t my_mysql srcs/mysql/ > /dev/null
-docker build -t my_phpmyadmin srcs/phpmyadmin/ > /dev/null
-docker build -t my_wordpress srcs/wordpress/ > /dev/null
-docker build -t my_ftps srcs/ftps/ > /dev/null
+docker build -t my_nginx srcs/nginx/ >> $SETUP_LOG
+docker build -t my_mysql srcs/mysql/ >> $SETUP_LOG
+docker build -t my_phpmyadmin srcs/phpmyadmin/ >> $SETUP_LOG
+docker build -t my_wordpress srcs/wordpress/ >> $SETUP_LOG
+docker build -t my_ftps srcs/ftps/ >> $SETUP_LOG
 # docker build -t my_grafana srcs/grafana/
-# docker build -t my_influxdb srcs/influxdb/
-
+docker build -t my_influxdb srcs/influxdb/ >> $SETUP_LOG
 echo "**********Docker build completed************"
 
 echo "**********Deploy init***********************"
-
-kubectl apply -f srcs/nginx/nginx.yaml
-kubectl apply -f srcs/mysql/mysql_service.yaml
-kubectl apply -f srcs/mysql/mysql_pvc.yaml
-kubectl apply -f srcs/mysql/mysql_deployment.yaml
-kubectl apply -f srcs/ftps/ftps.yaml
-kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
-kubectl apply -f srcs/wordpress/wordpress.yaml
-# kubectl apply -f srcs/telegraf/telegraf_secret.yaml
-# kubectl apply -f srcs/telegraf/telegraf_config.yaml
-# kubectl apply -f srcs/telegraf/telegraf_deployment.yaml
+kubectl apply -f srcs/nginx/nginx.yaml >> $SETUP_LOG
+kubectl apply -f srcs/mysql/mysql.yaml >> $SETUP_LOG
+kubectl apply -f srcs/ftps/ftps.yaml >> $SETUP_LOG
+kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml >> $SETUP_LOG
+kubectl apply -f srcs/wordpress/wordpress.yaml >> $SETUP_LOG
 # kubectl apply -f srcs/grafana/grafana.yaml
-# kubectl apply -f srcs/influxdb/influxdb_secret.yaml
-# kubectl apply -f srcs/influxdb/influxdb.yaml
-
-echo "***********Deploy completed******************"
+kubectl apply -f srcs/influxdb/influxdb_config.yaml >> $SETUP_LOG
+kubectl apply -f srcs/influxdb/influxdb.yaml >> $SETUP_LOG
+echo "***********Deploy completed*****************"

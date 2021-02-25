@@ -1,10 +1,14 @@
-FROM alpine:latest
+FROM alpine:3.12.0
 
-RUN aapk add grafana --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --no-cache
+RUN apk add grafana --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache && \
+	apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache
 
-COPY srcs/provisioning/dashboards/dashboards.yaml /usr/share/grafana/conf/provisioning/dashboards/
-COPY srcs/provisioning/datasources/influxdb.yaml /usr/share/grafana/conf/provisioning/datasources/
+COPY ./srcs/telegraf.conf /etc/
+COPY ./srcs/grafana.db /usr/share/grafana/data/
+COPY ./srcs/start.sh /tmp/
+
+WORKDIR	/usr/share/grafana
 
 EXPOSE 3000
 
-CMD ["/usr/sbin/grafana-server", "--config=/etc/grafana/grafana.ini", "--homepath=/usr/share/grafana"]
+CMD sh /tmp/start.sh

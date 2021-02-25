@@ -1,7 +1,8 @@
-FROM alpine:latest
+FROM alpine:3.12.0
 
 RUN apk update && \
     apk add openssl vsftpd --no-cache && \
+	apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache && \
     mkdir -p /ftps/ekim && \
     adduser --home=/ftps/ekim -D ekim && \
     echo "ekim:password" | chpasswd && \
@@ -11,8 +12,10 @@ RUN apk update && \
 
 RUN mkdir -p /etc/vsftpd
 
-COPY ./vsftpd.conf /etc/vsftpd/vsftpd.conf
+COPY ./srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
+COPY ./srcs/start.sh /tmp/
+COPY ./srcs/telegraf.conf /etc/
 
 EXPOSE 21 50021
 
-CMD /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
+ENTRYPOINT sh /tmp/start.sh

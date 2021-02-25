@@ -1,7 +1,8 @@
-FROM alpine:latest
+FROM alpine:3.12.0
 
 RUN apk add nginx 
 RUN apk add openssh openssl
+RUN apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache
 
 RUN adduser -D ekim && \
     echo 'ekim:password' | chpasswd && \
@@ -10,7 +11,6 @@ RUN adduser -D ekim && \
     ssh-keygen -f /etc/ssh/ssh_host_dsa_key -N '' -t dsa && \
     mkdir -p /run/sshd && \
     openssl dhparam -dsaparam -out /etc/ssl/certs/dhparam.pem 2048
-
 
 #nginx ssl certificate
 RUN openssl req -x509 -nodes -days 365 \
@@ -23,6 +23,7 @@ COPY ./srcs/ssl_params.conf /etc/nginx/
 COPY ./srcs/nginx.conf /etc/nginx/
 COPY ./srcs/sshd_config /etc/ssh/
 COPY ./srcs/start.sh /tmp/
+COPY ./srcs/telegraf.conf /etc/
 
 EXPOSE 80 443 22
 
