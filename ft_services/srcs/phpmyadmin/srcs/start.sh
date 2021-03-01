@@ -1,6 +1,8 @@
-export TELEGRAF_CONFIG_PATH=/etc/telegraf.conf
-chmod -R 777 /var/www/phpmyadmin
-# -S option : run with built-in web server. -S <addr>:<port>
-# Specify the root of the document for the internal web server
-telegraf &
-php -S 0.0.0.0:5000 -t /var/www/phpmyadmin
+adduser -G www-data -D www-data
+chown -R www-data:www-data /var/www/phpmyadmin
+chmod -R 755 /var/www/phpmyadmin
+
+# mkdir -p /run/openrc
+# touch /run/openrc/softlevel
+
+supervisord -c /etc/supervisord.conf	& tail -f /dev/null

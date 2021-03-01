@@ -29,8 +29,11 @@ $i++;
 $cfg['Servers'][$i]['auth_type'] = 'cookie';
 /* Server parameters */
 $cfg['Servers'][$i]['host'] = 'mysql';
+$cfg['Servers'][$i]['port'] = '3306';
+$cfg['Servers'][$i]['user'] = 'ekim';
+$cfg['Servers'][$i]['password'] = 'password';
 $cfg['Servers'][$i]['compress'] = false;
-$cfg['Servers'][$i]['AllowNoPassword'] = true;
+$cfg['Servers'][$i]['AllowNoPassword'] = false;
 
 /**
  * phpMyAdmin configuration storage settings.
@@ -38,9 +41,7 @@ $cfg['Servers'][$i]['AllowNoPassword'] = true;
 
 /* User used to manipulate with storage */
 // $cfg['Servers'][$i]['controlhost'] = '';
-$cfg['Servers'][$i]['port'] = '3306';
-$cfg['Servers'][$i]['controluser'] = 'ekim';
-$cfg['Servers'][$i]['controlpass'] = 'password';
+
 
 /* Storage database and tables */
 // $cfg['Servers'][$i]['pmadb'] = 'phpmyadmin';

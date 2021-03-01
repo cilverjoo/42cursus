@@ -14,7 +14,7 @@ RUN mkdir -p /etc/vsftpd
 
 COPY ./srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
 COPY ./srcs/start.sh /tmp/
-COPY ./srcs/telegraf.conf /etc/
+COPY ./srcs/telegraf.conf /etc/telegraf/
 
 EXPOSE 21 50021
 

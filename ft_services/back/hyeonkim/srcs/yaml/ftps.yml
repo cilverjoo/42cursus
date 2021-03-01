@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared
+  name: ftps-service # Service's name is ftps
+  labels:
+    app: ftps # Service's app label is ftps
+spec:
+  selector: # Select POD based on the POD's LABELS
+    app: ftps # Select ftps POD
+  type: LoadBalancer
+  ports:
+    - port: 20
+      name: ftp-data
+      targetPort: 20
+      protocol: TCP
+    - port: 21
+      name: ftp
+      targetPort: 21
+      protocol: TCP
+    - port: 31111
+      name: passive0
+      targetPort: 31111
+      protocol: TCP
+    - port: 31112
+      name: passive1
+      targetPort: 31112
+      protocol: TCP
+
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata: # metadata describes the deployment itself.
+  name: ftps-deployment # deployment's name. Pods is named based on this.
+  labels: # Deployment's label
+    app: ftps
+spec: # Set Deployment
+  selector:
+    matchLabels: # Control pods which have this label
+      app: ftps
+  template: # POD!!!
+    metadata:
+      labels:
+        app: ftps # Pod's app label is ftps
+    spec: # CONTAINER!!!
+      containers: # container set
+      - name: ftps # container's name
+        image: ftps_service # Select docker image
+        imagePullPolicy: Never # Using local image.
+        ports:
+          - containerPort: 20
+            hostPort: 20
+          - containerPort: 21
+            hostPort: 21
+          - containerPort: 31111
+            hostPort: 31111
+          - containerPort: 31112
+            hostPort: 31112

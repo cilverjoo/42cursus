@@ -8,7 +8,7 @@ minikube delete
 #start minikube with docker.
 minikube start --driver=virtualbox
 
-minikube addons enable metrics-server
+# minikube addons enable metrics-server
 minikube addons enable dashboard
 minikube addons enable metallb
 
@@ -24,22 +24,24 @@ eval $(minikube docker-env)
 
 #build docker images.
 echo "**********Docker images build**************"
+docker build -t my_influxdb srcs/influxdb/ >> $SETUP_LOG
 docker build -t my_nginx srcs/nginx/ >> $SETUP_LOG
 docker build -t my_mysql srcs/mysql/ >> $SETUP_LOG
 docker build -t my_phpmyadmin srcs/phpmyadmin/ >> $SETUP_LOG
 docker build -t my_wordpress srcs/wordpress/ >> $SETUP_LOG
 docker build -t my_ftps srcs/ftps/ >> $SETUP_LOG
-# docker build -t my_grafana srcs/grafana/
-docker build -t my_influxdb srcs/influxdb/ >> $SETUP_LOG
+docker build -t my_grafana srcs/grafana/ >> $SETUP_LOG
 echo "**********Docker build completed************"
 
 echo "**********Deploy init***********************"
+# kubectl apply -f srcs/influxdb/influxdb_secret.yaml >> $SETUP_LOG
+kubectl apply -f srcs/influxdb/influxdb.yaml >> $SETUP_LOG
+kubectl apply -f srcs/ftps/ftps.yaml >> $SETUP_LOG
 kubectl apply -f srcs/nginx/nginx.yaml >> $SETUP_LOG
 kubectl apply -f srcs/mysql/mysql.yaml >> $SETUP_LOG
-kubectl apply -f srcs/ftps/ftps.yaml >> $SETUP_LOG
 kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml >> $SETUP_LOG
 kubectl apply -f srcs/wordpress/wordpress.yaml >> $SETUP_LOG
-# kubectl apply -f srcs/grafana/grafana.yaml
-kubectl apply -f srcs/influxdb/influxdb_config.yaml >> $SETUP_LOG
-kubectl apply -f srcs/influxdb/influxdb.yaml >> $SETUP_LOG
+kubectl apply -f srcs/grafana/grafana.yaml >> $SETUP_LOG
 echo "***********Deploy completed*****************"
+
+minikube update-context
