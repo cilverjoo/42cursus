@@ -10,7 +10,7 @@ RUN	apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/comm
 RUN apk add supervisor --no-cache && \
 	rm -rf /var/cache/apk/*
 
-RUN mkdir /run/nginx
+RUN mkdir -p /run/nginx
 RUN	mkdir -p /var/www && mv /wordpress /var/www/
 
 COPY ./srcs/wp-config.php /var/www/wordpress/
