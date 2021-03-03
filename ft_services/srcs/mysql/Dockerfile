@@ -8,9 +8,10 @@ RUN mkdir -p /run/openrc && touch /run/openrc/softlevel
 COPY ./srcs/my.cnf /etc/mysql/
 COPY ./srcs/telegraf.conf /etc/telegraf/
 COPY ./srcs/supervisord.conf /etc/
-COPY ./srcs/start.sh .
-COPY ./srcs/run.sh .
+COPY ./srcs/wordpress.sql /tmp/
+COPY ./srcs/start.sh /tmp/
+COPY ./srcs/run.sh /tmp/
 
 EXPOSE 3306
 
-ENTRYPOINT sh start.sh
+ENTRYPOINT sh /tmp/start.sh
