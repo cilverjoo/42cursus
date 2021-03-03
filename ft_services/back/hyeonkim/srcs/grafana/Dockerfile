@@ -19,4 +19,3 @@ COPY    srcs/run.sh .
 EXPOSE  3000
 
 CMD     ["sh", "run.sh"]
-

@@ -1,5 +1,5 @@
-# adduser -G www-data -D www-data
-# chown -R www-data:www-data /var/www/phpmyadmin
+adduser -G www-data -D www-data
+chown -R www-data:www-data /var/www/phpmyadmin
 # chmod -R 755 /var/www/phpmyadmin
 
 # chmod 755 /var/www/phpmyadmin

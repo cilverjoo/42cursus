@@ -17,7 +17,7 @@ echo "CREATE USER 'ekim'@'%' IDENTIFIED BY 'password';" | mysql -u root
 echo "GRANT ALL PRIVILEGES ON wordpress.* TO 'ekim'@'%' WITH GRANT OPTION;" | mysql -u root
 echo "USE wordpress;" | mysql -u root
 
-# mysql -u root wordpress < /tmp/wordpress.sql
+mysql -u root wordpress < /tmp/wordpress.sql
 
 echo "FLUSH PRIVILEGES;" | mysql -u root
 

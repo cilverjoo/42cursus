@@ -14,4 +14,4 @@ COPY ./srcs/run.sh /tmp/
 
 EXPOSE 3306
 
-ENTRYPOINT sh /tmp/start.sh
+CMD sh /tmp/start.sh

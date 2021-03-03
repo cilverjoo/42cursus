@@ -27,13 +27,12 @@
 # docker build -t my_wordpress srcs/wordpress/
 # kubectl apply -f srcs/wordpress/wordpress.yaml
 
-
-# # grafana
-# kubectl delete deployment.apps/grafana
-# kubectl delete $(kubectl get pods | grep grafana  | awk '{print $1}')
-# docker rmi $(docker images | grep grafana | awk '{print $3}')
-# docker build -t my_grafana srcs/grafana/
-# kubectl apply -f srcs/grafana/grafana.yaml
+# grafana
+kubectl delete deployment.apps/grafana
+kubectl delete $(kubectl get pods | grep grafana  | awk '{print $1}')
+docker rmi $(docker images | grep grafana | awk '{print $3}')
+docker build -t my_grafana srcs/grafana/
+kubectl apply -f srcs/grafana/grafana.yaml
 
 # #ftps
 # kubectl delete deployment.apps/ftps
