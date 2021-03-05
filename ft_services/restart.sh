@@ -27,19 +27,21 @@
 # docker build -t my_wordpress srcs/wordpress/
 # kubectl apply -f srcs/wordpress/wordpress.yaml
 
-# grafana
-kubectl delete deployment.apps/grafana
-kubectl delete $(kubectl get pods | grep grafana  | awk '{print $1}')
-docker rmi $(docker images | grep grafana | awk '{print $3}')
-docker build -t my_grafana srcs/grafana/
-kubectl apply -f srcs/grafana/grafana.yaml
+# # grafana
+# kubectl delete deployment.apps/grafana
+# kubectl delete $(kubectl get pods | grep grafana  | awk '{print $1}')
+# docker rmi $(docker images | grep grafana | awk '{print $3}')
+# docker build -t my_grafana srcs/grafana/
+# kubectl apply -f srcs/grafana/grafana.yaml
 
-# #ftps
-# kubectl delete deployment.apps/ftps
-# kubectl delete $(kubectl get pods | grep ftps  | awk '{print $1}')
-# docker rmi $(docker images | grep ftps | awk '{print $3}')
-# docker build -t my_ftps srcs/ftps/
-# kubectl apply -f srcs/ftps/ftps.yaml
+#ftps
+kubectl delete deployment.apps/ftps
+kubectl delete $(kubectl get pods | grep ftps  | awk '{print $1}')
+docker rmi $(docker images | grep ftps | awk '{print $3}')
+docker build -t my_ftps srcs/ftps/
+kubectl apply -f srcs/ftps/ftps.yaml
+
+#curl ftp://192.168.99.105:21 --ssl -k --user ekim -T setup.log
 
 # #mysql
 # kubectl delete deployment.apps/mysql
@@ -47,3 +49,4 @@ kubectl apply -f srcs/grafana/grafana.yaml
 # docker rmi $(docker images | grep mysql | awk '{print $3}')
 # docker build -t my_mysql srcs/mysql/
 # kubectl apply -f srcs/mysql/mysql.yaml
+

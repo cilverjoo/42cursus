@@ -2,7 +2,7 @@
 
 # export MINIKUBE_HOME=~/goinfre
 export MINIKUBE_HOME=$HOME
-# SETUP_LOG=~/42cursus/ft_services/setup.log
+# # SETUP_LOG=~/42cursus/ft_services/setup.log
 SETUP_LOG=~/42cursus/ft_services/setup.log
 
 minikube delete
