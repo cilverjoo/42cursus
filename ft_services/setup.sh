@@ -43,6 +43,7 @@ docker build -t my_grafana srcs/grafana/ >> $SETUP_LOG
 echo "**********Docker build completed************"
 
 echo "**********Deploy init***********************"
+# kubectl apply -f srcs/influxdb/influxdb_config.yaml >> $SETUP_LOG
 kubectl apply -f srcs/influxdb/influxdb.yaml >> $SETUP_LOG
 kubectl apply -f srcs/ftps/ftps.yaml >> $SETUP_LOG
 kubectl apply -f srcs/nginx/nginx.yaml >> $SETUP_LOG
