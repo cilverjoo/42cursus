@@ -25,8 +25,6 @@ spec:
   hostPath:
     path: /mnt/influxdb
   persistentVolumeReclaimPolicy: Retain
-  # claimRef:
-  #   name: influxdb-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -54,11 +52,6 @@ spec:
   selector: 
     matchLabels: 
       app: influxdb
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
   template: 
     metadata: 
       labels: 
@@ -68,13 +61,13 @@ spec:
         - image: my_influxdb
           name: influxdb
           imagePullPolicy: Never
-          env:
-          - name: INFLUXDB_META_DIR
-            value: /var/lib/influxdb/meta
-          - name: INFLUXDB_DATA_DIR
-            value: /var/lib/influxdb/data
-          - name: INFLUXDB_DATA_WAL_DIR
-            value: /var/lib/influxdb/wal
+          # env:
+          # - name: INFLUXDB_META_DIR
+          #   value: /var/lib/influxdb/meta
+          # - name: INFLUXDB_DATA_DIR:
+          #   value: /var/lib/influxdb/data
+          # - name: INFLUXDB_DATA_WAL_DIR
+          #   value: /var/lib/influxdb/wal
           ports:
             - name: influxdb
               containerPort: 8086

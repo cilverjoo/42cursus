@@ -19,9 +19,9 @@ data:
     # Change this option to true to disable reporting.
     # reporting-disabled = false
 
-    # Bind address to use for the RPC service for backup and restore.
     bind-address = "http://influxdb:8086"
-
+   # Bind address to use for the RPC service for backup and restore.
+ 
     ###
     ### [meta]
     ###
@@ -261,7 +261,7 @@ data:
       # flux-log-enabled = false
 
       # The bind address used by the HTTP service.
-      bind-address = "1:8086"
+      bind-address = "external-ip:8086"
 
       # Determines whether user authentication is enabled over HTTP/HTTPS.
       auth-enabled = true
