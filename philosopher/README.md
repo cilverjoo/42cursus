@@ -44,6 +44,7 @@
 	+ 허용 함수 : memset, printf, malloc, free, write, fork, kill, exit, pthread_create, pthread_detach, pthread_join, usleep, gettimeofday, waitpid, sem_open, sem_close, sem_post, sem_wait, sem_unlink
 
 
+
 # 2. philo_one
 
 * mutex(Mutual Exclusion, 상호배제)란?
@@ -95,6 +96,7 @@ struct timezone
 타임존을 설정하는 게 아니라면 두번째 매개변수를 NULL로 넣어주면 된다.
 
 * 반환값 : 성공하면 0, 실패하면 -1.
+
 
 
 ## 3. pthread_create
