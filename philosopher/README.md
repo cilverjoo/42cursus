@@ -63,10 +63,11 @@
 
 
 ## 2. gettimeofday
-* 헤더 : <sys/time.h>
 
 	int gettimeofday(struct timeval *tv, struct timezone *tz);
 	int settimeofday(const struct timeval *tv, const struct timezone *tz);
+
+* 헤더 : <sys/time.h>
 
 * 매개변수
 	첫번째 매개변수인 tv는 현재 시스템 시간을 저장하기 위한 구조체로 다음과 같이 정의되어 있다.
@@ -79,7 +80,9 @@ struct timeval
 }
 </code>
 </pre>
-	두번째 매개변수인 tz은 타임존을 설정하기 위해서 사용된다.
+
+두번째 매개변수인 tz은 타임존을 설정하기 위해서 사용된다.
+
 <pre>
 <code>
 struct timezone
@@ -89,7 +92,8 @@ struct timezone
 }
 </code>
 </pre>
-	타임존을 설정하는 게 아니라면 두번째 매개변수를 NULL로 넣어주면 된다.
+타임존을 설정하는 게 아니라면 두번째 매개변수를 NULL로 넣어주면 된다.
+
 * 반환값 : 성공하면 0, 실패하면 -1.
 
 
@@ -237,7 +241,9 @@ struct timezone
 		- mode_t mode : 플래그를 O_CREAT로 설정하면, mode 매개변수를 받을 수 있다. <sys/stat.h> 를 인클루드 하면 아래 상수들을 활용할 수 있다.
 
 			S_IRWXR : 그룹 접근
+
 			S_IRWXO : 타인 접근
+
 			S_IRWXU : 개인 접근
 
 		- unsigned int value : 세마포어 초기 값으로 0 보다 큰 양수여야 한다. unlock된 세마포어의 수를 의미한다. 이 값은 SEM_VALUE_MAX를 초과할 수 없다.
@@ -267,8 +273,11 @@ struct timezone
 * 반환값 : 성공하면 0, 실패시 -1을 리턴하고 errno에 다음과 같은 에러값이 설정되며, semaphore의 상태는 변하지 않는다.
 
 	EAGAIN : 세마포어가 이미 lock 되어 있다.
+
 	EDEADLK : deadlock이 있을 때.
+
 	EINTR : signal에 의해 call이 interrupt 될 때.
+
 	EINVAL : sem이 사용가능한 상태가 아닐 때.
 
 ## 5. sem_unlink
@@ -280,7 +289,9 @@ struct timezone
 * 반환값 : 성공하면 0, 실패하면 -1을 리턴하고 errno에 다음과 같은 에러값이 설정된다. semaphore의 상태는 변하지 않는다.
 
 	EACCES : 이 세마포어를 제거할 권한이 없을 때
+	
 	ENAMETOOLONG : 세마포어의 이름이 너무 길 때
+	
 	ENOENT : 이 이름의 세마포어가 존재하지 않을 때
 
 
