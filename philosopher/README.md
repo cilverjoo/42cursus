@@ -55,11 +55,13 @@
 * critical section(임계구역)이란?
 
 ## 1. usleep
-* 헤더 : <unistd.h>
 
 	int usleep(useconds_t microseconds);
 
+* 헤더 : <unistd.h>
+
 * microseconds : 몇 microseconds(1/1000000 초) 기다리게 할건지 입력.
+
 * sleep보다 더 정밀하게 시간을 조절하고 싶을 때 사용한다.
 
 
