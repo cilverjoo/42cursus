@@ -94,10 +94,11 @@ struct timezone
 
 
 ## 3. pthread_create
-* 새로운 쓰레드를 생성한다.
-* 헤더 : <phread.h>
 
 	int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);
+
+* 새로운 쓰레드를 생성한다.
+* 헤더 : <phread.h>
 
 * 매개변수
 	+ 첫 번째 매개변수인 thread는 생성된 thread를 인식하기 위한 식별자.
@@ -109,10 +110,12 @@ struct timezone
 
 
 ## 4. pthread_detach
-* pthread_create를 사용하면 쓰레드가 종료되어도 사용했던 자원들을 해제하지 않는다. pthread_join을 사용하면 쓰레드가 종료될 때 까지 기다렸다가 종료시점이 되면 자원을 반납하는데, 그 전에 쓰레드가 종료될 때 사용한 자원을 해제시키고 싶다면 pthread_detach를 사용하면 된다.
-* 헤더 : <pthread.h>
 
 	int pthread_detach(pthread_t thread);
+
+* pthread_create를 사용하면 쓰레드가 종료되어도 사용했던 자원들을 해제하지 않는다. pthread_join을 사용하면 쓰레드가 종료될 때 까지 기다렸다가 종료시점이 되면 자원을 반납하는데, 그 전에 쓰레드가 종료될 때 사용한 자원을 해제시키고 싶다면 pthread_detach를 사용하면 된다.
+
+* 헤더 : <pthread.h>
 
 * 매개변수 thread는 thread를 구분하는 식별자!
 
@@ -128,10 +131,12 @@ struct timezone
 
 
 ## 5. pthread_join
-* 쓰레드가 종료되면 쓰레드에 할당된 리소스를 해제시킨다. 
-* 헤더 : <phtread.h>
 
 	int pthread_join(pthread_t th, void **thread_return);
+
+* 쓰레드가 종료되면 쓰레드에 할당된 리소스를 해제시킨다. 
+
+* 헤더 : <phtread.h>
 
 * 사용법
 
@@ -147,9 +152,9 @@ struct timezone
 
 ## 6. pthread_mutex_init
 
-* 헤더 : <pthread.h>
-
 	int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr);
+
+* 헤더 : <pthread.h>
 
 * pthread_mutex_init는 첫 번째 인자로 주어지는 mutex를 초기화하고, 두 번째 인자를 통해서 그 속성을 변경시킬 수 있다.
 
@@ -171,9 +176,9 @@ struct timezone
 
 ## 7. phread_mutex_destroy
 
-* 헤더 : <phtread.h>
-
 	int pthread_mutex_destroy(pthread_mutex_t *mutex);
+
+* 헤더 : <phtread.h>
 
 * mutex 객체를 삭제하고 자원을 반환한다. 쓰레드가 종료되었다고 하더라도 mutex는 그대로 남아있으므로 mutex를 더 이상 사용하지 않는다면 이 함수를 호출해 삭제해줘야 한다.
 
@@ -215,9 +220,10 @@ struct timezone
 	+ mutex는 1개만 동기화가 되지만 semaphore는 하나 이상을 동기화 할 수 있다.
 
 ## 1. sem_open
-* 헤더 : <semaphore.h>
 
 	sem_t * sem_open( const char * sem_name, int oflags, ... );
+
+* 헤더 : <semaphore.h>
 
 * 매개변수
 
@@ -238,10 +244,11 @@ struct timezone
 
 
 ## 2. sem_close
-* semaphore의 사용을 종료하고 할당된 자원을 해제한다. 
-* 헤더 : <semaphore.h>
 
 	int sem_close( sem_t *sem );
+
+* semaphore의 사용을 종료하고 할당된 자원을 해제한다. 
+* 헤더 : <semaphore.h>
 
 
 ## 3. sem_post

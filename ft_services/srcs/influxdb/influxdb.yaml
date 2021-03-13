@@ -61,13 +61,13 @@ spec:
         - image: my_influxdb
           name: influxdb
           imagePullPolicy: Never
-          # env:
-          # - name: INFLUXDB_META_DIR
-          #   value: /var/lib/influxdb/meta
-          # - name: INFLUXDB_DATA_DIR:
-          #   value: /var/lib/influxdb/data
-          # - name: INFLUXDB_DATA_WAL_DIR
-          #   value: /var/lib/influxdb/wal
+          env:
+          - name: INFLUXDB_META_DIR
+            value: /var/lib/influxdb/meta
+          - name: INFLUXDB_DATA_DIR:
+            value: /var/lib/influxdb/data
+          - name: INFLUXDB_DATA_WAL_DIR
+            value: /var/lib/influxdb/wal
           ports:
             - name: influxdb
               containerPort: 8086
