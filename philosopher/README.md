@@ -13,7 +13,7 @@
 	+ time_to_die: 수 밀리초 안에 철학자가 'time_to_die'를 먹는것을 시작하지 않으면 그의 마지막 식사를 시작하거나 시뮬레이션이 시작한 지 수 초 안에 철학자는 죽는다.
 	+ time_to_eat: 수 밀리초 이내이며 철학자가 먹는 데 걸리는 시간이다. 이 시간동안 철학자는 두 개의 포크를 가지고 있어야 한다.
 	+ time_to_sleep: 수 밀리초 이내이며 철학자가 잠을 자는데 걸리는 시간이다.
-	+ number_of_times_each_philosopher_must_eat: 선택적으로 인자가 주어지며, 만약 모든 철학자들이 최소 'number_of_times_each_philosopher_must_eat'를 먹으면 시뮬레이션은 중지된다. 명시되지 않으면, 시뮬레이션은 한 철학자가 죽을 때만 멈춘다.
+	+ number_of_times_each_philosopher_must_eat: 선택적으로 매개변수가 주어지며, 만약 모든 철학자들이 최소 'number_of_times_each_philosopher_must_eat'를 먹으면 시뮬레이션은 중지된다. 명시되지 않으면, 시뮬레이션은 한 철학자가 죽을 때만 멈춘다.
 * 각 철학자들은 1부터 'number_of_philosophers'까지의 숫자가 주어져야 한다.
 * 철학자1은 철학자'number_of_philosopher'의 옆에 있다. 철학자N은 철학자N-1과 철학자 N+1 사이에 있다.
 * 철학자의 상태 변화는 다음과 같아야 한다. (X는 철학자 번호로, timestamp_in_ms는 밀리 초 단위의 현재 timestamp 값으로 대체될 수 있다)
@@ -31,7 +31,7 @@
 	+ 각 철학자 사이에 포크가 하나씩 있으므로 각 철학자의 오른쪽과 왼쪽에 포크가 있습니다.
 	+ 철학자가 포크를 복제하지 않도록하려면 각각에 대한 Mutex를 사용하여 포크 상태를 보호해야합니다.
 	+ 각 철학자는 a thread 여야 한다.
-	+ 허용 함수 : memset, printf, malloc, free, write, usleep, gettimeofday pthread_create, pthread_detach, pthread_join, pthread_mutex_init pthread_mutex_destroy, pthread_mutex_lock, pthread_mutex_unlock
+	+ 허용 함수 : memset, printf, malloc, free, write, usleep, gettimeofday, pthread_create, pthread_detach, pthread_join, pthread_mutex_init pthread_mutex_destroy, pthread_mutex_lock, pthread_mutex_unlock
 * philo_two
 	+ 모든 포크는 테이블 중앙에 있다.
 	+ 메모리에 상태는 없지만 사용가능한 포크의 수는 semaphore로 표시된다.
@@ -42,3 +42,240 @@
 	+ 메모리에 상태는 없지만 사용가능한 포크의 수는 semaphore로 표시된다.
 	+ 각 철학자는 process 여야 하며 메인 process는 철학자여서는 안 된다.
 	+ 허용 함수 : memset, printf, malloc, free, write, fork, kill, exit, pthread_create, pthread_detach, pthread_join, usleep, gettimeofday, waitpid, sem_open, sem_close, sem_post, sem_wait, sem_unlink
+
+
+# 2. philo_one
+
+* mutex(Mutual Exclusion, 상호배제)란?
+
+	+ mutex 는 여러개의 쓰레드가 공유하는 데이타를 보호하기 위해서 사용되는 도구로써, 보호하고자 하는 데이터를 다루는 코드영역을 단지 '한번에 하나의 쓰레드만' 실행가능 하도록 하는 방법으로 데이터를 보호한다. 
+	+ 이러한 코드영역(하나의 쓰레드만 점유가능한)을 critical section 이라고 한다.
+
+* critical section(임계구역)이란?
+
+## 1. usleep
+* 헤더 : <unistd.h>
+
+	int usleep(useconds_t microseconds);
+
+* microseconds : 몇 microseconds(1/1000000 초) 기다리게 할건지 입력.
+* sleep보다 더 정밀하게 시간을 조절하고 싶을 때 사용한다.
+
+
+## 2. gettimeofday
+* 헤더 : <sys/time.h>
+
+	int gettimeofday(struct timeval *tv, struct timezone *tz);
+	int settimeofday(const struct timeval *tv, const struct timezone *tz);
+
+* 매개변수
+	첫번째 매개변수인 tv는 현재 시스템 시간을 저장하기 위한 구조체로 다음과 같이 정의되어 있다.
+<pre>
+<code>
+struct timeval
+{
+    long tv_sec;       // 초
+    long tv_usec;      // 마이크로초
+}
+</code>
+</pre>
+	두번째 매개변수인 tz은 타임존을 설정하기 위해서 사용된다.
+<pre>
+<code>
+struct timezone
+{
+    int tz_minuteswest:  // 그리니치 서측분차  
+    int tz_dsttime       // DST 보정타입(일광 절약시간)
+}
+</code>
+</pre>
+	타임존을 설정하는 게 아니라면 두번째 매개변수를 NULL로 넣어주면 된다.
+* 반환값 : 성공하면 0, 실패하면 -1.
+
+
+## 3. pthread_create
+* 새로운 쓰레드를 생성한다.
+* 헤더 : <phread.h>
+
+	int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);
+
+* 매개변수
+	+ 첫 번째 매개변수인 thread는 생성된 thread를 인식하기 위한 식별자.
+	+ 두 번째 매개변수 *attr은 쓰레드의 특성을 지정하기 위해 사용하며, 기본 쓰레드 특성을 사용할 경우 NULL을 준다.
+	+ 세 번째 매개변수 start_routine은 분기시켜서 실행할 쓰레드 함수이다.
+	+ 네 번째 매개변수 arg는 start_routine 쓰레드 함수의 매개변수로 넘겨진다.
+
+* 반환값 : 성공하면 0, 실패하면 errno
+
+
+## 4. pthread_detach
+* pthread_create를 사용하면 쓰레드가 종료되어도 사용했던 자원들을 해제하지 않는다. pthread_join을 사용하면 쓰레드가 종료될 때 까지 기다렸다가 종료시점이 되면 자원을 반납하는데, 그 전에 쓰레드가 종료될 때 사용한 자원을 해제시키고 싶다면 pthread_detach를 사용하면 된다.
+* 헤더 : <pthread.h>
+
+	int pthread_detach(pthread_t thread);
+
+* 매개변수 thread는 thread를 구분하는 식별자!
+
+* 사용법
+
+	thr_id = pthread_create(&p_thread, NULL, t_function, (void *)&a);
+	pthread_detach(thr_id);
+
+* 반환값 : 성공하면 0, 실패하면 errno.
+* 현재 자원을 점유하고 있는 쓰레드를 확인하고 싶다면 다음 명령어를 입력해보자.
+
+	while [ 1 ]; do ps -aux | grep pthread | grep -v grep | grep -v vim; sleep 1; done
+
+
+## 5. pthread_join
+* 쓰레드가 종료되면 쓰레드에 할당된 리소스를 해제시킨다. 
+* 헤더 : <phtread.h>
+
+	int pthread_join(pthread_t th, void **thread_return);
+
+* 사용법
+
+	thr_id = pthread_create(&p_thread, NULL, t_function, (void *)&a);
+	pthread_join(p_thread, (void *)&result);
+
+* 매개변수
+
+	첫번째 매개변수 th 는 기다릴 쓰레드의 식별자.
+	두번째 매개변수 thread_return 은 쓰레드의 리턴값. thread_return이 NULL이 아닌 경우 해당 포인터로 쓰레드의 리턴 값을 받아올 수 있다.  
+
+* 반환값 : 성공하면 0, 실패하면 errno
+
+## 6. pthread_mutex_init
+
+* 헤더 : <pthread.h>
+
+	int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr);
+
+* pthread_mutex_init는 첫 번째 인자로 주어지는 mutex를 초기화하고, 두 번째 인자를 통해서 그 속성을 변경시킬 수 있다.
+
+* 매개변수
+
+	첫 번째 매개변수 mutex는 초기화 받을 mutex 객체의 주소.
+	두 번째 매개변수 attr을 통해 초기화 할 뮤텍스의 특징을 정의할 수 있다.
+	mutex 특성(종류) 에는 "fast", "recurisev", "error checking"가 있으며, 디폴트으로 "fast" 가 사용된다. 디폴트값을 사용하려면 NULL을 넘겨주면 된다.
+
+* 반환값 : 항상 0을 리턴한다.
+
+- mutex를 초기화 하는 데에는 정적 방식과 동적 방식이 존재한다. 정적 방식은 
+
+	pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER
+
+와 같이 상수롤 통해서 초기화 하는 방식이고 동적 방식은 위와 같이 pthread_mutex_init 함수를 사용하는 방식이다.
+동적 방식을 사용했다면 pthread_mutex_destroy(&mutex)를 사용해서 mutex 객체를 해제시켜줘야 한다.
+
+
+## 7. phread_mutex_destroy
+
+* 헤더 : <phtread.h>
+
+	int pthread_mutex_destroy(pthread_mutex_t *mutex);
+
+* mutex 객체를 삭제하고 자원을 반환한다. 쓰레드가 종료되었다고 하더라도 mutex는 그대로 남아있으므로 mutex를 더 이상 사용하지 않는다면 이 함수를 호출해 삭제해줘야 한다.
+
+* 매개변수 : 리소스를 해제할 mutex 객체의 주소.
+
+* 반환값 : 성공하면 0, 실패하면 errno
+
+
+## 8. phread_mutex_lock
+
+	int pthread_mutex_lock(pthread_mutex_t *mutex);
+
+* 임계 구역에 진입하기 위해 mutex 잠금을 요청. 임계 구역에 이미 다른 쓰레드가 진입해 lock을 건 상태라면 임계 구역을 나올 때까지 (pthread_mutex_unlock이 호출될 때까지) 기다린다.
+
+* 반환값
+
+	EINVAL
+	뮤텍스가 잘못 초기화 되었다.
+
+	EDEADLK
+	이미 잠금을 얻은 쓰레드가 다시 잠금을 요청할 때 (error checking 뮤텍스일 경우 사용할 수 있다)
+
+## 9. pthread_mutex_unlock
+
+	int pthread_mutex_unlock(pthread_mutex_t *mutex);
+
+* mutex 잠금을 해제한다. 만약 fast 뮤텍스라면 pthread_mutex_unlock()는 언제나 unlocked 상태를 되돌려준다. recursive 뮤텍스라면 잠겨있는 뮤텍스의 수를 감소시키고 이 수가 0이 된다면 뮤텍스잠금을 되돌려주게 된다.
+
+
+# 3. philo_two
+
+* semaphore란?
+
+* semaphore와 mutex의 차이점
+	+ mutex는 동시 접근 동기화라면, semaphore는 접근 순서 동기화에 더 관련있다.
+	+ mutex는 상호 배제를 함으로써 임계구역에 하나의 쓰레드만 들어갈 수 있다. semaphore는 하나의 쓰레드(binary semaphore)만 들어가거나 여러 개의 쓰레드(counting semaphore)가 들어가게 할 수 있다.
+	+ semaphore는 mutex가 될 수 있지만 mutex는 semaphore가 될 수 없다.
+	+ semaphore는 소유할 수 없는 반면 mutex는 소유할 수 있고 소유자가 이에 책임을 진다.
+	+ mutex는 1개만 동기화가 되지만 semaphore는 하나 이상을 동기화 할 수 있다.
+
+## 1. sem_open
+* 헤더 : <semaphore.h>
+
+	sem_t * sem_open( const char * sem_name, int oflags, ... );
+
+* 매개변수
+
+	+ sem_name : 생성 또는 접근하고자 하는 세마포어의 이름
+	+ oflags : 세마포어 생성시 플래그. O_CREAT, O_EXCL 두 가지만 가능하다.
+
+		O_CREAT : sem_name이 존재하지 않으면 semaphore를 생성한다.
+		O_EXCL : 생성하려는 semaphore가 이미 존재하면 에러.
+
+	+ ... : O_CREAT 플래그를 사용하면 추가적으로 두 매개변수를 받을 수 있다.
+		- mode_t mode : 플래그를 O_CREAT로 설정하면, mode 매개변수를 받을 수 있다. <sys/stat.h> 를 인클루드 하면 아래 상수들을 활용할 수 있다.
+
+			S_IRWXR : 그룹 접근
+			S_IRWXO : 타인 접근
+			S_IRWXU : 개인 접근
+
+		- unsigned int value : 세마포어 초기 값으로 0 보다 큰 양수여야 한다. unlock된 세마포어의 수를 의미한다. 이 값은 SEM_VALUE_MAX를 초과할 수 없다.
+
+
+## 2. sem_close
+* semaphore의 사용을 종료하고 할당된 자원을 해제한다. 
+* 헤더 : <semaphore.h>
+
+	int sem_close( sem_t *sem );
+
+
+## 3. sem_post
+
+	int sem_post(sem_t *sem);
+
+* sem이 참조하는 세마포어가 unlock되고, 세마포어의 value가 1 증가하며, 세마포어에서 대기중인 스레드가 깨어난다.
+
+## 4. sem_wait
+
+	int sem_wait(sem_t *sem);
+
+* 세마포어를 lock하고, 세마포어의 value값이 1 감소한다.
+* 만약 sem_wait에서 받은 sem의 value가 0이라면 sem이 증가하거나 signal을 받을 때까지 wait호출자는 block(대기)상태가 된다.
+
+* 반환값 : 성공하면 0, 실패시 -1을 리턴하고 errno에 다음과 같은 에러값이 설정되며, semaphore의 상태는 변하지 않는다.
+
+	EAGAIN : 세마포어가 이미 lock 되어 있다.
+	EDEADLK : deadlock이 있을 때.
+	EINTR : signal에 의해 call이 interrupt 될 때.
+	EINVAL : sem이 사용가능한 상태가 아닐 때.
+
+## 5. sem_unlink
+
+	int sem_unlink(const char *name);
+
+* name에 해당하는 semaphore를 제거한다. 만약 이 세마포어가 다른 프로세스에 의해 사용중이라면, name은 즉시 semaphore와 연결이 해제되지만 세마포어 자체는 모든 참조가 해제될 때까지 제거되지 않는다. 이후에 이 name을 사용하여 sem_open을 호출하면 이름만 같은 새로운 semaphore가 생성된다.
+
+* 반환값 : 성공하면 0, 실패하면 -1을 리턴하고 errno에 다음과 같은 에러값이 설정된다. semaphore의 상태는 변하지 않는다.
+
+	EACCES : 이 세마포어를 제거할 권한이 없을 때
+	ENAMETOOLONG : 세마포어의 이름이 너무 길 때
+	ENOENT : 이 이름의 세마포어가 존재하지 않을 때
+
+
+# 4. philo_three
+
