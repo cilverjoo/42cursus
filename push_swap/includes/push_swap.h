@@ -5,10 +5,12 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 
-typedef struct s_push
+typedef struct		s_ps
 {
-	int cnt;
-
-}				t_push;
+	int 			len;
+	t_list			*stack_a;
+	t_list			*stack_b;
+	t_list			*instr;
+}					t_ps;
 
 #endif

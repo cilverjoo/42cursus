@@ -1,21 +1,28 @@
 
 #include "../../includes/push_swap.h"
 
-int		swap_a(int *arr)
+//change first to second.
+int			swap(t_list *stack)
 {
-	int tmp;
-	int len;
+	t_list	*top;
+	int		tmp;
 
-	len = ft_strlen(arr);
-
+	top = stack;
+	if (top)
+	{
+		if (!top->content || !top->next || !top->next->content)
+			return (0);
+		tmp = (int)top->content;
+		top->content = top->next->content;
+		top->next->content = tmp;
+		return (1);
+	}
+	return (0);
 }
 
-int 	swap_b()
+int			swap_both(t_ps *ps)
 {
-
-}
-
-int		swap_ab()
-{
-
+	if (!swap(ps->stack_a) || !swap(ps->stack_b))
+		return (0);
+	return (1);	
 }
