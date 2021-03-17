@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/17 16:10:29 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/18 00:07:07 by kim-eunju        ###   ########.fr       */
+/*   Created: 2021/03/17 16:11:00 by kim-eunju         #+#    #+#             */
+/*   Updated: 2021/03/18 01:10:10 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/push_swap.h"
+#include "../includes/push_swap.h"
 
-int			main(int ac, char **av)
+t_ps		*init_ps(void)
 {
 	t_ps	*ps;
 	
-	if (ac > 1)
-	{
-		ps = init_ps();
-		ps->len = ac;
-		make_stack_list(av, ps);
-		read_instruction(ps);
-		execute_instr(ps);
-		check_is_ok(ps);
-	}
-	return (0);
+	ps = (t_ps *)malloc(sizeof(t_ps));
+	ps->len = 0;
+	ps->is_sorted = 0;
+	ps->stack_a = ft_lstnew(NULL);
+	ps->stack_b = ft_lstnew(NULL);
+	ps->instr = ft_lstnew(NULL);
+	return (ps);
+}
+
+int			exit_program(void)
+{
+	char	*error;
+
+	error = "Error\n";
+	write(2, error, 6);
+	exit(0);
 }

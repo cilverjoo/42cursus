@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/17 16:10:29 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/18 00:07:07 by kim-eunju        ###   ########.fr       */
+/*   Created: 2021/03/17 16:10:55 by kim-eunju         #+#    #+#             */
+/*   Updated: 2021/03/18 01:10:07 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/push_swap.h"
+#include "../includes/push_swap.h"
 
-int			main(int ac, char **av)
+int			swap(t_list *stack)
 {
-	t_ps	*ps;
-	
-	if (ac > 1)
+	t_list	*top;
+	void	*tmp;
+
+	top = stack;
+	if (top)
 	{
-		ps = init_ps();
-		ps->len = ac;
-		make_stack_list(av, ps);
-		read_instruction(ps);
-		execute_instr(ps);
-		check_is_ok(ps);
+		if (!top->content || !top->next || !top->next->content)
+			return (0);
+		tmp = top->content;
+		top->content = top->next->content;
+		top->next->content = tmp;
+		return (1);
 	}
 	return (0);
+}
+
+int			swap_both(t_ps *ps)
+{
+	return (swap(ps->stack_a) && swap(ps->stack_b));	
 }

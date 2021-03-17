@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 17:53:20 by ekim              #+#    #+#             */
-/*   Updated: 2021/03/15 14:43:01 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/03/16 19:29:52 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static int			repeat_read(int fd, char **stack, char **line, char *buf)
 
 	if (*stack)
 		if (newline_check(*stack) >= 0)
-			return (return_line(stack, line, 129));
-	while ((check = read(fd, buf, 129)) > 0)
+			return (return_line(stack, line, 2));
+	while ((check = read(fd, buf, 1)) > 0)
 	{
 		buf[check] = '\0';
 		tmp_stack = *stack;
@@ -67,7 +67,7 @@ int					get_next_line(int fd, char **line)
 	int				check;
 	int				BUFFER_SIZE;
 
-	BUFFER_SIZE = 128;
+	BUFFER_SIZE = 1;
 	if ((fd < 0) || !line
 			|| !(buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (-1);
