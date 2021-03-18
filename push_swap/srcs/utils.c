@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:11:00 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/18 01:10:10 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/03/18 15:44:25 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ t_ps		*init_ps(void)
 	ps->is_sorted = 0;
 	ps->stack_a = ft_lstnew(NULL);
 	ps->stack_b = ft_lstnew(NULL);
-	ps->instr = ft_lstnew(NULL);
+	ps->instr = new_instr_node(NULL);
+	ps->p_instr = new_instr_node(NULL);
 	return (ps);
 }
 

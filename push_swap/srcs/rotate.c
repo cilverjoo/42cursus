@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:10:51 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/18 01:09:29 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/03/18 15:20:44 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,22 @@ int			rotate(t_list **stack)
 		*stack = next;
 		head->content = NULL;
 		head->next = NULL;
+		head->prev = NULL;
 		free(head);
 		head = NULL;
 	}
 
-	t_list *tmp;
-	tmp = *stack;
-	while (tmp)
-	{
-		printf("rotate : %d\n", *(int*)tmp->content);
-		tmp = tmp->next;
-	}
+	// t_list *tmp;
+	// tmp = *stack;
+	// while (tmp)
+	// {
+	// 	printf("rotate : %d\n", *(int*)tmp->content);
+	// 	tmp = tmp->next;
+	// }
 	return (1);
 }
 
 int			rotate_both(t_ps *ps)
 {
-	rotate(&ps->stack_a);
-	rotate(&ps->stack_b);
-	return (1);
+	return (rotate(&ps->stack_a) && rotate(&ps->stack_b));
 }

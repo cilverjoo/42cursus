@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 00:17:22 by ekim              #+#    #+#             */
-/*   Updated: 2020/10/14 21:14:40 by ekim             ###   ########.fr       */
+/*   Updated: 2021/03/18 15:14:05 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 	if (lst && new)
 	{
 		new->next = *lst;
+		(*lst)->prev = new;
 		*lst = new;
 	}
 }

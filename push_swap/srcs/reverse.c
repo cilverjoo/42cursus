@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:10:48 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/18 01:09:25 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/03/18 15:20:49 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int			reverse(t_list **stack)
 			free(tmp);
 			tmp = NULL;
 			head->next = NULL;
+			head->prev = NULL;
 			return (1);
 		}
 		head = head->next;

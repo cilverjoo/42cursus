@@ -6,11 +6,21 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:10:43 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/18 01:05:59 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/03/18 16:35:17 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+t_instr		*new_instr_node(char *instr)
+{
+	t_instr	*new;
+
+	new = (t_instr *)malloc(sizeof(t_instr));
+	new->content = instr;
+	new->next = NULL;
+	return (new);
+}
 
 int			execute_instr(t_ps *ps)
 {
@@ -73,7 +83,7 @@ void		read_instruction(t_ps *ps)
 		if (!check_instr_valid(instruction))
 			exit_program();
 		if (!ps->instr->content)
-			ps->instr->content = (void *)instruction;
+			ps->instr->content = instruction;
 		else
 		{
 			new = ft_lstnew(instruction);

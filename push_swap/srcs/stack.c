@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:10:53 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/18 00:40:11 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/03/18 15:19:59 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int			make_stack_list(char **av, t_ps *ps)
 		if (check_valid_arg(av[i], ptr))
 		{
 			if (!head->content)
-				head->content = (void *)ptr;
+				head->content = ptr;
 			else
 			{
 				new = ft_lstnew(ptr);
@@ -58,15 +58,12 @@ int			check_stack_is_sorted(t_list *stack)
 	{
 		if (!head->next || !head->content)
 			break ;
-		num1 = (int *)head->content;
-		num2 = (int *)head->next->content;
+		num1 = head->content;
+		num2 = head->next->content;
 		if (*num1 > *num2)
 			return (0);
-		printf("%d ", *num1);
 		head = head->next;
 	}
-	printf("%d", *num2);
-	printf("\n");
 	return (1);
 }
 
