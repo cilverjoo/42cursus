@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:10:40 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/18 15:26:33 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/03/21 15:34:42 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,18 @@ int			check_valid_arg(char *str, int *ptr)
 		return (0);
 	num = (int)(ret * minus);
 	*ptr = num;
+	return (1);
+}
+
+int			check_is_ok(t_ps *ps, int check)
+{
+	if (ps->stack_b || !check_stack_is_sorted(ps->stack_a))
+	{
+		if (check == 1)
+			write(1, "KO\n", 3);
+		return (0);
+	}
+	if (check == 1)
+		write(1, "OK\n", 3);
 	return (1);
 }

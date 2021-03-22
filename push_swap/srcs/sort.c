@@ -1,52 +1,107 @@
 #include "../includes/push_swap.h"
 
-void	move_top_chunk_to_b(int chunk_size, t_ps *ps)
+//quick sort!
+
+void	rotate_remains(int remains, t_ps *ps)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < remains)
+		rotate_a(&ps->stack_a, 1);
+}
+
+void		move_chunk_to_b_and_reverse(int chunk_size, t_ps *ps)
 {
 	int		i;
 
 	i = 0;
 	while (i < chunk_size)
 	{
-		push(&ps->stack_b, &ps->stack_a);
+		push_b(&ps->stack_b, &ps->stack_a, 1);
+		if (i != 0)
+			reverse_b(&ps->stack_b, 1);
 		i++;
 	}
 }
 
+//chunk_size를 줬을 때 정렬해주기.
 void		merge_sort(int chunk_size, t_ps *ps)
 {
-	t_list *s1;
-	t_list *s2;
+	t_list	*s1;
+	t_list	*s2;
 	int		to_bottom;
+	int		remains;
 
 	to_bottom = 0;
-	move_top_chunk_to_b(chunk_size, ps);
-	s1 = ps->stack_a;
-	s2 = ft_lstlast(ps->stack_b);
-	//chunk_size = this.
-	while (to_bottom < chunk_size * 2)
+	remains = ps->size;
+	while (remains >= chunk_size)
 	{
-		
+		move_chunk_to_b_and_reverse(chunk_size, ps);
+		s1 = ps->stack_a;
+		s2 = ps->stack_b;
+		to_bottom = 0;
+		while (to_bottom < chunk_size * 2)
+		{
+			//stack b가 비었거나, stack_a top < stack_b top
+			if (s2->content == NULL || s1->content < s2->content)
+				rotate_a(&ps->stack_a, 1);
+			else
+			{
+				push_a(&ps->stack_a, &ps->stack_b, 1);
+				rotate_a(&ps->stack_a, 1);
+				s2 = ps->stack_b;
+			}
+			s1 = ps->stack_a;
+			to_bottom++;
+		}
+		remains -= to_bottom;
 	}
-
 }
 
-int		sorting(t_ps *ps)
+void		swap_top_at_start(t_ps *ps)
+{
+	t_list	*first;
+	t_list	*second;
+	int		cnt;
+
+	//이 함수에 들어온다면 무조건 first, second는 존재하는 걸로 가정.
+	cnt = 0;
+	first = ps->stack_a;
+	second = ps->stack_a->next;
+	while (cnt < ps->size)
+	{
+		if (first->content > second->content)
+			swap_a(ps->stack_a, 1);
+		cnt += rotate_a(&ps->stack_a, 1);
+		cnt += rotate_a(&ps->stack_a, 1);
+		first = ps->stack_a;
+		second = first->next;
+	}
+}
+
+int		do_sorting(t_ps *ps)
 {
 	int chunk_size;
-	int tmp1;
-	int	tmp2;
 
-	chunk_size = 2;
-	if (ps->len <= 2)
+	if (check_is_ok(ps, 0))
+		return (1);
+	if (ps->size <= 5)
 	{
-		if (!check_stack_is_sorted(ps->stack_a))
-			swap(ps->stack_a);
+		sort_small_list(ps);
 		return (1);
 	}
+	chunk_size = 1;
 	while (!ps->is_sorted)
 	{
-		merge_sort(chunk_size, ps);
+		if (chunk_size == 1)
+			swap_top_at_start(ps);
+		else
+			merge_sort(chunk_size, ps);	
 		chunk_size *= 2;
+		show_stacks(ps);
+		if (chunk_size >= ps->size)
+			ps->is_sorted = 1;
 	}
 	return (1);
 }

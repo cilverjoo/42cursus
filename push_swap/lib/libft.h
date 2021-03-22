@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 23:38:06 by ekim              #+#    #+#             */
-/*   Updated: 2021/03/18 15:25:33 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/03/18 21:11:33 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 int					ft_isdigit(int c);
 size_t				ft_strlen(const char *str);
+int					ft_strncmp(const char *s1, const char *s2, int n);
 
 typedef struct		s_list
 {
@@ -29,7 +30,7 @@ typedef struct		s_list
 	struct s_list	*prev;
 }					t_list;
 
-t_list				*ft_lstnew(void *content);
+t_list				*ft_lstnew(int *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 int					ft_lstsize(t_list *lst);
 t_list				*ft_lstlast(t_list *lst);

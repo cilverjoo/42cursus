@@ -2,7 +2,7 @@ NAME = libft.a
 CC = gcc
 AFLAGS = rcs
 CFLAGS = -Wall -Wextra -Werror
-SRCS = ft_isdigit.c get_next_line.c get_next_line_utils.c
+SRCS = ft_isdigit.c ft_strlen.c ft_strncmp.c get_next_line.c get_next_line_utils.c
 
 BONUS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
 			ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
