@@ -15,7 +15,7 @@ typedef struct      s_instr
 typedef struct		s_ps
 {
 	int 			size;
-	int				is_sorted;
+	int				*sorted_array;
 	t_list			*stack_a;
 	t_list			*stack_b;
 	t_instr			*instr;
@@ -24,13 +24,14 @@ typedef struct		s_ps
 
 //utils
 int					exit_program(void);
-t_ps				*init_ps(void);
+t_ps				*init_ps(int size);
 
 //checker
 int					check_valid_arg(char *str, int *ptr);
 int					make_stack_list(char **av, t_ps *ps);
 void				read_instruction(t_ps *ps);
-int					execute_instr(t_ps *ps);
+int					execute_instr(t_ps *ps, char *content);
+int					execute_instrs(t_ps *ps);
 int 				check_instr_valid(char *instr);
 int					check_stack_is_sorted(t_list *stack);
 int					check_is_ok(t_ps *ps, int check);
@@ -57,8 +58,7 @@ void				move_chunk_to_b_and_reverse(int chunk_size, t_ps *ps);
 void				rotate_remains(int remains, t_ps *ps);
 void				show_stacks(t_ps *ps);
 
-int					*make_sorted_array(t_ps *ps);
+void				make_sorted_array(int *array, t_ps *ps);
 void				sort_small_list(t_ps *ps);
-void				simple_sort(t_ps *ps, int *arr, int pivot);
 
 #endif

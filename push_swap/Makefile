@@ -1,6 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I./includes
-
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I./includes  # CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I./includes
 CHECKER = checker
 PUSHSWAP = push_swap
 

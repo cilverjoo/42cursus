@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:10:40 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/21 15:34:42 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/03/22 12:50:10 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+int			check_instr_valid(char *instr)
+{
+	if (ft_strncmp(instr, "sa", 2) == 0 || ft_strncmp(instr, "sb", 2) == 0
+		|| ft_strncmp(instr, "ss", 2) == 0 || ft_strncmp(instr, "pa", 2) == 0
+		|| ft_strncmp(instr, "pb", 2) == 0 || ft_strncmp(instr, "ra", 2) == 0
+		|| ft_strncmp(instr, "rb", 2) == 0 || ft_strncmp(instr, "rr", 2) == 0
+		|| ft_strncmp(instr, "rra", 3) == 0 || ft_strncmp(instr, "rrb", 3) == 0
+		|| ft_strncmp(instr, "rrr", 3) == 0)
+		return (1);
+	return (0);
+}
+
+int			check_arg_has_flag(char c, int *minus)
+{
+	if (c == '-' || c == '+')
+	{
+		if (c == '-')
+			*minus = -1;
+		return (1);
+	}
+	return (0);
+}
 
 int			check_valid_arg(char *str, int *ptr)
 {
@@ -23,12 +46,7 @@ int			check_valid_arg(char *str, int *ptr)
 	i = 0;
 	minus = 1;
 	len = (int)ft_strlen(str);
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			minus = -1;
-		i++;
-	}
+	i += check_arg_has_flag(str[i], &minus);
 	ret = 0;
 	while (i < len)
 	{

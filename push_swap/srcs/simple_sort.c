@@ -1,43 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simple_sort.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/22 12:24:27 by ekim              #+#    #+#             */
+/*   Updated: 2021/03/22 16:57:33 by ekim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
-int			*make_sorted_array(t_ps *ps)
+void			make_sorted_array(int *array, t_ps *ps)
 {
-	t_list	*stack;
-	int		*arr;
-	int		i;
-	int		j;
-	int		tmp;
+	t_list		*stack;
+	int			i;
+	int			j;
+	int			tmp;
 
 	stack = ps->stack_a;
-	arr = (int *)malloc(sizeof(int) * 5);
 	i = 0;
 	while (stack)
 	{
-		arr[i++] = *(stack->content);
+		array[i++] = *(stack->content);
 		stack = stack->next;
 	}
 	i = -1;
 	while (++i < ps->size)
 	{
-		j = 0;
-		while (j < ps->size)
-		{
-			if (arr[i] < arr[j])
+		j = -1;
+		while (++j < ps->size)
+			if (array[i] < array[j])
 			{
-				tmp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = tmp;
+				tmp = array[i];
+				array[i] = array[j];
+				array[j] = tmp;
 			}
-			j++;
-		}
 	}
-	return (arr);
 }
 
-static void		sort_a(t_ps *ps, int max)
+static void		sort_a(t_ps *ps)
 {
-	t_list	*s_a;
+	t_list		*s_a;
+	int			max;
 
+	max = ps->sorted_array[ps->size - 1];
 	while (!check_stack_is_sorted(ps->stack_a))
 	{
 		s_a = ps->stack_a;
@@ -50,11 +58,13 @@ static void		sort_a(t_ps *ps, int max)
 	}
 }
 
-void		simple_sort(t_ps *ps, int *arr, int pivot)
+void			sort_small_list(t_ps *ps)
 {
-	int		cnt;
+	int			pivot;
+	int			cnt;
 
 	cnt = 0;
+	pivot = (ps->sorted_array)[ps->size / 2];
 	while (cnt < ps->size && ps->size > 3)
 	{
 		if (*(ps->stack_a->content) < pivot)
@@ -64,21 +74,9 @@ void		simple_sort(t_ps *ps, int *arr, int pivot)
 	}
 	if (ft_lstsize(ps->stack_b) >= 2)
 		if (*(ps->stack_b->content) < *(ps->stack_b->next->content))
-			swap_a(ps->stack_a, 1);
-	sort_a(ps, arr[ps->size - 1]);
+			swap_b(ps->stack_b, 1);
+	sort_a(ps);
 	while (ps->stack_b)
 		push_a(&ps->stack_a, &ps->stack_b, 1);
 	show_stacks(ps);
-}
-
-void		sort_small_list(t_ps *ps)
-{
-	int		*arr;
-	int		idx;
-	int		pivot;
-
-	arr = make_sorted_array(ps);
-	idx = ps->size % 2 == 1 ? ps->size / 2 : ps->size / 2 - 1;
-	pivot = arr[idx];
-	simple_sort(ps, arr, pivot);
 }

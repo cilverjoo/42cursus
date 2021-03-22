@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:10:37 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/20 13:42:39 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/03/22 17:24:10 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int			main(int ac, char **av)
 
 	if (ac > 1)
 	{
-		ps = init_ps();
-		ps->size = ac -1;
+		ps = init_ps(ac - 1);
 		make_stack_list(av, ps);
 		do_sorting(ps);
 	}
