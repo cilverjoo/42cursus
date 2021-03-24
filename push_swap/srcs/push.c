@@ -6,13 +6,12 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:10:46 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/22 18:35:23 by ekim             ###   ########.fr       */
+/*   Updated: 2021/03/24 15:42:22 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-//from stack_2 to stack_1
 int			push_a(t_list **stack_1, t_list **stack_2, int check)
 {
 	t_list	*new;

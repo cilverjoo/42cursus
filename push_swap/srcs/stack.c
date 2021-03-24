@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:10:53 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/22 19:22:25 by ekim             ###   ########.fr       */
+/*   Updated: 2021/03/24 15:47:20 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int			make_stack_list(char **av, t_ps *ps)
 			return (exit_program());
 		i++;
 	}
-	// show_stacks(ps);
 	return (1);
 }
 

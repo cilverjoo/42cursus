@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 17:53:20 by ekim              #+#    #+#             */
-/*   Updated: 2021/03/18 15:25:20 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/03/24 16:07:59 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ int					get_next_line(int fd, char **line)
 	static char		*stack[10];
 	char			*buf;
 	int				check;
-	int				BUFFER_SIZE;
+	int				buffer_size;
 
-	BUFFER_SIZE = 1;
+	buffer_size = 1;
 	if ((fd < 0) || !line
-			|| !(buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+		|| !(buf = (char *)malloc(sizeof(char) * buffer_size + 1)))
 		return (-1);
 	*line = 0;
 	check = repeat_read(fd, &stack[fd], line, buf);
