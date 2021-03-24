@@ -6,11 +6,25 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:11:00 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/22 22:13:53 by ekim             ###   ########.fr       */
+/*   Updated: 2021/03/24 17:49:21 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+int			check_double(t_ps *ps)
+{
+	int		i;
+
+	i = 0;
+	while (i < ps->size - 1)
+	{
+		if (ps->sorted_array[i] == ps->sorted_array[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 t_ps		*init_ps(int size)
 {
@@ -59,30 +73,17 @@ int			exit_program(void)
 	exit(0);
 }
 
-void		show_stacks(t_ps *ps)
+int			get_chunk_size(t_ps *ps)
 {
-	t_list	*s_1;
-	t_list	*s_2;
-
-	s_1 = ps->stack_a;
-	s_2 = ps->stack_b;
-	printf("\n\n\n**************start**************\n");
-	while (1)
-	{
-		if (s_1)
-			printf("%8d", *s_1->content);
-		else
-			printf("        ");
-		if (s_2)
-			printf("%10d", *s_2->content);
-		printf("\n");
-		if (!s_1 && !s_2)
-			break ;
-		if (s_1)
-			s_1 = s_1->next;
-		if (s_2)
-			s_2 = s_2->next;
-	}
-	printf("     stackA     stackB");
-	printf("\n**************end****************\n\n\n");
+	if (ps->size <= 10)
+		return (3);
+	else if (ps->size <= 20)
+		return (5);
+	else if (ps->size <= 50)
+		return (10);
+	else if (ps->size <= 100)
+		return (20);
+	else if (ps->size <= 200)
+		return (30);
+	return (50);
 }

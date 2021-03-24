@@ -18,7 +18,8 @@ CHECKER_NAME =	checker/checker.c \
 				check.c \
 				stack.c \
 				simple_sort.c \
-				sort.c
+				sort.c \
+				sort2.c
 
 PUSHSWAP_NAME =	push_swap/push_swap.c \
 				utils.c \
@@ -30,7 +31,8 @@ PUSHSWAP_NAME =	push_swap/push_swap.c \
 				check.c \
 				stack.c \
 				simple_sort.c \
-				sort.c
+				sort.c \
+				sort2.c
 				
 CHECKER_SRCS = $(addprefix $(SRCS_DIR), $(CHECKER_NAME))
 PUSHSWAP_SRCS = $(addprefix $(SRCS_DIR), $(PUSHSWAP_NAME))

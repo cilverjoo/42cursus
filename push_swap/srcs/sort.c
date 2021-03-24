@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 15:42:59 by ekim              #+#    #+#             */
-/*   Updated: 2021/03/24 16:03:30 by ekim             ###   ########.fr       */
+/*   Updated: 2021/03/24 17:48:29 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void			move_to_b_by_pivot(t_ps *ps, int pivot1, int pivot2)
 		if (*(s_a->content) >= pivot1 && *(s_a->content) <= pivot2)
 		{
 			cnt += depth;
-			make_arg_top_of_stack_a(ps, depth);
+			get_arg_and_push_to_b(ps, depth);
 			depth = 0;
 			s_a = ps->stack_a;
 		}
@@ -50,7 +50,7 @@ void			move_to_a_in_sequence(t_ps *ps, int idx1, int idx2)
 	while (idx1 + i <= idx2)
 		if (ps->sorted_array[idx1 + i] == *(s_b->content))
 		{
-			make_arg_top_of_stack_a(ps, depth);
+			get_arg_and_push_to_a(ps, depth);
 			depth = 0;
 			s_b = ps->stack_b;
 			i++;
@@ -95,6 +95,8 @@ int				do_sorting(t_ps *ps)
 	if (check_is_ok(ps, 0))
 		return (1);
 	make_sorted_array(ps->sorted_array, ps);
+	if (!check_double(ps))
+		exit_program();
 	if (ps->size <= 5)
 		sort_small_list(ps);
 	else
