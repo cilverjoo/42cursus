@@ -6,13 +6,13 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:10:40 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/22 12:50:10 by ekim             ###   ########.fr       */
+/*   Updated: 2021/03/24 13:12:14 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int			check_instr_valid(char *instr)
+int				check_instr_valid(char *instr)
 {
 	if (ft_strncmp(instr, "sa", 2) == 0 || ft_strncmp(instr, "sb", 2) == 0
 		|| ft_strncmp(instr, "ss", 2) == 0 || ft_strncmp(instr, "pa", 2) == 0
@@ -24,7 +24,7 @@ int			check_instr_valid(char *instr)
 	return (0);
 }
 
-int			check_arg_has_flag(char c, int *minus)
+int				check_arg_has_flag(char c, int *minus)
 {
 	if (c == '-' || c == '+')
 	{
@@ -35,13 +35,13 @@ int			check_arg_has_flag(char c, int *minus)
 	return (0);
 }
 
-int			check_valid_arg(char *str, int *ptr)
+int				check_valid_arg(char *str, int *ptr)
 {
-	long	ret;
-	int		len;
-	int		minus;
-	int		i;
-	int		num;
+	long long	ret;
+	int			len;
+	int			minus;
+	int			i;
+	int			num;
 
 	i = 0;
 	minus = 1;
@@ -62,7 +62,7 @@ int			check_valid_arg(char *str, int *ptr)
 	return (1);
 }
 
-int			check_is_ok(t_ps *ps, int check)
+int				check_is_ok(t_ps *ps, int check)
 {
 	if (ps->stack_b || !check_stack_is_sorted(ps->stack_a))
 	{
