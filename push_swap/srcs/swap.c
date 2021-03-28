@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:10:55 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/20 18:01:23 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/03/22 12:50:58 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int			swap_a(t_list *stack, int check)
 	int		*tmp;
 
 	top = stack;
-	if (!top|| !top->next)
+	if (!top || !top->next)
 		return (0);
 	tmp = top->content;
 	top->content = top->next->content;
@@ -34,7 +34,7 @@ int			swap_b(t_list *stack, int check)
 	int		*tmp;
 
 	top = stack;
-	if (!top|| !top->next)
+	if (!top || !top->next)
 		return (0);
 	tmp = top->content;
 	top->content = top->next->content;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:10:48 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/03/21 15:06:39 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/03/24 17:48:49 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,25 @@ int			reverse_a(t_list **stack, int check)
 	t_list	*tmp;
 
 	head = *stack;
-	while (head->next)
-	{
-		if (!head->next->next)
+	if (head)
+		while (head->next)
 		{
-			tail = ft_lstnew(head->next->content);
-			ft_lstadd_front(stack, tail);
-			tmp = head->next;
-			free(tmp);
-			tmp = NULL;
-			head->next = NULL;
-			head->prev = NULL;
-			break ;
+			if (!head->next->next)
+			{
+				tail = ft_lstnew(head->next->content);
+				ft_lstadd_front(stack, tail);
+				tmp = head->next;
+				free(tmp);
+				tmp = NULL;
+				head->next = NULL;
+				head->prev = NULL;
+				break ;
+			}
+			head = head->next;
 		}
-		head = head->next;
-	}
 	if (check)
 		write(1, "rra\n", 4);
-	return (0);
+	return (1);
 }
 
 int			reverse_b(t_list **stack, int check)
@@ -63,7 +64,7 @@ int			reverse_b(t_list **stack, int check)
 	}
 	if (check)
 		write(1, "rrb\n", 4);
-	return (0);
+	return (1);
 }
 
 int			reverse_both(t_ps *ps, int check)

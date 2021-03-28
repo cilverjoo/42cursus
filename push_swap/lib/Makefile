@@ -6,7 +6,7 @@ SRCS = ft_isdigit.c ft_strlen.c ft_strncmp.c get_next_line.c get_next_line_utils
 
 BONUS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
 			ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
-			ft_lstmap.c ft_lstnew.c ft_lstsize.c
+			ft_lstnew.c ft_lstsize.c
 
 OBJECTS = $(SRCS:.c=.o)
 
