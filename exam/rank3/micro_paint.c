@@ -4,42 +4,41 @@
 
 typedef struct	s_zone
 {
-	int		width;
-	int		height;
-	char	background;
-} 				t_zone;
+	int			width;
+	int			height;
+	char		background;
+}				t_zone;
 
-typedef struct	s_shape
+typedef struct s_shape
 {
-	char	type;
-	float	x;
-	float	y;
-	float	width;
-	float	height;
-	char	color;
+	char		type;
+	float		x;
+	float		y;
+	float		width;
+	float		height;
+	char		color;
 	struct s_shape	*next;
 }				t_shape;
 
-int
-	ft_strlen(char const *str)
+int		ft_strlen(char *str)
 {
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);
 }
 
-int
-	str_error(char const *str, int ret)
+int		str_error(char *str, int ret)
 {
 	write(1, str, ft_strlen(str));
 	return (ret);
 }
 
-int
-	clear_all(FILE *file, char *drawing)
+int		clear_all(FILE *file, char *drawing)
 {
 	fclose(file);
 	if (drawing)
@@ -47,26 +46,17 @@ int
 	return (1);
 }
 
-int
-	check_zone(t_zone *zone)
+int			check_zone(t_zone *zone)
 {
-	return (zone->width > 0 && zone->width <= 300
-			&& zone->height > 0 && zone->height <= 300);
+	return (zone->width > 0 && zone->height > 0
+			&& zone->width <= 300 && zone->height <= 300);
 }
 
-int
-	check_shape(t_shape *shape)
+int			get_zone(FILE *file, t_zone *zone)
 {
-	return (shape->width > 0.00000000 && shape->height > 0.00000000
-			&& (shape->type == 'r' || shape->type == 'R'));
-}
+	int		scan_ret;
 
-int
-	get_zone(FILE *file, t_zone *zone)
-{
-	int scan_ret;
-
-	if ((scan_ret = fscanf(file, "%d %d %c\n", &zone->width, &zone->height, &zone->background)) != 3)
+	if ((scan_ret = fscanf(file, "%d %d %c\n", &zone->width, &zone->height, &zone->background) != 3))
 		return (0);
 	if (!check_zone(zone))
 		return (0);
@@ -75,13 +65,12 @@ int
 	return (1);
 }
 
-char
-	*paint_background(t_zone *zone)
+char		*paint_background(t_zone *zone)
 {
 	char	*drawing;
 	int		i;
 
-	if (!(drawing = (char*)malloc(sizeof(*drawing) * (zone->width * zone->height))))
+	if (!(drawing = (char *)malloc(sizeof(char) * (zone->width * zone->height))))
 		return (NULL);
 	i = 0;
 	while (i < zone->width * zone->height)
@@ -89,30 +78,36 @@ char
 	return (drawing);
 }
 
-int
-	in_rectangle(float x, float y, t_shape *shape)
+int			check_shape(t_shape *shape)
 {
-	if (((x < shape->x || (shape->x + shape->width < x))
-		|| (y < shape->y)) || (shape->y + shape->height < y))
+	return (shape->width > 0.00000000 && shape->height > 0.00000000
+		&& (shape->type == 'r' || shape->type == 'R'));	
+}
+
+int			in_rectangle(float x, float y, t_shape *shape)
+{
+	if (((x < shape->x) || (shape->x + shape->width < x))
+		|| (y < shape->y) || (shape->y + shape->height < y))
 		return (0);
-	if (((x - shape->x < 1.00000000) || ((shape->x + shape->width) - x < 1.00000000)) ||
-	((y - shape->y < 1.00000000 || ((shape->y + shape->height) - y < 1.00000000))))
+
+	//이부분!!! 그니까 무조건 안쪽일 때구나..........
+	if (((x - shape->x < 1.00000000) || ((shape->x + shape->width) -x < 1.00000000))
+		|| ((y - shape->y < 1.00000000 || ((shape->y + shape->height) - y < 1.00000000))))
 		return (2);
 	return (1);
 }
 
-void
-	draw_shape(char **drawing, t_shape *shape, t_zone *zone)
+void		draw_shape(char **drawing, t_shape *shape, t_zone *zone)
 {
-	int	i;
-	int	j;
-	int	ret;
+	int		i;
+	int		j;
+	int		ret;
 
 	i = 0;
 	while (i < zone->height)
 	{
 		j = 0;
-		while (j< zone->width)
+		while (j < zone->width)
 		{
 			ret = in_rectangle(j, i, shape);
 			if ((shape->type == 'r' && ret == 2)
@@ -124,8 +119,7 @@ void
 	}
 }
 
-int
-	draw_shapes(FILE *file, char **drawing, t_zone *zone)
+int			draw_shapes(FILE *file, char **drawing, t_zone *zone)
 {
 	t_shape	tmp;
 	int		scan_ret;
@@ -136,15 +130,15 @@ int
 			return (0);
 		draw_shape(drawing, &tmp, zone);
 	}
+	//이부분!!
 	if (scan_ret != -1)
 		return (0);
 	return (1);
 }
 
-void
-	draw_drawing(char *drawing, t_zone *zone)
+void		draw_drawing(char *drawing, t_zone *zone)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (i < zone->height)
@@ -155,24 +149,20 @@ void
 	}
 }
 
-int
-	main(int argc, char **argv)
+int			main(int ac, char **av)
 {
+	FILE	*file;
 	t_zone	zone;
 	char	*drawing;
-	FILE	*file;
 
-	zone.width = 0;
-	zone.height = 0;
-	zone.background = 0;
-	if (argc != 2)
-		return (str_error("Error: argument\n", 1));
-	if (!(file = fopen(argv[1], "r")))
+	if (ac != 2)
+		return (str_error("Error: argument;\n", 1));
+	if (!(file = fopen(av[1], "r")))
 		return (str_error("Error: Operation file corrupted\n", 1));
 	if (!get_zone(file, &zone))
 		return (clear_all(file, NULL) && str_error("Error: Operation file corrupted\n", 1));
 	if (!(drawing = paint_background(&zone)))
-		return (clear_all(file, NULL) && str_error("Error: malloc failed :)\n", 1));
+		return (clear_all(file, NULL) && str_error("Error: malloc failed\n", 1));
 	if (!draw_shapes(file, &drawing, &zone))
 		return (clear_all(file, drawing) && str_error("Error: Operation file corrupted\n", 1));
 	draw_drawing(drawing, &zone);

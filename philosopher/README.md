@@ -12,7 +12,7 @@
 	+ number_of_philosophers: 철학자들의 수이자 포크의 갯수
 	+ time_to_die: 수 밀리초 안에 철학자가 'time_to_die'를 먹는것을 시작하지 않으면 그의 마지막 식사를 시작하거나 시뮬레이션이 시작한 지 수 초 안에 철학자는 죽는다.
 	+ time_to_eat: 수 밀리초 이내이며 철학자가 먹는 데 걸리는 시간이다. 이 시간동안 철학자는 두 개의 포크를 가지고 있어야 한다.
-	+ time_to_sleep: 수 밀리초 이내이며 철학자가 잠을 자는데 걸리는 시간이다.
+	+ time_to_sleep: 수 밀리초 이내이며 철학자가 잠을 자는 데 걸리는 시간이다.
 	+ number_of_times_each_philosopher_must_eat: 선택적으로 매개변수가 주어지며, 만약 모든 철학자들이 최소 'number_of_times_each_philosopher_must_eat'를 먹으면 시뮬레이션은 중지된다. 명시되지 않으면, 시뮬레이션은 한 철학자가 죽을 때만 멈춘다.
 * 각 철학자들은 1부터 'number_of_philosophers'까지의 숫자가 주어져야 한다.
 * 철학자1은 철학자'number_of_philosopher'의 옆에 있다. 철학자N은 철학자N-1과 철학자 N+1 사이에 있다.
@@ -61,6 +61,7 @@
 * 헤더 : <unistd.h>
 
 * microseconds : 몇 microseconds(1/1000000 초) 기다리게 할건지 입력.
+* 1microseconds = 0.001miliseconds이므로 usleep(100)은 0.1miliseconds 동안 기다리라는 말이 된다.
 
 * sleep보다 더 정밀하게 시간을 조절하고 싶을 때 사용한다.
 
@@ -78,27 +79,16 @@
 <code>
 struct timeval
 {
-    long tv_sec;       // 초
-    long tv_usec;      // 마이크로초
+    long tv_sec;       // second since Jan. 1, 1970
+    long tv_usec;      // 마이크로세컨드 - 1/1,000,000초 사용, 밀리세컨드 - 1/1000초
 }
 </code>
 </pre>
 
-두번째 매개변수인 tz은 타임존을 설정하기 위해서 사용된다.
-
-<pre>
-<code>
-struct timezone
-{
-    int tz_minuteswest:  // 그리니치 서측분차  
-    int tz_dsttime       // DST 보정타입(일광 절약시간)
-}
-</code>
-</pre>
-타임존을 설정하는 게 아니라면 두번째 매개변수를 NULL로 넣어주면 된다.
+두번째 매개변수인 tz은 타임존을 설정하기 위해서 사용되었으나, 그냥 사용하지 말자.
+두번째 매개변수는 NULL을 넣어주자.
 
 * 반환값 : 성공하면 0, 실패하면 -1.
-
 
 
 ## 3. pthread_create
@@ -209,6 +199,7 @@ struct timezone
 	EDEADLK
 	이미 잠금을 얻은 쓰레드가 다시 잠금을 요청할 때 (error checking 뮤텍스일 경우 사용할 수 있다)
 
+
 ## 9. pthread_mutex_unlock
 
 	int pthread_mutex_unlock(pthread_mutex_t *mutex);
@@ -235,8 +226,8 @@ struct timezone
 
 * 매개변수
 
-	+ sem_name : 생성 또는 접근하고자 하는 세마포어의 이름
-	+ oflags : 세마포어 생성시 플래그. O_CREAT, O_EXCL 두 가지만 가능하다.
+	+ sem_name : 생성 또는 접근하고자 하는 semaphore의 이름
+	+ oflags : semaphore 생성시 플래그. O_CREAT, O_EXCL 두 가지만 가능하다.
 
 		O_CREAT : sem_name이 존재하지 않으면 semaphore를 생성한다.
 		O_EXCL : 생성하려는 semaphore가 이미 존재하면 에러.
@@ -250,7 +241,9 @@ struct timezone
 
 			S_IRWXU : 개인 접근
 
-		- unsigned int value : 세마포어 초기 값으로 0 보다 큰 양수여야 한다. unlock된 세마포어의 수를 의미한다. 이 값은 SEM_VALUE_MAX를 초과할 수 없다.
+		- unsigned int value :  semaphore 초기 값으로 0 보다 큰 양수여야 한다. unlock된  semaphore의 수를 의미한다. 이 값은 SEM_VALUE_MAX를 초과할 수 없다.
+
+	* semaphore를 생성하면 초기 value는 1이다.
 
 
 ## 2. sem_close
@@ -265,18 +258,18 @@ struct timezone
 
 	int sem_post(sem_t *sem);
 
-* sem이 참조하는 세마포어가 unlock되고, 세마포어의 value가 1 증가하며, 세마포어에서 대기중인 스레드가 깨어난다.
+* sem이 참조하 semaphore가 unlock되고 semaphore의 value가 1 증가하며 semaphore에서 대기중인 스레드가 깨어난다.
 
 ## 4. sem_wait
 
 	int sem_wait(sem_t *sem);
 
-* 세마포어를 lock하고, 세마포어의 value값이 1 감소한다.
+* semaphore를 lock하고 semaphore의 value값이 1 감소한다.
 * 만약 sem_wait에서 받은 sem의 value가 0이라면 sem이 증가하거나 signal을 받을 때까지 wait호출자는 block(대기)상태가 된다.
 
 * 반환값 : 성공하면 0, 실패시 -1을 리턴하고 errno에 다음과 같은 에러값이 설정되며, semaphore의 상태는 변하지 않는다.
 
-	EAGAIN : 세마포어가 이미 lock 되어 있다.
+	EAGAIN : semaphore가 이미 lock 되어 있다.
 
 	EDEADLK : deadlock이 있을 때.
 
@@ -288,16 +281,19 @@ struct timezone
 
 	int sem_unlink(const char *name);
 
-* name에 해당하는 semaphore를 제거한다. 만약 이 세마포어가 다른 프로세스에 의해 사용중이라면, name은 즉시 semaphore와 연결이 해제되지만 세마포어 자체는 모든 참조가 해제될 때까지 제거되지 않는다. 이후에 이 name을 사용하여 sem_open을 호출하면 이름만 같은 새로운 semaphore가 생성된다.
+* name에 해당하는 semaphore를 제거한다. 만약  semaphore가 다른 프로세스에 의해 사용중이라면, name은 즉시 semaphore와 연결이 해제되지 semaphore 자체는 모든 참조가 해제될 때까지 제거되지 않는다. 이후에 이 name을 사용하여 sem_open을 호출하면 이름만 같은 새로운 semaphore가 생성된다.
 
 * 반환값 : 성공하면 0, 실패하면 -1을 리턴하고 errno에 다음과 같은 에러값이 설정된다. semaphore의 상태는 변하지 않는다.
 
-	EACCES : 이 세마포어를 제거할 권한이 없을 때
+	EACCES : 이 semaphore를 제거할 권한이 없을 때
 	
-	ENAMETOOLONG : 세마포어의 이름이 너무 길 때
+	ENAMETOOLONG : semaphore의 이름이 너무 길 때
 	
-	ENOENT : 이 이름의 세마포어가 존재하지 않을 때
+	ENOENT : 이 이름의 semaphore가 존재하지 않을 때
 
 
 # 4. philo_three
+
+# 5. 참고
+* https://selvarajahkesavan.medium.com/the-dining-philosophers-problem-de586df365bc
 
