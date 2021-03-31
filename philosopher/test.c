@@ -7,6 +7,6 @@ int		main(void)
 	struct timeval tv;
 
 	time = gettimeofday(&tv, NULL);
-	printf("%ld %ld\n", tv.tv_sec * 1000, tv.tv_usec / 1000);
+	printf("%10.5ld %10.5ld\n", tv.tv_sec * 1000, tv.tv_usec / 1000);
 	return (0);
 }

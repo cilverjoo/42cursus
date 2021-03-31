@@ -54,6 +54,9 @@
 
 * critical section(임계구역)이란?
 
+	+ 임계 구역(critical section) 또는 공유변수 영역은 병렬컴퓨팅에서 둘 이상의 스레드가 동시에 접근해서는 안되는 공유 자원(자료 구조 또는 장치)을 접근하는 코드의 일부를 말한다. 때문에 어떤 스레드(태스크 또는 프로세스)가 임계 구역에 들어가고자 한다면 지정된 시간만큼 또는 lock이 풀릴 때까지 대기해야 한다. 스레드가 공유자원의 배타적인 사용을 보장받기 위해서 임계 구역에 들어가거나 나올때는 세마포어 같은 동기화 매커니즘이 사용된다.
+	+ 각 프로세스는 자신의 임계 구역에 진입하려면 진입허가를 요청해야 한다. 이런 요청을 구현하는 코드 부분을 입장 구역(entry section)이라고 한다. 입장 구역에서 기다리다가 진입 허가가 나면 임계 구역에 들어간다. 임계 구역 이후에는 임계 구역을 빠져나왔음을 알리는 코드 부분인 퇴장 구역(exit section)이 있다. 또한, 그밖의 나머지 코드 부분들을 총칭하여 나머지 구역(remainder section)이라 한다.
+
 ## 1. usleep
 
 	int usleep(useconds_t microseconds);
@@ -96,6 +99,7 @@ struct timeval
 	int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);
 
 * 새로운 쓰레드를 생성한다.
+* routine이 return되면, routine의 리턴값을 exit_status로서 pthread_exit()을 부른것과 같다.
 * 헤더 : <phread.h>
 
 * 매개변수
@@ -105,6 +109,103 @@ struct timeval
 	+ 네 번째 매개변수 arg는 start_routine 쓰레드 함수의 매개변수로 넘겨진다.
 
 * 반환값 : 성공하면 0, 실패하면 errno
+
+<pre>
+<code>
+
+int value = 0;
+void *runner(void *param);
+
+int 				main(int ac, char **av)
+{
+	pid_t 			pid;
+	pthread_t 		tid;
+	pthread_attr_t	attr;
+
+	pid = fork();
+
+	if (pid == 0)
+	{
+		pthrad_attr_init(&attr);
+		pthread_create(&tid, &attr, runner, NULL);
+		pthread_join(tid, NULL);
+		printf("CHILD : value = %d\n", value);
+	}
+	else if (pid > 0)
+	{
+		wait(NULL);
+		printf("PARENT : value = %d\n", value);
+	}
+}
+
+void 				*runner(void *param)
+{
+	value = 5;
+	pthread_exit(0);
+}
+
+</code>
+</pre>
+
+	CHILD : value = 5;
+	PARENT : value = 0;
+
+<pre>
+<code>
+
+void			*runner(void *param);
+
+int 			main(int ac, char **av)
+{
+	pid_t		pid;
+	pthread_t	tid;
+
+	printf("A = %d\n", getpid());
+	pid = fork();
+	if (pid > 0)
+	{
+		wait(NULL);			//parent process waits until child process finished.
+		printf("B = %d\n", pid);
+	}
+	if (pid == 0)
+	{
+		pid = fork();
+		if (pid > 0)
+		{
+			wait(NULL);
+			printf("C = %d\n", pid);
+		}
+		pthread_create(&tid, NULL, runner, NULL);
+	}
+	pid = fork();
+	if (pid > 0)
+	{
+		wait(NULL);
+		printf("D = %d\n", pid);
+	}
+}
+
+void		*runner(void *param)
+{
+	printf("I'm a thread\n");
+	pthread_exit(0);
+}
+</code>
+</pre>
+
+	A = 18937
+	I'm a thread!
+	D = 18941
+	C = 18939
+	I'm a thread!
+	D = 18943
+	B = 18938
+	D = 18944
+
+* Thread Pools
+create a number of threads in a pool where they await work.
+* Fork & Join
+explicit threading, but an excellent candidate for implicit threading.
 
 
 ## 4. pthread_detach
