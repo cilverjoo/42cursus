@@ -57,6 +57,47 @@
 	+ 임계 구역(critical section) 또는 공유변수 영역은 병렬컴퓨팅에서 둘 이상의 스레드가 동시에 접근해서는 안되는 공유 자원(자료 구조 또는 장치)을 접근하는 코드의 일부를 말한다. 때문에 어떤 스레드(태스크 또는 프로세스)가 임계 구역에 들어가고자 한다면 지정된 시간만큼 또는 lock이 풀릴 때까지 대기해야 한다. 스레드가 공유자원의 배타적인 사용을 보장받기 위해서 임계 구역에 들어가거나 나올때는 세마포어 같은 동기화 매커니즘이 사용된다.
 	+ 각 프로세스는 자신의 임계 구역에 진입하려면 진입허가를 요청해야 한다. 이런 요청을 구현하는 코드 부분을 입장 구역(entry section)이라고 한다. 입장 구역에서 기다리다가 진입 허가가 나면 임계 구역에 들어간다. 임계 구역 이후에는 임계 구역을 빠져나왔음을 알리는 코드 부분인 퇴장 구역(exit section)이 있다. 또한, 그밖의 나머지 코드 부분들을 총칭하여 나머지 구역(remainder section)이라 한다.
 
+
+* pthread_t의 구조
+
+	#define __PTHREAD_SIZE__		8176
+
+	struct __darwin_pthread_handler_rec {
+		void (*__routine)(void *);						// Routine to call
+		void *__arg;									// Argument to pass
+		struct __darwin_pthread_handler_rec *__next;
+	};
+
+	struct _opaque_pthread_t {
+		long __sig;
+		struct __darwin_pthread_handler_rec  *__cleanup_stack;
+		char __opaque[__PTHREAD_SIZE__];
+	};
+
+	typedef struct _opaque_pthread_t *__darwin_pthread_t;
+
+	typedef __darwin_pthread_t pthread_t;
+
+
+- pthread_t는 현재 쓰레드의 식별자 정보를 담고 있다.
+
+
+* pthread_mutex_t의 구조
+
+		#define __PTHREAD_MUTEX_SIZE__		56
+
+		struct _opaque_pthread_mutex_t {
+			long __sig;
+			char __opaque[__PTHREAD_MUTEX_SIZE__];
+		};
+
+		typedef struct _opaque_pthread_mutex_t __darwin_pthread_mutex_t;
+
+		typedef __darwin_pthread_mutex_t pthread_mutex_t;
+
+- pthread_mutex_t는 현재 mutex의 식별자 정보를 담고 있다.
+
+
 ## 1. usleep
 
 	int usleep(useconds_t microseconds);
@@ -299,6 +340,50 @@ explicit threading, but an excellent candidate for implicit threading.
 
 	EDEADLK
 	이미 잠금을 얻은 쓰레드가 다시 잠금을 요청할 때 (error checking 뮤텍스일 경우 사용할 수 있다)
+	
+* 예제
+
+	#include <pthread.h>
+	#include <stdio.h>
+	#include <unistd.h>
+	#include <stdlib.h>
+
+	pthread_mutex_t mutex;
+	int cnt=0;
+
+	void *count(void *arg)
+	{
+		int i;
+		char* name = (char*)arg;
+
+		pthread_mutex_lock(&mutex);
+
+		//======== critical section =============
+		cnt=0;
+		for (i = 0; i <10; i++)
+		{
+			printf("%s cnt: %d\n", name,cnt);
+			cnt++;
+			usleep(1);
+		}
+		//========= critical section ============
+		pthread_mutex_unlock(&mutex);
+	}
+
+	int main()
+	{
+		pthread_t thread1,thread2;
+
+		pthread_mutex_init(&mutex,NULL);
+
+		pthread_create(&thread1, NULL, count, (void *)"thread1");
+		pthread_create(&thread2, NULL, count, (void *)"thread2");
+
+		pthread_join(thread1, NULL);
+		pthread_join(thread2, NULL);
+
+		pthread_mutex_destroy(&mutex);
+	}
 
 
 ## 9. pthread_mutex_unlock
