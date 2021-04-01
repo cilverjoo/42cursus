@@ -29,6 +29,7 @@ typedef struct			s_philo
 	int					t_eat;
 	int					t_sleep;
 	int					l_meals;
+	int					eat_all;
 	int					dead;
 	uint64_t			start;
 	t_ones				*ones;

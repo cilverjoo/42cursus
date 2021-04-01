@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:26:54 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/01 17:57:20 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/01 20:33:45 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,16 @@ int					init_ones(t_philo *philo, t_ones *ones)
 	while (i < philo->total)
 	{
 		ones[i].position = i + 1;
-		ones[i].l_fork = i > 0 ? &philo->forks[i - 1] : &philo->forks[philo->total - 1];
-		ones[i].r_fork = i < philo->total - 1 ? &philo->forks[i + 1] : &philo->forks[0];
+		if (philo->total != 2)
+		{
+			ones[i].l_fork = i > 0 ? &philo->forks[i - 1] : &philo->forks[philo->total - 1];
+			ones[i].r_fork = i < philo->total - 1 ? &philo->forks[i + 1] : &philo->forks[0];
+		}
+		else
+		{
+			ones[i].l_fork = &philo->forks[0];
+			ones[i].r_fork = &philo->forks[1];
+		}
 		ones[i].eat_cnt = 0;
 		ones[i].philo = philo;
 		ones[i].dead = 0;
@@ -55,6 +63,7 @@ int			init_philo(char **av, int ac, t_philo *philo)
 	philo->t_sleep = ft_atoi(av[4]);
 	philo->l_meals = -1;
 	philo->dead = 0;
+	philo->eat_all = 0;
 	philo->start = get_time();
 	if (ac == 6)
 		philo->l_meals = ft_atoi(av[5]);
