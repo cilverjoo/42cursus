@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:25:09 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/01 16:24:03 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/02 14:20:28 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int				ft_strlen(char *str)
 {
 	int			i;
-
+	
 	i = 0;
 	if (!str)
 		return (0);
@@ -55,4 +55,17 @@ uint64_t	get_time(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+int					timer(int wait, uint64_t start)
+{
+	int				time_diff;
+	
+	while (1)
+	{
+		time_diff = get_time() - start;
+		if ((int)time_diff >= wait)
+			return (1);
+	}
+	return (0);
 }

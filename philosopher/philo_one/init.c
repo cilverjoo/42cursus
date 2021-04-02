@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:26:54 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/01 20:33:45 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/02 17:59:17 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int					init_ones(t_philo *philo, t_ones *ones)
 		}
 		ones[i].eat_cnt = 0;
 		ones[i].philo = philo;
-		ones[i].dead = 0;
+		ones[i].full = 0;
+		ones[i].is_eating = 0;
 		ones[i].start = philo->start;
 		ones[i].dining_time = 0;
 		pthread_mutex_init(&mutex[i], NULL);
@@ -63,7 +64,6 @@ int			init_philo(char **av, int ac, t_philo *philo)
 	philo->t_sleep = ft_atoi(av[4]);
 	philo->l_meals = -1;
 	philo->dead = 0;
-	philo->eat_all = 0;
 	philo->start = get_time();
 	if (ac == 6)
 		philo->l_meals = ft_atoi(av[5]);

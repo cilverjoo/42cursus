@@ -1,11 +1,13 @@
 NAME = philo_one
 
 CC = gcc
-CFLAGS = -g3 -fsanitize=address #-Wall -Wextra -Werror -pthread -I./
+CFLAGS = -g3 -fsanitize=address -Wall -Wextra -Werror -pthread -I./
 
 SRCS =		philo_one.c \
 			init.c \
-			utils.c
+			utils.c \
+			dining.c \
+			monitor.c
 			
 OBJS =	$(SRCS:.c=.o)
 

@@ -7,13 +7,14 @@
 # include <stdlib.h>
 # include <sys/time.h>
 
-struct 					s_philo;
+struct					s_philo;
 
 typedef struct			s_ones
 {
 	int					position;
 	int					eat_cnt;
-	int					dead;
+	int					is_eating;
+	int					full;
 	uint64_t			start;
 	uint64_t			dining_time;
 	struct s_philo		*philo;
@@ -37,17 +38,24 @@ typedef struct			s_philo
 	pthread_mutex_t		output;
 }						t_philo;
 
-
 //init
 int						init_philo(char **av, int ac, t_philo *philo);
 int						init_ones(t_philo *philo, t_ones *ones);
 int						init_forks(t_philo *philo);
 
+//dining
+int						pickup(t_ones *ones);
+int						eat(t_ones *ones);
+int						putdown(t_ones *ones);
+
+//monitor
+void					*monitoring(void *param);
+void					*die_monitor(void *param);
+
 //utils
 int						ft_strlen(char *str);
 int						ft_atoi(char *num);
 uint64_t				get_time(void);
-
-
+int						timer(int wait, uint64_t start);
 
 #endif
