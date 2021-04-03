@@ -427,9 +427,19 @@ explicit threading, but an excellent candidate for implicit threading.
 
 			S_IRWXU : 개인 접근
 
+			0644  의미 :
+
+			소유자를위한 6 (읽기 및 쓰기)
+
+			다른 그룹 사용자의 경우 4 (읽기 전용)
+
+			다른 사람을위한 4 (읽기 전용)
+
 		- unsigned int value :  semaphore 초기 값으로 0 보다 큰 양수여야 한다. unlock된  semaphore의 수를 의미한다. 이 값은 SEM_VALUE_MAX를 초과할 수 없다.
 
 	* semaphore를 생성하면 초기 value는 1이다.
+
+* 반환값 : 실패시 SEM_FAILED 값을 리턴하고 errno를 설정한다. 성공시 semaphore descriptor를 반환한다.
 
 
 ## 2. sem_close

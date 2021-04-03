@@ -6,15 +6,15 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:25:09 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/04 01:20:45 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/04 04:00:20 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo_two.h"
 
-int					ft_strlen(char *str)
+int				ft_strlen(char *str)
 {
-	int				i;
+	int			i;
 
 	i = 0;
 	if (!str)
@@ -24,12 +24,12 @@ int					ft_strlen(char *str)
 	return (i);
 }
 
-int					ft_atoi(char *num)
+int				ft_atoi(char *num)
 {
-	int				ret;
-	int				len;
-	int				i;
-	int				minus;
+	int			ret;
+	int			len;
+	int			i;
+	int			minus;
 
 	ret = 0;
 	minus = 1;
@@ -49,7 +49,7 @@ int					ft_atoi(char *num)
 	return (ret * minus);
 }
 
-uint64_t			get_time(void)
+uint64_t		get_time(void)
 {
 	struct timeval tv;
 
@@ -57,9 +57,9 @@ uint64_t			get_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-int					timer(int wait, uint64_t start)
+int				timer(int wait, uint64_t start)
 {
-	int				time_diff;
+	int			time_diff;
 
 	while (1)
 	{
@@ -68,22 +68,4 @@ int					timer(int wait, uint64_t start)
 			return (1);
 	}
 	return (0);
-}
-
-int					clear_mutex(t_philo *philo)
-{
-	int				i;
-
-	i = 0;
-	while (i < philo->total)
-	{
-		pthread_mutex_destroy(&philo->forks[i]);
-		pthread_mutex_destroy(philo->ones[i].state_msg);
-		pthread_mutex_destroy(&philo->ones[i].eat_monitor);
-		i++;
-	}
-	pthread_mutex_destroy(&philo->deadman);
-	free(philo->ones);
-	free(philo->forks);
-	return (1);
 }

@@ -1,17 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   philo_one.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/04 01:17:51 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/04 03:04:47 by kim-eunju        ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef PHILO_ONE_H
-# define PHILO_ONE_H
+#ifndef PHILO_THREE_H
+# define PHILO_THREE_H
 
 # include <pthread.h>
 # include <unistd.h>
@@ -64,6 +52,5 @@ int						ft_strlen(char *str);
 int						ft_atoi(char *num);
 uint64_t				get_time(void);
 int						timer(int wait, uint64_t start);
-int						clear_mutex(t_philo *philo);
 
 #endif

@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_one.h                                        :+:      :+:    :+:   */
+/*   philo_two.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 01:17:51 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/04 03:04:47 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/04 04:02:26 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_ONE_H
-# define PHILO_ONE_H
+#ifndef PHILO_TWO_H
+# define PHILO_TWO_H
 
 # include <pthread.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <semaphore.h>
 
 struct s_philo;
 
@@ -28,10 +29,6 @@ typedef struct			s_ones
 	uint64_t			start;
 	uint64_t			dining_time;
 	struct s_philo		*philo;
-	pthread_mutex_t		*l_fork;
-	pthread_mutex_t		*r_fork;
-	pthread_mutex_t		*state_msg;
-	pthread_mutex_t		eat_monitor;
 }						t_ones;
 
 typedef struct			s_philo
@@ -43,15 +40,15 @@ typedef struct			s_philo
 	int					l_meals;
 	int					dead;
 	uint64_t			start;
+	sem_t				*forks;
+	sem_t				*output;
+	sem_t				*state;
 	t_ones				*ones;
-	pthread_mutex_t		deadman;
-	pthread_mutex_t		*forks;
-	pthread_mutex_t		output;
 }						t_philo;
 
 int						init_philo(char **av, int ac, t_philo *philo);
 int						init_ones(t_philo *philo, t_ones *ones);
-int						init_forks(t_philo *philo);
+int						init_semaphore(t_philo *philo);
 
 int						pickup(t_ones *ones);
 int						eat(t_ones *ones);
@@ -64,6 +61,5 @@ int						ft_strlen(char *str);
 int						ft_atoi(char *num);
 uint64_t				get_time(void);
 int						timer(int wait, uint64_t start);
-int						clear_mutex(t_philo *philo);
 
 #endif

@@ -1,5 +1,4 @@
-NAME = philo_one
-
+NAME = philo_three
 CC = gcc
 CFLAGS = -g3 -fsanitize=address -Wall -Wextra -Werror -pthread -I./
 
