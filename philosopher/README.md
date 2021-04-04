@@ -253,7 +253,7 @@ explicit threading, but an excellent candidate for implicit threading.
 
 	int pthread_detach(pthread_t thread);
 
-* pthread_create를 사용하면 쓰레드가 종료되어도 사용했던 자원들을 해제하지 않는다. pthread_join을 사용하면 쓰레드가 종료될 때 까지 기다렸다가 종료시점이 되면 자원을 반납하는데, 그 전에 쓰레드가 종료될 때 사용한 자원을 해제시키고 싶다면 pthread_detach를 사용하면 된다.
+* pthread_create를 사용하면 쓰레드가 종료되어도 사용했던 자원들을 해제하지 않는다. pthread_join을 사용하면 쓰레드가 종료될 때 까지 **기다렸다가** 종료시점이 되면 자원을 반납하는데, join처럼 종료될 때 까지 대기하지 않고 분리하여 별도로 실행시키고, 종료되면 자동으로 자원을 반납하게 하고 싶다면 pthread_detach를 사용하면 된다.
 
 * 헤더 : <pthread.h>
 
@@ -274,7 +274,7 @@ explicit threading, but an excellent candidate for implicit threading.
 
 	int pthread_join(pthread_t th, void **thread_return);
 
-* 쓰레드가 종료되면 쓰레드에 할당된 리소스를 해제시킨다. 
+* 쓰레드가 종료될 때까지 기다렸다가 쓰레드에 할당된 리소스를 해제시킨다. 
 
 * 헤더 : <phtread.h>
 
@@ -289,6 +289,7 @@ explicit threading, but an excellent candidate for implicit threading.
 	두번째 매개변수 thread_return 은 쓰레드의 리턴값. thread_return이 NULL이 아닌 경우 해당 포인터로 쓰레드의 리턴 값을 받아올 수 있다.  
 
 * 반환값 : 성공하면 0, 실패하면 errno
+
 
 ## 6. pthread_mutex_init
 
@@ -428,12 +429,9 @@ explicit threading, but an excellent candidate for implicit threading.
 			S_IRWXU : 개인 접근
 
 			0644  의미 :
-
 			소유자를위한 6 (읽기 및 쓰기)
-
 			다른 그룹 사용자의 경우 4 (읽기 전용)
-
-			다른 사람을위한 4 (읽기 전용)
+			다른 사람을 위한 4 (읽기 전용)
 
 		- unsigned int value :  semaphore 초기 값으로 0 보다 큰 양수여야 한다. unlock된  semaphore의 수를 의미한다. 이 값은 SEM_VALUE_MAX를 초과할 수 없다.
 
@@ -473,6 +471,7 @@ explicit threading, but an excellent candidate for implicit threading.
 
 	EINVAL : sem이 사용가능한 상태가 아닐 때.
 
+
 ## 5. sem_unlink
 
 	int sem_unlink(const char *name);
@@ -489,6 +488,16 @@ explicit threading, but an excellent candidate for implicit threading.
 
 
 # 4. philo_three
+
+## waitpid
+
+	pid_t waitpid(pid_t pid, int *status, int options);
+
+* waitpid 함수는 인수로 주어진 pid 번호의 자식프로세스가 종료되거나, 시그널 함수를 호출하는 신호가 전달될때까지 waitpid 호출한 영역에서 일시 중지 된다. 
+
+* 헤더 : <sys/wait.h>
+
+
 
 # 5. 참고
 * https://selvarajahkesavan.medium.com/the-dining-philosophers-problem-de586df365bc

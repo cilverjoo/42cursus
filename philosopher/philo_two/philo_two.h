@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 01:17:51 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/04 04:02:26 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/04 11:10:32 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ int						ft_strlen(char *str);
 int						ft_atoi(char *num);
 uint64_t				get_time(void);
 int						timer(int wait, uint64_t start);
+int						clear_all(t_philo *philo);
+
 
 #endif

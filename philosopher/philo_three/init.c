@@ -6,23 +6,21 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:26:54 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/05 00:47:59 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/05 00:48:22 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_two.h"
+#include "philo_three.h"
 
 int					init_semaphore(t_philo *philo)
 {
-	int				i;
-	char			*str;
-
-	i = 1;
 	sem_unlink("/forks");
 	philo->forks = sem_open("/forks", O_CREAT, 0666, philo->total);
-	sem_unlink("/output");
-	philo->output = sem_open("/output", O_CREAT, 0666, 1);
-	return (0);
+	sem_unlink("/state");
+	philo->state = sem_open("/state", O_CREAT, 0666, 1);
+	sem_unlink("/death");
+	philo->death = sem_open("/death", O_CREAT, 0666, 1);
+	return (1);
 }
 
 int					init_ones(t_philo *philo, t_ones *ones)
@@ -37,6 +35,7 @@ int					init_ones(t_philo *philo, t_ones *ones)
 		ones[i].philo = philo;
 		ones[i].start = philo->start;
 		ones[i].dining_time = 0;
+		ones[i].full = 0;
 		i++;
 	}
 	return (1);

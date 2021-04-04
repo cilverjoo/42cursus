@@ -6,76 +6,72 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:13:52 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/04 17:12:42 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/05 00:12:58 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo_three.h"
 
-int					pickup(t_ones *ones)
+int				pickup(t_ones *ones)
 {
-	pthread_mutex_lock(ones->l_fork);
+	sem_wait(ones->philo->forks);
 	if (ones->philo->dead)
 	{
-		pthread_mutex_unlock(ones->l_fork);
+		sem_post(ones->philo->forks);
 		return (0);
 	}
-	pthread_mutex_lock(ones->state_msg);
+	sem_wait(ones->philo->state);
 	printf("%5.5llu %d Philosopher has taken a left fork\n",
 		get_time() - ones->start, ones->position);
-	pthread_mutex_unlock(ones->state_msg);
-	pthread_mutex_lock(ones->r_fork);
+	sem_post(ones->philo->state);
+	sem_wait(ones->philo->forks);
 	if (ones->philo->dead)
 	{
-		pthread_mutex_unlock(ones->l_fork);
-		pthread_mutex_unlock(ones->r_fork);
+		sem_post(ones->philo->forks);
+		sem_post(ones->philo->forks);
 		return (0);
 	}
-	pthread_mutex_lock(ones->state_msg);
+	sem_wait(ones->philo->state);
 	printf("%5.5llu %d Philosopher has taken a right fork\n",
 		get_time() - ones->start, ones->position);
-	pthread_mutex_unlock(ones->state_msg);
+	sem_post(ones->philo->state);
 	return (1);
 }
 
-int					eat(t_ones *ones)
+int				eat(t_ones *ones)
 {
 	if (ones->philo->dead)
 	{
-		pthread_mutex_unlock(ones->l_fork);
-		pthread_mutex_unlock(ones->r_fork);
-		return (0);
+		sem_post(ones->philo->forks);
+		sem_post(ones->philo->forks);
+		return (0);		
 	}
 	ones->dining_time = get_time();
-	pthread_mutex_lock(ones->state_msg);
+	sem_wait(ones->philo->state);
 	printf("%5.5llu %d Philosopher is eating...\n",
 		get_time() - ones->start, ones->position);
-	pthread_mutex_unlock(ones->state_msg);
-	
-	pthread_mutex_lock(&ones->eat_monitor);
+	sem_post(ones->philo->state);
 	ones->eat_cnt++;
-	pthread_mutex_unlock(&ones->eat_monitor);
-	
 	timer(ones->philo->t_eat, get_time());
 	return (1);
 }
 
-int					putdown(t_ones *ones)
+int				putdown(t_ones *ones)
 {
-	pthread_mutex_unlock(ones->l_fork);
-	pthread_mutex_unlock(ones->r_fork);
+	sem_post(ones->philo->forks);
+	sem_post(ones->philo->forks);
 	if (ones->philo->dead)
 		return (0);
-	pthread_mutex_lock(ones->state_msg);
+	sem_wait(ones->philo->state);
 	printf("%5.5llu %d Philosopher is sleeping...\n",
 		get_time() - ones->start, ones->position);
-	pthread_mutex_unlock(ones->state_msg);
+	sem_post(ones->philo->state);
 	timer(ones->philo->t_sleep, get_time());
 	if (ones->philo->dead)
 		return (0);
-	pthread_mutex_lock(ones->state_msg);
+	sem_wait(ones->philo->state);
 	printf("%5.5llu %d Philosopher is thinking...\n",
 		get_time() - ones->start, ones->position);
-	pthread_mutex_unlock(ones->state_msg);
+	sem_post(ones->philo->state);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 01:13:26 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/04 04:05:36 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/04 11:10:14 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int					main(int ac, char **av)
 	init_philo(av, ac, &philo);
 	execute_philosophers(&philo, philo.total);
 	check_dinning_status(&philo);
-	sem_close(philo.output);
-	sem_close(philo.forks);
+	clear_all(&philo);
 	return (0);
 }
