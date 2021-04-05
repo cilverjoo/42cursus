@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dining.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:13:52 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/04 17:12:42 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/05 16:26:01 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,9 @@ int					eat(t_ones *ones)
 	printf("%5.5llu %d Philosopher is eating...\n",
 		get_time() - ones->start, ones->position);
 	pthread_mutex_unlock(ones->state_msg);
-	
 	pthread_mutex_lock(&ones->eat_monitor);
 	ones->eat_cnt++;
 	pthread_mutex_unlock(&ones->eat_monitor);
-	
 	timer(ones->philo->t_eat, get_time());
 	return (1);
 }

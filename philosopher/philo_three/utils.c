@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:25:09 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/04 14:20:32 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/05 16:22:05 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,11 @@ int					timer(int wait, uint64_t start)
 
 int					clear_all(t_philo *philo)
 {
-	int				i;
-
-	i = 0;
-	while (i < philo->total)
-	{
-		kill(philo->ones[i].pid, SIGKILL);
-		i++;
-	}
-	sem_close(philo->philosopher);
-	sem_close(philo->state);
 	sem_close(philo->forks);
+	sem_close(philo->state);
+	sem_close(philo->death);
+	sem_close(philo->process);
+	sem_close(philo->exit_check);
 	free(philo->ones);
 	return (1);
 }
