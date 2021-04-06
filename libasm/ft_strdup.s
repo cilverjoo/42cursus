@@ -13,10 +13,11 @@ _ft_strdup:
     call    _malloc
     cmp     rax, 0      ;check malloc error
     je      exit
-    pop     rsi         ;give rdi's string(src) to rsi
+    pop     r9         ;give rdi's string(src) to r9
     mov     rdi, rax    ;give malloc space's address
+	mov		rsi, r9
     call    _ft_strcpy  ;rdi : dest(malloc space), rsi : src
-    mov     rax, rdi
+	ret
 
 exit:
     ret

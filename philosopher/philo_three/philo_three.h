@@ -1,0 +1,60 @@
+#ifndef PHILO_THREE_H
+# define PHILO_THREE_H
+
+# include <pthread.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <semaphore.h>
+# include <signal.h>
+# include <sys/wait.h>
+# include <string.h>
+
+struct s_philo;
+
+typedef struct			s_ones
+{
+	int					position;
+	int					eat_cnt;
+	int					full;
+	pid_t				pid;
+	uint64_t			start;
+	uint64_t			dining_time;
+	struct s_philo		*philo;
+}						t_ones;
+
+typedef struct			s_philo
+{
+	int					total;
+	int					t_die;
+	int					t_eat;
+	int					t_sleep;
+	int					l_meals;
+	int					dead;
+	uint64_t			start;
+	sem_t				*philosopher;
+	sem_t				*forks;
+	sem_t				*state;
+	sem_t				*death;
+	t_ones				*ones;
+}						t_philo;
+
+int						init_philo(char **av, int ac, t_philo *philo);
+int						init_ones(t_philo *philo, t_ones *ones);
+int						init_semaphore(t_philo *philo);
+
+int						pickup(t_ones *ones);
+int						eat(t_ones *ones);
+int						putdown(t_ones *ones);
+
+void					*monitoring(void *param);
+void					*die_monitor(void *param);
+
+int						ft_strlen(char *str);
+int						ft_atoi(char *num);
+uint64_t				get_time(void);
+int						timer(int wait, uint64_t start);
+int						clear_all(t_philo *philo);
+
+#endif

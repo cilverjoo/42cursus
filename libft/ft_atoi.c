@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:26:59 by ekim              #+#    #+#             */
-/*   Updated: 2020/10/14 22:39:21 by ekim             ###   ########.fr       */
+/*   Updated: 2021/03/15 14:23:48 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int					ft_atoi(const char *str)
 {
 	int				i;
 	int				minus;
-	unsigned long	result;
+	long			result;
 
 	i = 0;
 	minus = 1;

@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 19:53:08 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/10 19:37:49 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/03/03 16:56:39 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ static void		do_raycasting(t_window *window)
 			window->player, window->cub);
 		calc_wall_texture(window, window->ray);
 		wall_to_buffer(window, window->ray, x);
+		
 		x++;
 	}
 }

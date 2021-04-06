@@ -12,16 +12,25 @@ SRCS = ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c \
 BONUS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
 			ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
 			ft_lstmap.c ft_lstnew.c ft_lstsize.c
+
 OBJECTS = $(SRCS:.c=.o)
+
 BONUS_OBJS = $(BONUS:.c=.o)
+
 all : $(NAME)
+
 clean :
 	rm -rf $(OBJECTS) $(BONUS_OBJS)
+
 fclean : clean
 	rm -rf $(NAME)
+
 re : fclean all
+
 bonus : $(OBJECTS) $(BONUS_OBJS)
 	ar $(AFLAGS) $(NAME) $(OBJECTS) $(BONUS_OBJS)
+
 $(NAME) : $(OBJECTS)
 	ar $(AFLAGS) $(NAME) $(OBJECTS)
+	
 .PHONY : all clean fclean re bonus%
