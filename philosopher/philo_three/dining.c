@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:13:52 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/05 16:17:45 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/06 21:53:26 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int				eat(t_ones *ones)
 		sem_post(ones->philo->forks);
 		return (0);
 	}
-	ones->dining_time = get_time();
+	ones->dining_time = get_time();	
 	sem_wait(ones->philo->state);
 	printf("%5.5llu %d Philosopher is eating...\n",
 		get_time() - ones->start, ones->position);
 	sem_post(ones->philo->state);
-	ones->eat_cnt++;
 	timer(ones->philo->t_eat, get_time());
+	ones->eat_cnt++;
 	return (1);
 }
 

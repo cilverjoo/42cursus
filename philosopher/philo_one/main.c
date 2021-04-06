@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 01:13:26 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/04 17:11:23 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/06 17:59:09 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void				*dining_philosophers(void *param)
 
 	ones = (t_ones *)param;
 	if (ones->position % 2 == 0)
-		timer(1, get_time());
+		timer(5, get_time());
 	ones->dining_time = get_time();
 	pthread_create(&monitor_th, NULL, monitoring, (void *)ones);
 	while (ones->philo->dead == 0

@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:26:54 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/05 16:17:38 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/06 21:53:44 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int					init_ones(t_philo *philo, t_ones *ones)
 		ones[i].eat_cnt = 0;
 		ones[i].philo = philo;
 		ones[i].dining_time = 0;
-		ones[i].full = 0;
 		i++;
 	}
 	return (1);

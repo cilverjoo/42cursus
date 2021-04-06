@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 16:17:10 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/05 16:20:18 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/06 21:53:24 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct			s_philo
 	int					t_sleep;
 	int					l_meals;
 	int					dead;
-	int					full;
 	uint64_t			start;
 	sem_t				*philosopher;
 	sem_t				*forks;

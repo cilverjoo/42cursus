@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:16:32 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/05 16:24:40 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/06 21:56:17 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ void				*monitoring(void *param)
 	ones = (t_ones *)param;
 	while (1)
 	{
-		if (ones->eat_cnt == ones->philo->l_meals || ones->philo->dead)
+		if (ones->eat_cnt == ones->philo->l_meals)
 			return (0);
 		diff = get_time() - ones->dining_time;
-		if (diff >= ones->philo->t_die)
+		if (diff > ones->philo->t_die)
 		{
 			ones->philo->dead = ones->position;
 			sem_post(ones->philo->death);
 			return (0);
 		}
-		timer(1, get_time());
+		usleep(1000);
 	}
 }
 
@@ -52,8 +52,9 @@ void				*death_monitor(void *param)
 
 	philo = (t_philo *)param;
 	sem_wait(philo->death);
-	printf("One of Philosophers is dead...\n");
 	kill_process(philo);
+	printf("One of Philosophers is dead...\n");
+	exit(0);
 	sem_post(philo->process);
 	return (0);
 }
@@ -73,9 +74,9 @@ void				*full_monitor(void *param)
 		{
 			printf("All Philosophers have had enough meals\n");
 			kill_process(philo);
-			break ;
+			exit(0);
+			sem_post(philo->process);
+			return (0);
 		}
 	}
-	sem_post(philo->process);
-	return (0);
 }

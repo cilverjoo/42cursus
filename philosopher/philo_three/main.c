@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/04 01:13:26 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/05 16:24:26 by ekim             ###   ########.fr       */
+/*   Created: 2021/04/04 01:13:26 by ekim              #+#    #+#             */
+/*   Updated: 2021/04/06 21:52:11 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ int					dining_philosophers(t_ones *ones)
 {
 	pthread_t		monitor_th;
 
-	ones->start = get_time();
-	ones->dining_time = ones->start;
+	if (ones->position % 2 == 0)
+		usleep(50);
+	ones->dining_time = get_time();
 	pthread_create(&monitor_th, NULL, monitoring, (void *)ones);
+	pthread_detach(monitor_th);
 	while (ones->philo->dead == 0
 		&& (ones->philo->l_meals == -1 || ones->eat_cnt < ones->philo->l_meals))
 	{
@@ -29,42 +31,46 @@ int					dining_philosophers(t_ones *ones)
 		if (!putdown(ones))
 			break ;
 	}
-	pthread_join(monitor_th, NULL);
 	sem_post(ones->philo->exit_check);
 	return (0);
 }
 
 void				wait_childprocess(t_philo *philo)
 {
-	int				i;
 	pthread_t		th_death;
 	pthread_t		th_full;
 
-	i = 0;
 	pthread_create(&th_death, NULL, &death_monitor, (void *)philo);
 	pthread_create(&th_full, NULL, &full_monitor, (void *)philo);
 	pthread_detach(th_death);
 	pthread_detach(th_full);
 	sem_wait(philo->process);
+	kill_process(philo);
 	clear_all(philo);
-	exit(0);
+}
+
+void				init_starttime(t_philo *philo)
+{
+	int				i;
+	
+	i = 0;
+	philo->start = get_time();
+	while (i < philo->total)
+		philo->ones[i++].start = philo->start;
 }
 
 int					execute_philosophers(t_philo *philo, int total)
 {
 	int				i;
-	pid_t			process[total];
 
 	i = 0;
-	while (i < total && philo->dead == 0)
+	init_starttime(philo);
+	while (i < total)
 	{
-		process[i] = fork();
-		if (process[i] == 0)
+		philo->ones[i].pid = fork();
+		if (philo->ones[i].pid == 0)
 			break ;
-		philo->ones[i].pid = process[i];
 		i++;
-		if (i == philo->total)
-			sem_post(philo->process);
 	}
 	if (i != philo->total)
 	{
@@ -72,10 +78,7 @@ int					execute_philosophers(t_philo *philo, int total)
 		exit(0);
 	}
 	else
-	{
-		sem_wait(philo->process);
 		wait_childprocess(philo);
-	}
 	return (1);
 }
 

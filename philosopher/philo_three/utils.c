@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:25:09 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/05 16:22:05 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/05 18:07:26 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ int					timer(int wait, uint64_t start)
 
 int					clear_all(t_philo *philo)
 {
-	sem_close(philo->forks);
-	sem_close(philo->state);
-	sem_close(philo->death);
-	sem_close(philo->process);
-	sem_close(philo->exit_check);
+	sem_unlink("/forks");
+	sem_unlink("/state");
+	sem_unlink("/exit_check");
+	sem_unlink("/death");
+	sem_unlink("/process");
 	free(philo->ones);
 	return (1);
 }

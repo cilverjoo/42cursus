@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:13:52 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/05 16:25:42 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/05 18:29:41 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int					eat(t_ones *ones)
 	sem_wait(ones->philo->output);
 	printf("%5.5llu %d Philosopher is eating...\n",
 		get_time() - ones->start, ones->position);
-	ones->eat_cnt++;
 	sem_post(ones->philo->output);
 	timer(ones->philo->t_eat, get_time());
+	ones->eat_cnt++;
 	return (1);
 }
 
@@ -49,7 +49,7 @@ int					putdown(t_ones *ones)
 {
 	sem_post(ones->philo->forks);
 	sem_post(ones->philo->forks);
-	if (ones->philo->dead)
+	if (ones->philo->dead || ones->eat_cnt == ones->philo->l_meals)
 		return (0);
 	sem_wait(ones->philo->output);
 	printf("%5.5llu %d Philosopher is sleeping...\n",

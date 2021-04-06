@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:25:09 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/04 17:14:43 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/05 18:20:10 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,12 @@ int					clear_mutex(t_philo *philo)
 	while (i < philo->total)
 	{
 		pthread_mutex_destroy(&philo->forks[i]);
-		pthread_mutex_destroy(philo->ones[i].state_msg);
+		pthread_mutex_destroy(&philo->ones[i].state_msg);
 		pthread_mutex_destroy(&philo->ones[i].eat_monitor);
 		i++;
 	}
 	pthread_mutex_destroy(&philo->deadman);
+	pthread_mutex_destroy(&philo->output);
 	free(philo->ones);
 	free(philo->forks);
 	return (1);

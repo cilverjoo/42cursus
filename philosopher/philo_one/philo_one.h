@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 01:17:51 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/04 03:04:47 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/05 18:19:57 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct			s_ones
 	struct s_philo		*philo;
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		*r_fork;
-	pthread_mutex_t		*state_msg;
+	pthread_mutex_t		state_msg;
 	pthread_mutex_t		eat_monitor;
 }						t_ones;
 

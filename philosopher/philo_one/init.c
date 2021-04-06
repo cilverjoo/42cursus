@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:26:54 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/04 16:58:23 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/05 18:20:00 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int					init_forks(t_philo *philo)
 int					init_ones(t_philo *philo, t_ones *ones)
 {
 	int				i;
-	pthread_mutex_t mutex[philo->total];
 
 	i = 0;
 	while (i < philo->total)
@@ -44,8 +43,7 @@ int					init_ones(t_philo *philo, t_ones *ones)
 		ones[i].philo = philo;
 		ones[i].start = philo->start;
 		ones[i].dining_time = 0;
-		pthread_mutex_init(&mutex[i], NULL);
-		philo->ones[i].state_msg = &mutex[i];
+		pthread_mutex_init(&ones[i].state_msg, NULL);
 		pthread_mutex_init(&ones[i].eat_monitor, NULL);
 		i++;
 	}
