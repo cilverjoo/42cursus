@@ -4,14 +4,14 @@
 
 C++은 public, priavte 및 protected 세 가지 접근 지정 키워드를 제공한다. public은 공개 멤버이므로 클래스 외부에서도 접근할 수 있고, private는 비공개 멤버이므로 클래스 내에서만 접근할 수 있다. protected는 나중에 "상속"을 다룰 때 설명할 예정이다.
 
-public: 공개 멤버, 클래스 외부에서도 접근 가능
-priavte: 비공개 멤버, 클래스 내에서만 접근 가능
+	public: 공개 멤버, 클래스 외부에서도 접근 가능
+	priavte: 비공개 멤버, 클래스 내에서만 접근 가능
 
 클래스에는 여러 접근 지정자를 사용하여 각 멤버의 접근 수준을 설정할 수 있다. 한 클래스에서 사용할 수 있는 접근 지정자의 개수에는 제한이 없다.
 
 일반적으로 멤버 변수는 비공개로 하고, 멤버 함수는 공개하는 것이 일반적이다.
 
-출처: https://boycoding.tistory.com/242 [소년코딩]
+출처: https://boycoding.tistory.com/242
 
 
 ## 생성자와 소멸자
@@ -33,12 +33,9 @@ priavte: 비공개 멤버, 클래스 내에서만 접근 가능
 
 또한, 소멸자를 명시적으로 호출하는 경우는 없다.
 
-
-
 출처: https://boycoding.tistory.com/249 [소년코딩]
 
 
-출처: https://boycoding.tistory.com/249 [소년코딩]
 
 ## string에서 == 연산자의 오버로딩
 
@@ -55,4 +52,37 @@ String 문자열을 비교할 때 == 연산자는 아래와 같이 오버로딩�
 	{
 		return __lhs.compare(__rhs) == 0;
 	}
+
+
+## STL(Standard Template Library)이란?
+
+### 정의
+* 표준 C++ 라이브러리 (Standard Template Library)
+* 프로그램에 필요한 자료구조와 알고리즘을 Template로 제공하는 라이브러리 
+
+### Container
+- 객체를 저장하는 객체, 자료구조 라고도 한다. 클래스 템플릿으로 구현되어있다.
+- container는 크게 sequence container, associative container로 나뉩니다.
+
+	> Sequence Container 의 종류 : array (C++ 11), vector, list, deque
+	> Associative Container 의 종류 : set, multiset, map, multimap
+
+### Iterator
+- 포인터와 비슷한 개념으로 컨테이너의 원소를 가리키고, 가리키는 원소에 접근하여 다음 원소를 가리키는 기능. 순회
+
+### Algorithm
+- 정렬, 삭제, 검색, 연산 등을 해결하는 일반화된 방법을 제공하는 함수 템플릿.
+
+### Function Object
+- 함수처럼 동작하는 객체로 operator() 연산자를 오버로딩 한 객체.
+- 컨테이너와 알고리즘 등에 클라이언트 정책을 반영하게 한다.
+
+### Container Adaptor
+- 구성요소의 인터페이스를 변경해 새로운 인터페이스를 갖는 구성요소로 변경.
+
+	> Container Adaptor 의 종류 : stack, queue, priority_queue
+	Allocator
+	- 컨테이너의 메모리 할당 정책을 캡슐화한 클래스 객체로 모든 컨테이너는 자신만의 할당기를 가지고 있다. 
+
+출처: https://blockdmask.tistory.com/67 [개발자 지망생]
 
