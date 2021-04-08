@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dining.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:13:52 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/05 00:12:58 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/07 21:00:07 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,14 @@ int				pickup(t_ones *ones)
 {
 	sem_wait(ones->philo->forks);
 	if (ones->philo->dead)
-	{
-		sem_post(ones->philo->forks);
 		return (0);
-	}
 	sem_wait(ones->philo->state);
 	printf("%5.5llu %d Philosopher has taken a left fork\n",
 		get_time() - ones->start, ones->position);
 	sem_post(ones->philo->state);
 	sem_wait(ones->philo->forks);
 	if (ones->philo->dead)
-	{
-		sem_post(ones->philo->forks);
-		sem_post(ones->philo->forks);
 		return (0);
-	}
 	sem_wait(ones->philo->state);
 	printf("%5.5llu %d Philosopher has taken a right fork\n",
 		get_time() - ones->start, ones->position);
@@ -41,18 +34,14 @@ int				pickup(t_ones *ones)
 int				eat(t_ones *ones)
 {
 	if (ones->philo->dead)
-	{
-		sem_post(ones->philo->forks);
-		sem_post(ones->philo->forks);
-		return (0);		
-	}
+		return (0);
 	ones->dining_time = get_time();
 	sem_wait(ones->philo->state);
 	printf("%5.5llu %d Philosopher is eating...\n",
 		get_time() - ones->start, ones->position);
 	sem_post(ones->philo->state);
-	ones->eat_cnt++;
 	timer(ones->philo->t_eat, get_time());
+	ones->eat_cnt++;
 	return (1);
 }
 
@@ -60,7 +49,7 @@ int				putdown(t_ones *ones)
 {
 	sem_post(ones->philo->forks);
 	sem_post(ones->philo->forks);
-	if (ones->philo->dead)
+	if (ones->philo->dead || ones->eat_cnt == ones->philo->l_meals)
 		return (0);
 	sem_wait(ones->philo->state);
 	printf("%5.5llu %d Philosopher is sleeping...\n",

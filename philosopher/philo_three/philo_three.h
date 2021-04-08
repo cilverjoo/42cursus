@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_three.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/05 16:17:10 by ekim              #+#    #+#             */
+/*   Updated: 2021/04/07 21:09:27 by ekim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_THREE_H
 # define PHILO_THREE_H
 
@@ -36,7 +48,9 @@ typedef struct			s_philo
 	sem_t				*philosopher;
 	sem_t				*forks;
 	sem_t				*state;
+	sem_t				*exit_check;
 	sem_t				*death;
+	sem_t				*process;
 	t_ones				*ones;
 }						t_philo;
 
@@ -49,12 +63,15 @@ int						eat(t_ones *ones);
 int						putdown(t_ones *ones);
 
 void					*monitoring(void *param);
-void					*die_monitor(void *param);
+void					*death_monitor(void *param);
+void					*full_monitor(void *param);
 
 int						ft_strlen(char *str);
 int						ft_atoi(char *num);
 uint64_t				get_time(void);
 int						timer(int wait, uint64_t start);
 int						clear_all(t_philo *philo);
+
+int						kill_process(t_philo *philo);
 
 #endif

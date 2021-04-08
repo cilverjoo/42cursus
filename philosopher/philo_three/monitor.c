@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:16:32 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/05 00:33:35 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/07 21:14:41 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
+
+int					kill_process(t_philo *philo)
+{
+	int				i;
+
+	i = 0;
+	while (i < philo->total)
+	{
+		kill(philo->ones[i].pid, SIGKILL);
+		i++;
+	}
+	return (1);
+}
 
 void				*monitoring(void *param)
 {
@@ -21,18 +34,48 @@ void				*monitoring(void *param)
 	while (1)
 	{
 		if (ones->eat_cnt == ones->philo->l_meals)
-		{
-			ones->full = 1;
 			return (0);
-		}
 		diff = get_time() - ones->dining_time;
-		if (diff >= ones->philo->t_die)
+		if (diff > ones->philo->t_die)
 		{
-			ones->philo->dead = 1;
+			ones->philo->dead = ones->position;
+			sem_post(ones->philo->death);
 			return (0);
 		}
-		if (ones->philo->dead)
-			return (0);
 		usleep(1000);
 	}
+}
+
+void				*death_monitor(void *param)
+{
+	t_philo			*philo;
+
+	philo = (t_philo *)param;
+	sem_wait(philo->death);
+	kill_process(philo);
+	printf("One of Philosophers is dead...\n");
+	sem_post(philo->process);
+	return (0);
+}
+
+void				*full_monitor(void *param)
+{
+	int				full;
+	t_philo			*philo;
+
+	philo = (t_philo *)param;
+	full = 0;
+	while (1)
+	{
+		sem_wait(philo->exit_check);
+		full++;
+		if (full == philo->total)
+		{
+			printf("All Philosophers have had enough meals\n");
+			kill_process(philo);
+			sem_post(philo->process);
+			return (0);
+		}
+	}
+	return (0);
 }

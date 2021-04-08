@@ -1,6 +1,6 @@
 NAME = philo_three
 CC = gcc
-CFLAGS = -g3 -fsanitize=address -Wall -Wextra -Werror -I./
+CFLAGS = -Wall -Wextra -Werror -I./
 
 SRCS =		main.c \
 			init.c \
@@ -11,15 +11,14 @@ SRCS =		main.c \
 OBJS =	$(SRCS:.c=.o)
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@ -lpthread
+	$(CC) $(CFLAGS) $^ -o $@ -pthread
 
 all : $(NAME)
 
 clean : 
 	rm $(OBJS)
 
-fclean :
+fclean : clean
 	rm $(NAME)
-	rm $(OBJS)
 
 re : fclean all

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:26:54 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/05 00:47:59 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/07 20:57:25 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int					init_philo(char **av, int ac, t_philo *philo)
 	philo->dead = 0;
 	if (ac == 6)
 		philo->l_meals = ft_atoi(av[5]);
-	if (philo->total < 2 || (philo->l_meals != -1 && philo->l_meals < 0))
+	if (philo->total < 2 || (philo->l_meals != -1 && philo->l_meals < 0) ||
+		philo->t_die == -1 || philo->t_eat == -1 || philo->t_sleep == -1)
 		return (0);
 	if (!(philo->ones = (t_ones *)malloc(sizeof(t_ones) * philo->total)))
 		return (0);

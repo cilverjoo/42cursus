@@ -1,6 +1,6 @@
 NAME = philo_two
 CC = gcc
-FLAGS = -g3 -fsanitize=address -Wall -Wextra -Werror -lpthread -I./
+FLAGS = -Wall -Wextra -Werror -lpthread -I./
 
 SRCS = main.c \
 		utils.c \
@@ -18,7 +18,7 @@ all : $(NAME)
 clean :
 	rm $(OBJS)
 
-fclean : $(clean)
+fclean : clean
 	rm $(NAME)
 
 re : fclean all

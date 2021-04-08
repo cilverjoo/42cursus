@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:26:54 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/04 16:58:23 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/07 21:00:14 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,13 @@ int					init_forks(t_philo *philo)
 		* philo->total)))
 		return (0);
 	while (i < philo->total)
-	{
-		pthread_mutex_init(&philo->forks[i], NULL);
-		philo->ones[i].l_fork = &philo->forks[i];
-		philo->ones[i].r_fork = (i + 1 == philo->total ?
-			&philo->forks[0] : &philo->forks[i + 1]);
-		i++;
-	}
+		pthread_mutex_init(&philo->forks[i++], NULL);
 	return (1);
 }
 
 int					init_ones(t_philo *philo, t_ones *ones)
 {
 	int				i;
-	pthread_mutex_t mutex[philo->total];
 
 	i = 0;
 	while (i < philo->total)
@@ -42,11 +35,11 @@ int					init_ones(t_philo *philo, t_ones *ones)
 		ones[i].position = i + 1;
 		ones[i].eat_cnt = 0;
 		ones[i].philo = philo;
-		ones[i].start = philo->start;
 		ones[i].dining_time = 0;
-		pthread_mutex_init(&mutex[i], NULL);
-		philo->ones[i].state_msg = &mutex[i];
-		pthread_mutex_init(&ones[i].eat_monitor, NULL);
+		ones[i].start = philo->start;
+		ones[i].l_fork = &philo->forks[i];
+		ones[i].r_fork = (i + 1 == philo->total ?
+			&philo->forks[0] : &philo->forks[i + 1]);
 		i++;
 	}
 	return (1);
@@ -60,14 +53,15 @@ int					init_philo(char **av, int ac, t_philo *philo)
 	philo->t_sleep = ft_atoi(av[4]);
 	philo->l_meals = -1;
 	philo->dead = 0;
-	pthread_mutex_init(&philo->deadman, NULL);
-	pthread_mutex_init(&philo->output, NULL);
 	if (ac == 6)
 		philo->l_meals = ft_atoi(av[5]);
-	if (philo->total < 2 || (philo->l_meals != -1 && philo->l_meals < 0))
+	if (philo->total < 2 || (philo->l_meals != -1 && philo->l_meals < 0) ||
+		philo->t_die == -1 || philo->t_eat == -1 || philo->t_sleep == -1)
 		return (0);
 	if (!(philo->ones = (t_ones *)malloc(sizeof(t_ones) * philo->total)))
 		return (0);
+	pthread_mutex_init(&philo->deadman, NULL);
+	pthread_mutex_init(&philo->output, NULL);
 	init_forks(philo);
 	philo->start = get_time();
 	init_ones(philo, philo->ones);

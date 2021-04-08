@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:25:09 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/04 14:20:32 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/07 21:14:51 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,24 @@ int					ft_atoi(char *num)
 	int				ret;
 	int				len;
 	int				i;
-	int				minus;
 
 	ret = 0;
-	minus = 1;
 	i = 0;
 	if (*num == '-' || *num == '+')
 	{
 		if (*num == '-')
-			minus = -1;
+			return (-1);
 		i++;
 	}
 	len = ft_strlen(num);
 	while (i < len)
 	{
+		if (num[i] < '0' || num[i] > '9')
+			return (-1);
 		ret = ret * 10 + num[i] - '0';
 		i++;
 	}
-	return (ret * minus);
+	return (ret);
 }
 
 uint64_t			get_time(void)
@@ -66,23 +66,18 @@ int					timer(int wait, uint64_t start)
 		time_diff = get_time() - start;
 		if ((int)time_diff >= wait)
 			return (1);
+		usleep(100);
 	}
 	return (0);
 }
 
 int					clear_all(t_philo *philo)
 {
-	int				i;
-
-	i = 0;
-	while (i < philo->total)
-	{
-		kill(philo->ones[i].pid, SIGKILL);
-		i++;
-	}
-	sem_close(philo->philosopher);
-	sem_close(philo->state);
-	sem_close(philo->forks);
+	sem_unlink("/forks");
+	sem_unlink("/state");
+	sem_unlink("/exit_check");
+	sem_unlink("/death");
+	sem_unlink("/process");
 	free(philo->ones);
 	return (1);
 }
