@@ -1,6 +1,10 @@
 NAME = philo_one
 CC = gcc
+<<<<<<< HEAD
 CFLAGS = -Wall -Wextra -Werror -I./
+=======
+CFLAGS = -Wall -Wextra -Werror -pthread -I./
+>>>>>>> main
 SRCS =		main.c \
 			init.c \
 			utils.c \

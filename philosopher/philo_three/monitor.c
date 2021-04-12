@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/02 14:16:32 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/07 21:14:41 by ekim             ###   ########.fr       */
+/*   Created: 2021/04/12 11:35:55 by ekim              #+#    #+#             */
+/*   Updated: 2021/04/12 11:36:38 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void				*full_monitor(void *param)
 		full++;
 		if (full == philo->total)
 		{
-			printf("All Philosophers have had enough meals\n");
 			kill_process(philo);
+			printf("All Philosophers have had enough meals\n");
 			sem_post(philo->process);
 			return (0);
 		}

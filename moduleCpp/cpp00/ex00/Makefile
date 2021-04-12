@@ -5,18 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/07 13:54:47 by ekim              #+#    #+#              #
-#    Updated: 2021/04/07 18:03:49 by ekim             ###   ########.fr        #
+#    Created: 2021/04/12 11:11:34 by ekim              #+#    #+#              #
+#    Updated: 2021/04/12 11:11:39 by ekim             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-NAME = megaphone
-
-SRCS = main.cpp
 
 CC = clang++
 
 FLAGS = -Wall -Wextra -Werror
+
+SRCS = megaphone.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

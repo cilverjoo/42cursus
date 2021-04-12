@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/04 01:13:26 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/07 21:13:21 by ekim             ###   ########.fr       */
+/*   Created: 2021/04/12 11:34:57 by ekim              #+#    #+#             */
+/*   Updated: 2021/04/12 11:39:30 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void				wait_childprocess(t_philo *philo)
 	pthread_detach(th_full);
 	sem_wait(philo->process);
 	clear_all(philo);
+	return (0);
 }
 
 void				init_starttime(t_philo *philo)

@@ -6,7 +6,11 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 01:13:26 by kim-eunju         #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/04/07 21:02:55 by ekim             ###   ########.fr       */
+=======
+/*   Updated: 2021/04/06 17:59:09 by ekim             ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +23,7 @@ void				*dining_philosophers(void *param)
 
 	ones = (t_ones *)param;
 	if (ones->position % 2 == 0)
-		timer(1, get_time());
+		timer(5, get_time());
 	ones->dining_time = get_time();
 	pthread_create(&monitor_th, NULL, monitoring, (void *)ones);
 	while (ones->philo->dead == 0

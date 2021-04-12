@@ -6,7 +6,11 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 01:17:51 by kim-eunju         #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/04/07 20:34:29 by ekim             ###   ########.fr       */
+=======
+/*   Updated: 2021/04/05 18:19:57 by ekim             ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +34,11 @@ typedef struct			s_ones
 	struct s_philo		*philo;
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		*r_fork;
+<<<<<<< HEAD
+=======
+	pthread_mutex_t		state_msg;
+	pthread_mutex_t		eat_monitor;
+>>>>>>> main
 }						t_ones;
 
 typedef struct			s_philo

@@ -6,7 +6,11 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:25:09 by ekim              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/04/07 20:53:07 by ekim             ###   ########.fr       */
+=======
+/*   Updated: 2021/04/05 18:20:10 by ekim             ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +83,11 @@ int					clear_mutex(t_philo *philo)
 	while (i < philo->total)
 	{
 		pthread_mutex_destroy(&philo->forks[i]);
+<<<<<<< HEAD
+=======
+		pthread_mutex_destroy(&philo->ones[i].state_msg);
+		pthread_mutex_destroy(&philo->ones[i].eat_monitor);
+>>>>>>> main
 		i++;
 	}
 	pthread_mutex_destroy(&philo->deadman);
