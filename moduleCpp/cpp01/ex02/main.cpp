@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pony.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/08 00:11:01 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/09 14:25:40 by kim-eunju        ###   ########.fr       */
+/*   Created: 2021/04/09 15:33:51 by kim-eunju         #+#    #+#             */
+/*   Updated: 2021/04/09 16:20:46 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PONY_HPP
-# define PONY_HPP
+#include "ZombieEvent.hpp"
+#include "Zombie.hpp"
 
-#include <string>
-#include <iostream>
-
-class	Pony
+int			main(void)
 {
+	ZombieEvent		event;
+	Zombie			*zombie1;
 
-private:
-	std::string	color;
+	zombie1 = event.randomCrump();
+	zombie1->announce();
+	delete zombie1; 
 
-public:
-
-	Pony(void);
-	~Pony();
-
-	void		walk(void);
-	void		run(void);
-	void		eat(void);
-	void		sleep(void);
-	std::string getColor(void);
-	void		setColor(std::string color);
-
-};
-
-#endif
+	system("leaks zombie.out");
+	return (0);
+}

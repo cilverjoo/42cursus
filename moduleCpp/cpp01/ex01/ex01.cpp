@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pony.hpp                                           :+:      :+:    :+:   */
+/*   ex01.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/08 00:11:01 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/09 14:25:40 by kim-eunju        ###   ########.fr       */
+/*   Created: 2021/04/09 14:36:07 by kim-eunju         #+#    #+#             */
+/*   Updated: 2021/04/09 14:50:59 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PONY_HPP
-# define PONY_HPP
-
-#include <string>
 #include <iostream>
 
-class	Pony
+void	memoryLeak(void)
 {
+	std::string* panther = new std::string("String panther");
+	std::cout << *panther << std::endl;
+	delete panther;
+}
 
-private:
-	std::string	color;
+void	memorySafe(void)
+{
+	std::string panther = std::string("String panther");
+	std::cout << panther << std::endl;
+}
 
-public:
-
-	Pony(void);
-	~Pony();
-
-	void		walk(void);
-	void		run(void);
-	void		eat(void);
-	void		sleep(void);
-	std::string getColor(void);
-	void		setColor(std::string color);
-
-};
-
-#endif
+int		main(void)
+{
+	memoryLeak();
+	memorySafe();
+	return (0);
+}
