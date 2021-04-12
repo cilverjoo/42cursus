@@ -6,7 +6,11 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:16:32 by ekim              #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2021/04/07 21:14:41 by ekim             ###   ########.fr       */
+=======
 /*   Updated: 2021/04/06 21:56:17 by ekim             ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +58,10 @@ void				*death_monitor(void *param)
 	sem_wait(philo->death);
 	kill_process(philo);
 	printf("One of Philosophers is dead...\n");
+<<<<<<< HEAD
+=======
 	exit(0);
+>>>>>>> main
 	sem_post(philo->process);
 	return (0);
 }
@@ -74,9 +81,16 @@ void				*full_monitor(void *param)
 		{
 			printf("All Philosophers have had enough meals\n");
 			kill_process(philo);
+<<<<<<< HEAD
+=======
 			exit(0);
+>>>>>>> main
 			sem_post(philo->process);
 			return (0);
 		}
 	}
+<<<<<<< HEAD
+	return (0);
+=======
+>>>>>>> main
 }

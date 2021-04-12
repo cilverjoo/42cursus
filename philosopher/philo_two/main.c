@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 01:13:26 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/04 11:10:14 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/07 21:03:08 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,11 @@ int					main(int ac, char **av)
 {
 	t_philo			philo;
 
-	if (ac < 5 || ac > 6)
+	if (ac < 5 || ac > 6 || !init_philo(av, ac, &philo))
 	{
 		printf("Argument Error\n");
-		exit(0);
+		return (0);
 	}
-	init_philo(av, ac, &philo);
 	execute_philosophers(&philo, philo.total);
 	check_dinning_status(&philo);
 	clear_all(&philo);

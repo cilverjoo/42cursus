@@ -6,7 +6,11 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 01:17:51 by kim-eunju         #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2021/04/07 20:58:13 by ekim             ###   ########.fr       */
+=======
 /*   Updated: 2021/04/05 16:26:16 by ekim             ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +59,6 @@ int						eat(t_ones *ones);
 int						putdown(t_ones *ones);
 
 void					*monitoring(void *param);
-void					*die_monitor(void *param);
 
 int						ft_strlen(char *str);
 int						ft_atoi(char *num);

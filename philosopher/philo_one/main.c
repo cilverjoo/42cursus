@@ -6,7 +6,11 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 01:13:26 by kim-eunju         #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2021/04/07 21:02:55 by ekim             ###   ########.fr       */
+=======
 /*   Updated: 2021/04/06 17:59:09 by ekim             ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +36,7 @@ void				*dining_philosophers(void *param)
 		if (!putdown(ones))
 			break ;
 	}
-	pthread_detach(monitor_th);
+	pthread_join(monitor_th, NULL);
 	return (0);
 }
 
@@ -42,7 +46,7 @@ int					execute_philosophers(t_philo *philo, int total)
 	int				i;
 
 	i = 0;
-	while (i < total && philo->dead == 0)
+	while (i < total)
 	{
 		pthread_create(&thread[i], NULL, dining_philosophers,
 			(void *)&philo->ones[i]);
@@ -50,10 +54,7 @@ int					execute_philosophers(t_philo *philo, int total)
 	}
 	i = 0;
 	while (i < total)
-	{
-		pthread_join(thread[i], NULL);
-		i++;
-	}
+		pthread_join(thread[i++], NULL);
 	return (0);
 }
 
@@ -77,12 +78,11 @@ int					main(int ac, char **av)
 {
 	t_philo			philo;
 
-	if (ac < 5 || ac > 6)
+	if (ac < 5 || ac > 6 || !init_philo(av, ac, &philo))
 	{
 		printf("Argument Error\n");
-		exit(0);
+		return (0);
 	}
-	init_philo(av, ac, &philo);
 	execute_philosophers(&philo, philo.total);
 	check_dinning_status(&philo);
 	clear_mutex(&philo);

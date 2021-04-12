@@ -6,7 +6,11 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:26:54 by ekim              #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2021/04/07 20:57:31 by ekim             ###   ########.fr       */
+=======
 /*   Updated: 2021/04/06 21:53:44 by ekim             ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +57,8 @@ int					init_philo(char **av, int ac, t_philo *philo)
 	philo->dead = 0;
 	if (ac == 6)
 		philo->l_meals = ft_atoi(av[5]);
-	if (philo->total < 2 || (philo->l_meals != -1 && philo->l_meals < 0))
+	if (philo->total < 2 || (philo->l_meals != -1 && philo->l_meals < 0) ||
+		philo->t_die == -1 || philo->t_eat == -1 || philo->t_sleep == -1)
 		return (0);
 	if (!(philo->ones = (t_ones *)malloc(sizeof(t_ones) * philo->total)))
 		return (0);

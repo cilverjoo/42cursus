@@ -6,7 +6,11 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:25:09 by ekim              #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2021/04/12 10:27:42 by ekim             ###   ########.fr       */
+=======
 /*   Updated: 2021/04/05 18:07:26 by ekim             ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +33,24 @@ int					ft_atoi(char *num)
 	int				ret;
 	int				len;
 	int				i;
-	int				minus;
 
 	ret = 0;
-	minus = 1;
 	i = 0;
 	if (*num == '-' || *num == '+')
 	{
 		if (*num == '-')
-			minus = -1;
+			return (-1);
 		i++;
 	}
 	len = ft_strlen(num);
 	while (i < len)
 	{
+		if (num[i] < '0' || num[i] > '9')
+			return (-1);
 		ret = ret * 10 + num[i] - '0';
 		i++;
 	}
-	return (ret * minus);
+	return (ret);
 }
 
 uint64_t			get_time(void)
@@ -66,6 +70,7 @@ int					timer(int wait, uint64_t start)
 		time_diff = get_time() - start;
 		if ((int)time_diff >= wait)
 			return (1);
+		usleep(100);
 	}
 	return (0);
 }

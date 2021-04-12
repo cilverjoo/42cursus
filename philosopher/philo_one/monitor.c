@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:16:32 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/04 01:17:44 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/07 20:26:47 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void				*monitoring(void *param)
 	ones = (t_ones *)param;
 	while (1)
 	{
-		if (ones->eat_cnt == ones->philo->l_meals)
+		if (ones->eat_cnt == ones->philo->l_meals || ones->philo->dead)
 			return (0);
 		diff = get_time() - ones->dining_time;
 		if (diff >= ones->philo->t_die)
@@ -30,8 +30,6 @@ void				*monitoring(void *param)
 			pthread_mutex_unlock(&ones->philo->deadman);
 			return (0);
 		}
-		if (ones->philo->dead)
-			return (0);
 		usleep(1000);
 	}
 }

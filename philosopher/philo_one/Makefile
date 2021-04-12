@@ -1,6 +1,10 @@
 NAME = philo_one
 CC = gcc
+<<<<<<< HEAD
+CFLAGS = -Wall -Wextra -Werror -I./
+=======
 CFLAGS = -Wall -Wextra -Werror -pthread -I./
+>>>>>>> main
 SRCS =		main.c \
 			init.c \
 			utils.c \
@@ -10,7 +14,7 @@ SRCS =		main.c \
 OBJS =	$(SRCS:.c=.o)
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ -pthread
 
 all : $(NAME)
 

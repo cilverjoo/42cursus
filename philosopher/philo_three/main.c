@@ -6,7 +6,11 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 01:13:26 by ekim              #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2021/04/07 21:13:21 by ekim             ###   ########.fr       */
+=======
 /*   Updated: 2021/04/06 21:52:11 by ekim             ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +21,11 @@ int					dining_philosophers(t_ones *ones)
 	pthread_t		monitor_th;
 
 	if (ones->position % 2 == 0)
+<<<<<<< HEAD
+		timer(1, get_time());
+=======
 		usleep(50);
+>>>>>>> main
 	ones->dining_time = get_time();
 	pthread_create(&monitor_th, NULL, monitoring, (void *)ones);
 	pthread_detach(monitor_th);
@@ -45,14 +53,21 @@ void				wait_childprocess(t_philo *philo)
 	pthread_detach(th_death);
 	pthread_detach(th_full);
 	sem_wait(philo->process);
+<<<<<<< HEAD
+=======
 	kill_process(philo);
+>>>>>>> main
 	clear_all(philo);
 }
 
 void				init_starttime(t_philo *philo)
 {
 	int				i;
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> main
 	i = 0;
 	philo->start = get_time();
 	while (i < philo->total)
@@ -86,12 +101,11 @@ int					main(int ac, char **av)
 {
 	t_philo			philo;
 
-	if (ac < 5 || ac > 6)
+	if (ac < 5 || ac > 6 || !init_philo(av, ac, &philo))
 	{
 		printf("Argument Error\n");
-		exit(0);
+		return (0);
 	}
-	init_philo(av, ac, &philo);
 	execute_philosophers(&philo, philo.total);
 	return (0);
 }

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -6,43 +5,30 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/07 13:54:47 by ekim              #+#    #+#              #
-#    Updated: 2021/04/07 18:03:49 by ekim             ###   ########.fr        #
+#    Created: 2021/04/07 13:53:51 by ekim              #+#    #+#              #
+#    Updated: 2021/04/07 17:58:37 by ekim             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
-
-SRCS = main.cpp
-
+NAME = phonebook
 CC = clang++
+FLAGS = -Wall -Wextra -Werror -I./
 
-FLAGS = -Wall -Wextra -Werror
+SRCS =	main.cpp \
+		contact.cpp \
+		phonebook.cpp
 
-=======
-NAME = megaphone
-CC = clang++
-FLAGS = -Wall -Wextra -Werror
-
-SRCS = megaphone.cpp
-
->>>>>>> main
 OBJS = $(SRCS:.cpp=.o)
 
 $(NAME) : $(OBJS)
 	$(CC) $(FLAGS) $^ -o $@
-	
+
 all : $(NAME)
 
 clean :
 	rm $(OBJS)
-	
-fclean: clean
-	rm $(NAME)
-<<<<<<< HEAD
 
-re: fclean all
-=======
-	
-re: fclean re
->>>>>>> main
+fclean : clean
+	rm $(NAME)
+
+re : fclean all 
