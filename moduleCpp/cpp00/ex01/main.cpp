@@ -16,7 +16,6 @@ int				main(void)
 {
 	Phonebook	book;
 	std::string	command;
-	int			idx;
 	
 	while (1)
 	{
@@ -25,10 +24,7 @@ int				main(void)
 		if (command == "ADD")
 			book.add_to_phonebook();
 		else if (command == "SEARCH")
-		{
-			book.show_phonebook(0);
 			book.search_from_phonebook();
-		}
 		else if (command == "EXIT")
 		{
 			std::cout << "EXIT PHONEBOOK :)" << std::endl;
@@ -36,7 +32,6 @@ int				main(void)
 		}
 		else
 			std::cout << "Error: Incorrect command!" << std::endl;
-		command.clear();
 	}
 	return (0);
 }

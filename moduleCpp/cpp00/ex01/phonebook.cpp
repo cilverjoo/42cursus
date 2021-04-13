@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
-#include <sys/time.h>
-#include <unistd.h>
 
 Phonebook::Phonebook()
 {
@@ -66,12 +64,19 @@ void			Phonebook::search_from_phonebook(void)
 {
 	int 		index;
 	
+	if (this->total == 0)
+	{
+		std::cout << "Add at least 1 contact! :(" << std::endl;
+		return ;
+	}
+	show_phonebook(0);
 	std::cout << "which index ? >> ";
 	std::cin >> index;
 	if (std::cin.fail())
 	{
 		std::cout << "input is not a numeric (or int) value!" << std::endl;
 		std::cin.clear();
+		std::cin.ignore(1000, '\n');
 		return ;
 	}
 	if (index <= 0 || index > this->total)

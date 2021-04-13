@@ -18,10 +18,11 @@ int			main(void)
 	ZombieEvent		event;
 	Zombie			*zombie1;
 
-	zombie1 = event.randomCrump();
-	zombie1->announce();
-	delete zombie1; 
-
-	system("leaks zombie.out");
+	srand(time(NULL));
+	for (int i = 0; i < 10; i++)
+	{
+		zombie1 = event.randomCrump();
+		delete zombie1;
+	}
 	return (0);
 }

@@ -25,12 +25,11 @@ private:
 public:
 
 	Phonebook();
-	~Phonebook();
 	void		show_phonebook(int index);
 	void		search_from_phonebook(void);
 	std::string	print_shortly(std::string str);
 	void		add_to_phonebook();
-
+	~Phonebook();
 };
 
 #endif 
