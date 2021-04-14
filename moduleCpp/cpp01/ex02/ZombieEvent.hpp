@@ -4,6 +4,8 @@
 #include "Zombie.hpp"
 #include <string>
 #include <cstdlib>
+#include <random>
+#include <chrono>
 
 class ZombieEvent
 {

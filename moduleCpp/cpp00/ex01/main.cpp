@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:09:41 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/12 19:14:46 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/14 11:25:35 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int				main(void)
 {
 	Phonebook	book;
 	std::string	command;
-	int			idx;
 	
 	while (1)
 	{
@@ -33,6 +32,8 @@ int				main(void)
 			std::cout << "EXIT PHONEBOOK :)" << std::endl;
 			break ;
 		}
+		else
+			std::cout << "Error: Incorrect command!" << std::endl;
 	}
 	return (0);
 }

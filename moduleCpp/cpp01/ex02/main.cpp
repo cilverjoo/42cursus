@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:33:51 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/12 18:38:24 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/14 11:32:43 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int			main(void)
 	for (int i = 0; i < 10; i++)
 	{
 		zombie1 = event.randomCrump();
-		delete zombie1;	
+		delete zombie1;
 	}
-	// system("leaks zombie.out");
 	return (0);
 }

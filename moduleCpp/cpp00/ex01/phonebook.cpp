@@ -6,14 +6,11 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:49:52 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/14 11:12:03 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/14 11:27:24 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
-# include <iostream>
-# include <iomanip>
-# include <string>
 
 Phonebook::Phonebook()
 {
@@ -70,15 +67,17 @@ void			Phonebook::search_from_phonebook(void)
 	if (this->total == 0)
 	{
 		std::cout << "Add at least 1 contact!\n";
+		std::cout << "Add at least 1 contact! :(" << std::endl;
 		return ;
 	}
 	show_phonebook(0);
 	std::cout << "which index ? >> ";
-	std::getline(std::cin, index);
+	std::cin >> index;
 	if (std::cin.fail())
 	{
 		std::cin.clear();
 		std::cout << "input is not a numeric (or int) value!\n";
+		std::cin.ignore(1000, '\n');
 		return ;
 	}
 	if (index <= 0 || index > this->total)

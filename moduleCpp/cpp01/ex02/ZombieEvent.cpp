@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:28:04 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/12 18:37:17 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/14 11:32:29 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ Zombie		*ZombieEvent::newZombie(std::string Name)
 
 Zombie		*ZombieEvent::randomCrump(void)
 {
-	int		idx;
 	std::string name;
 	Zombie	*zombie;
 
-	idx = rand() % 20;
-	name = returnRandomName(idx);
-	zombie = newZombie(name);
+	srand(time(NULL));
+	this->setZombieType(rand() % 20);
+	name = this->returnRandomName(this->_eventType);
+	zombie = this->newZombie(name);
 	zombie->announce();
 	return (zombie);
 }
