@@ -6,13 +6,14 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:49:52 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/12 19:21:46 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/14 11:12:03 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
-#include <sys/time.h>
-#include <unistd.h>
+# include <iostream>
+# include <iomanip>
+# include <string>
 
 Phonebook::Phonebook()
 {
@@ -72,7 +73,7 @@ void			Phonebook::search_from_phonebook(void)
 		return ;
 	}
 	show_phonebook(0);
-	std::cout << "which index ? > ";
+	std::cout << "which index ? >> ";
 	std::getline(std::cin, index);
 	if (std::cin.fail())
 	{

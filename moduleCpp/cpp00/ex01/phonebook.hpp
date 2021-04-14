@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 13:53:58 by ekim              #+#    #+#             */
-/*   Updated: 2021/04/12 19:19:53 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/12 19:28:19 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHONEBOOK_HPP
 
 #include "contact.hpp"
+#include <unistd.h>
 
 class		Phonebook
 {
