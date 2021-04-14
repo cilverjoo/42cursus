@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 00:24:37 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/09 14:25:18 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/12 17:05:14 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void		PonyOnTheHeap(void)
 	Pony	*pony;
 
 	pony = new Pony();
+	if (!pony)
+		return ;
 	pony->setColor(std::string("white"));
 	std::cout << pony->getColor() << std::endl;
 	pony->walk();

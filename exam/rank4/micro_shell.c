@@ -19,7 +19,7 @@
 # define TEST		0
 #endif
 
-typedef struct	s_list
+typedef struct		s_list
 {
 	char			**args;
 	int				length;
@@ -27,7 +27,7 @@ typedef struct	s_list
 	int				pipes[2];
 	struct s_list	*previous;
 	struct s_list	*next;
-}				t_list;
+}					t_list;
 
 int ft_strlen(char const *str)
 {

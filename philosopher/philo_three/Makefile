@@ -11,7 +11,7 @@ SRCS =		main.c \
 OBJS =	$(SRCS:.c=.o)
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@ -pthread
+	$(CC) $(CFLAGS) $^ -o $@
 
 all : $(NAME)
 

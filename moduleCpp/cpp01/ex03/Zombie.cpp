@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 14:58:36 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/12 18:37:22 by ekim             ###   ########.fr       */
+/*   Updated: 2021/04/09 16:05:45 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Zombie::Zombie()
 
 Zombie::~Zombie()
 {
-	std::cout << "A Zombie is deleted" << std::endl;
+	// std::cout << this->name << " is deleted" << std::endl;
 }
 
 void		Zombie::setName(std::string Name)

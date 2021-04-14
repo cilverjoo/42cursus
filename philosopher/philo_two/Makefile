@@ -1,6 +1,6 @@
 NAME = philo_two
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -lpthread -I./
+FLAGS = -Wall -Wextra -Werror -I./
 
 SRCS = main.c \
 		utils.c \

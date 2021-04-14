@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ZombieEvent.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:28:04 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/09 16:09:14 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/14 11:32:29 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ZombieEvent.hpp"
+#include "Zombie.hpp"
 
 ZombieEvent::ZombieEvent()
 {
-	_eventType = 0;
+	this->_eventType = 0;
 }
 
 ZombieEvent::~ZombieEvent()
@@ -23,10 +24,10 @@ ZombieEvent::~ZombieEvent()
 
 void		ZombieEvent::setZombieType(int type)
 {
-	_eventType = type;
+	this->_eventType = type;
 }
 
-std::string		returnRandomName(int idx)
+std::string		ZombieEvent::returnRandomName(int idx)
 {
 	std::string names[20] = {"Trinidad", "Calista", "Brandi", "Patria", "Elma", 
 	"Woodrow", "Jeannetta", "Janean", "Thanh", "Tyisha", "Mi", "Irvin", "Tillie", 
@@ -48,11 +49,13 @@ Zombie		*ZombieEvent::newZombie(std::string Name)
 
 Zombie		*ZombieEvent::randomCrump(void)
 {
-	int		idx;
+	std::string name;
 	Zombie	*zombie;
 
-	idx = rand() % 20;	
-	zombie = newZombie(returnRandomName(idx));
+	srand(time(NULL));
+	this->setZombieType(rand() % 20);
+	name = this->returnRandomName(this->_eventType);
+	zombie = this->newZombie(name);
 	zombie->announce();
 	return (zombie);
 }
