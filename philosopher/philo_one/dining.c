@@ -6,13 +6,10 @@
 /*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:13:52 by ekim              #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/04/07 21:00:12 by ekim             ###   ########.fr       */
-=======
-/*   Updated: 2021/04/05 18:29:55 by ekim             ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2021/04/12 15:59:47 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "philo_one.h"
 
@@ -21,33 +18,25 @@ int					pickup(t_ones *ones)
 	pthread_mutex_lock(ones->l_fork);
 	if (ones->philo->dead)
 		return (0);
-<<<<<<< HEAD
 	pthread_mutex_lock(&ones->philo->output);
 	printf("%5.5llu %d Philosopher has taken a left fork\n",
 		get_time() - ones->start, ones->position);
 	pthread_mutex_unlock(&ones->philo->output);
-=======
 	}
 	pthread_mutex_lock(&ones->state_msg);
 	printf("%5.5llu %d Philosopher has taken a left fork\n",
 		get_time() - ones->start, ones->position);
-	pthread_mutex_unlock(&ones->state_msg);
->>>>>>> main
 	pthread_mutex_lock(ones->r_fork);
 	if (ones->philo->dead)
 		return (0);
-<<<<<<< HEAD
 	pthread_mutex_lock(&ones->philo->output);
 	printf("%5.5llu %d Philosopher has taken a right fork\n",
 		get_time() - ones->start, ones->position);
 	pthread_mutex_unlock(&ones->philo->output);
-=======
 	}
 	pthread_mutex_lock(&ones->state_msg);
 	printf("%5.5llu %d Philosopher has taken a right fork\n",
 		get_time() - ones->start, ones->position);
-	pthread_mutex_unlock(&ones->state_msg);
->>>>>>> main
 	return (1);
 }
 
