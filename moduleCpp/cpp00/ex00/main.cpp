@@ -36,7 +36,7 @@ int			main(int ac, char **av)
 		while (i < ac)
 		{
 			j = 0;
-			len = strlen(av[i]);
+			len = std::string(av[i]).length();
 			while (j < len)
 			{
 				if (ft_isalpha(av[i][j]))

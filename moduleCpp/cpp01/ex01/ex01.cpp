@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ex01.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ekim <ekim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 14:36:07 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/04/09 14:50:59 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/04/12 17:04:56 by ekim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	memoryLeak(void)
 {
 	std::string* panther = new std::string("String panther");
+	if (!panther)
+		return ;
 	std::cout << *panther << std::endl;
 	delete panther;
 }

@@ -2,7 +2,7 @@ NAME = zombie
 CC = clang++
 FLAGS = -Wall -Wextra -Werror -I./
 
-SRCS = Zombie.cpp ZombieEvent.cpp main.cpp
+SRCS = Zombie.cpp ZombieHorde.cpp main.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 $(NAME) : $(OBJS)
