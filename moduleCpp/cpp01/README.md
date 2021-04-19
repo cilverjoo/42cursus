@@ -47,3 +47,19 @@ ex00)
 
 
 ex01)
+
+
+ex07 )
+
+1. open(const char *fileName, ios_bash::openmode mode = ios_bash::in) : 첫번째 인자로는 open할 파일 이름이 들어가고 두번째 인자로는 open mode가 들어간다
+
+    ios_base::in - 파일을 read할 목적으로 open
+
+    ios_base::out - 파일을 write할 목적으로 opne
+
+    ios_base::binary - 파일을 바이너리 형태로 open ..etc.
+
+2. bool is_open() : 파일이 열렸는지 확인하는 함수
+3. void close() : 파일을 닫는 함수
+4. getline(char *str, streamize len) : '\n'을 만날 때까지 문장 끝까지 읽어주는 함수
+5. bool eof() : 파일의 끝이 나오면 true를 반환하고 아니면 false를 반환
