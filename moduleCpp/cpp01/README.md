@@ -133,5 +133,9 @@ ex07 )
 2. bool is_open() : 파일이 열렸는지 확인하는 함수
 3. void close() : 파일을 닫는 함수
 4. getline(char *str, streamize len) : '\n'을 만날 때까지 문장 끝까지 읽어주는 함수
+<<<<<<< HEAD
+5. bool eof() : 파일의 끝이 나오면 true를 반환하고 아니면 false를 반환
+>>>>>>> 17e848ba9fbdce19a5e8dbe7ac37d85467df7214
+=======
 5. bool eof() : 파일의 끝이 나오면 true를 반환하고 아니면 false를 반환
 >>>>>>> 17e848ba9fbdce19a5e8dbe7ac37d85467df7214
