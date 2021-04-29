@@ -1,10 +1,10 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I./includes  # CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I./includes
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I./includes
 CHECKER = checker
 PUSHSWAP = push_swap
 
 LIB_DIR = ./lib
-LIB_NAME = ft		#library 이름은 lib와 .a 사이의 이름이다. libft.a ==> ft
+LIB_NAME = ft
 
 SRCS_DIR = ./srcs/
 
