@@ -23,14 +23,12 @@ int         replaceFiles(std::string readName, std::string s1, std::string s2)
         }
     }
     readFile.close();
-
     f_idx = str.find(s1);
     while (f_idx != std::string::npos)
     {        
         str.replace(f_idx, s1.length(), s2);
         f_idx = str.find(s1);
     }
-
     tmp.clear();
     tmp += (readName + std::string(".replace"));
     writeToFile.open(tmp.c_str());

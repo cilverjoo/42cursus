@@ -9,7 +9,6 @@
 
 class ZombieEvent
 {
-
 private:
 	int			_eventType;
 
@@ -20,7 +19,6 @@ public:
 	Zombie		*newZombie(std::string name);
 	Zombie		*randomCrump(void);
 	~ZombieEvent();
-
 };
 
 
