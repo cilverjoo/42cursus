@@ -9,24 +9,8 @@ int			main(void)
 	str = "HI THIS IS BRAIN";
 	ptr = &str;
 	std::string &ref = str;
-<<<<<<< HEAD
-<<<<<<< HEAD
 	std::cout << "str : " << str << std::endl;
 	std::cout << "ptr : " << *ptr << std::endl;
 	std::cout << "ref : " << ref << std::endl;
 	return (0);
 }
-=======
-=======
->>>>>>> 17e848ba9fbdce19a5e8dbe7ac37d85467df7214
-	std::cout << str << std::endl;
-	std::cout << ptr << std::endl;
-	std::cout << ref << std::endl;
-
-	return (0);
-<<<<<<< HEAD
-}
->>>>>>> 17e848ba9fbdce19a5e8dbe7ac37d85467df7214
-=======
-}
->>>>>>> 17e848ba9fbdce19a5e8dbe7ac37d85467df7214

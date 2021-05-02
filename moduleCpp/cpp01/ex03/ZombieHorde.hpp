@@ -10,9 +10,9 @@
 class ZombieHorde
 {
 	private:
-		Zombie	*zombies;
-		int		total;
-		int		*randoms;
+		Zombie		*zombies;
+		int			total;
+		int			*randoms;
 
 	public:
 		ZombieHorde(int N);
