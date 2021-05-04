@@ -15,11 +15,11 @@ private :
 public :
 
 	Fixed();
-	~Fixed();
-	Fixed(const Fixed &copy);
-	Fixed&			operator=(const Fixed &copy);
 	Fixed(int param);
 	Fixed(float param);
+	~Fixed();
+	Fixed(const Fixed &ref);
+	Fixed			&operator=(const Fixed &ref);
 	void			setRawBits(int const value);
 	int				getRawBits(void) const;
 	int				toInt(void) const;
@@ -27,6 +27,6 @@ public :
 
 };
 
-std::ostream	&operator<<(std::ostream &os, const Fixed &fixed);
+std::ostream		&operator<<(std::ostream &os, const Fixed &ref);
 
 #endif
