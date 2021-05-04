@@ -3,28 +3,12 @@
 ClapTrap::ClapTrap()
 {
     _name = "unknown";
-    _hitPoint = 100;
-    _maxHitPoint = 100;
-    _energyPoint = 100;
-    _maxEnergyPoint = 100;
-    _level = 1;
-    _meleeAttackDamage = 30;
-    _rangedAttackDamage = 20;
-    _armorDamageReduction = 5;
-    std::cout << "Create Player " << "<" << _name << "> !\n";
+    std::cout << "Create Player " << "<" << _name << ">\n";
 }
 
 ClapTrap::ClapTrap(std::string name)
 {
     _name = name;
-    _hitPoint = 100;
-    _maxHitPoint = 100;
-    _energyPoint = 100;
-    _maxEnergyPoint = 100;
-    _level = 1;
-    _meleeAttackDamage = 30;
-    _rangedAttackDamage = 20;
-    _armorDamageReduction = 5;
     std::cout << "Create Player " << "<" << _name << ">\n";
 }
 
@@ -77,7 +61,7 @@ void ClapTrap::takeDamage(unsigned int amount)
     else
 	{
 		_hitPoint -= amount - _armorDamageReduction;
-		
+		std::cout << "< " << _name << " > " << _hitPoint << " HP left :(" << std::endl;
 	}
 }
 

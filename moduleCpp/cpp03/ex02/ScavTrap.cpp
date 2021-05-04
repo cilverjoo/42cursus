@@ -1,6 +1,7 @@
 #include "ScavTrap.hpp"
+#include "ClapTrap.hpp"
 
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap() : ClapTrap()
 {
     _hitPoint = 100;
     _maxHitPoint = 100;
@@ -10,13 +11,11 @@ ScavTrap::ScavTrap()
     _meleeAttackDamage = 20;
     _rangedAttackDamage = 15;
     _armorDamageReduction = 3;
-    _name = "unknown";
     std::cout << "Create Player " << "<" << _name << "> !\n";
 }
 
-ScavTrap::ScavTrap(std::string name)
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-    _name = name;
     _hitPoint = 100;
     _maxHitPoint = 100;
     _energyPoint = 50;
@@ -39,51 +38,18 @@ ScavTrap::ScavTrap(const ScavTrap &copy)
     std::cout << "Create Player " << "<" << _name << ">\n";
 }
 
-ScavTrap &ScavTrap::operator=(const ScavTrap &st)
+ScavTrap &ScavTrap::operator=(const ScavTrap &ref)
 {
-    _name = st._name;
-    _hitPoint = st._hitPoint;
-    _maxHitPoint = st._maxHitPoint;
-    _energyPoint = st._energyPoint;
-    _maxEnergyPoint = st._maxEnergyPoint;
-    _level = st._level;
-    _meleeAttackDamage = st._meleeAttackDamage;
-    _rangedAttackDamage = st._rangedAttackDamage;
-    _armorDamageReduction = st._armorDamageReduction;
+    _name = ref._name;
+    _hitPoint = ref._hitPoint;
+    _maxHitPoint = ref._maxHitPoint;
+    _energyPoint = ref._energyPoint;
+    _maxEnergyPoint = ref._maxEnergyPoint;
+    _level = ref._level;
+    _meleeAttackDamage = ref._meleeAttackDamage;
+    _rangedAttackDamage = ref._rangedAttackDamage;
+    _armorDamageReduction = ref._armorDamageReduction;
     return (*this);
-}
-
-unsigned int ScavTrap::rangedAttack(std::string const &target)
-{
-    std::cout << "FR4G-TP " << _name << " attacks " << target << " at range, causing "
-        << this->_rangedAttackDamage << " points of damage\n";
-    return (_rangedAttackDamage);    
-}
-
-unsigned int ScavTrap::meleeAttack(std::string const & target)
-{
-    std::cout << "FR4G-TP " << _name << " attacks " << target << " at melee, causing "
-        << _meleeAttackDamage << " points of damage\n";
-    return (_meleeAttackDamage);
-}
-
-void ScavTrap::takeDamage(unsigned int amount)
-{
-    if (_hitPoint - (amount - _armorDamageReduction) <= 0)
-    {
-        _hitPoint = 0;
-        std::cout << "Player " << _name << " is DEAD :(\n";
-    }
-    else
-        _hitPoint -= amount - _armorDamageReduction;
-}
-
-void ScavTrap::beRepaired(unsigned int amount)
-{
-    if (_hitPoint + amount >= _maxHitPoint)
-        _hitPoint = _maxHitPoint;
-    else
-        _hitPoint += amount;
 }
 
 void ScavTrap::challengeNewcomer(void)
