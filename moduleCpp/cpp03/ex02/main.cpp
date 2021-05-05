@@ -17,7 +17,7 @@ int     main(void)
 	unknown.takeDamage(ekim.vaulthunter_dot_exe(unknown._name));
 	stranger.takeDamage(unknown.vaulthunter_dot_exe(stranger._name));
 	stranger.takeDamage(stranger.meleeAttack(stranger._name));
-	
+
 	ekim.show_status();
 	unknown.show_status();
 	stranger.show_status();
