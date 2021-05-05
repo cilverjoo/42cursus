@@ -29,7 +29,7 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 
 FragTrap::~FragTrap()
 {
-    std::cout << "<" << _name << ">" << " left this game." << std::endl;
+    std::cout << "[FragTrap] <" << _name << ">" << " left this game." << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &copy)

@@ -4,32 +4,34 @@
 int     main(void)
 {
 	ScavTrap	stranger("stranger");
-	ScavTrap	doctor("doctor");
-	ScavTrap	phd(doctor);
-    ScavTrap    steve;
     FragTrap 	unknown;
     FragTrap 	ekim("ekim");
-    FragTrap 	ekim2(ekim);
 
     unknown = FragTrap("bradpitt");
+
+	ekim.show_status();
+	unknown.show_status();
+	stranger.show_status();
+
     ekim.takeDamage(unknown.rangedAttack(ekim._name));
-    unknown.takeDamage(ekim2.meleeAttack(unknown._name));
-    ekim.beRepaired(50);
-    unknown.beRepaired(100);
-    ekim.takeDamage(unknown.vaulthunter_dot_exe(ekim._name));
-
-	steve = stranger;
-	steve.takeDamage(phd.rangedAttack(steve._name));
-
-	phd.takeDamage(phd.meleeAttack(phd._name));
-
-	steve.beRepaired(50);
-	phd.beRepaired(100);
+	unknown.takeDamage(ekim.vaulthunter_dot_exe(unknown._name));
+	stranger.takeDamage(unknown.vaulthunter_dot_exe(stranger._name));
+	stranger.takeDamage(stranger.meleeAttack(stranger._name));
+	
+	ekim.show_status();
+	unknown.show_status();
+	stranger.show_status();
+	
+    ekim.beRepaired(20);
+    unknown.beRepaired(10);
+	
+	ekim.show_status();
+	unknown.show_status();
 
 	for(int i = 0; i < 5; i++)
 	{
 		std::cout << i <<"\'st challenge! ";
-		steve.challengeNewcomer();
+		stranger.challengeNewcomer();
 	}
 	return (0);
 }
