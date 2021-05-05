@@ -58,5 +58,5 @@ float			Fixed::toFloat(void) const
 
 std::ostream	&operator<<(std::ostream &os, const Fixed &ref)
 {
-	return (os << ref.toFloat());
+	return (os << ref.toFloat());	
 }
