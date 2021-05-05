@@ -1,7 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-
 #define ERR1	"error: cd: bad arguments\n"
 #define ERR2	"error: cd: cannot change directory to "
 #define ERR3	"error: fatal\n"
@@ -53,7 +52,7 @@ int		ft_argvlen(char **argv)
 
 void	ft_cd(char **argv)
 {
-	int	i = ft_argvlen(argv);
+	int	i=ft_argvlen(argv);
 
 	if (i != 2)
 		put_error(ERR1);
@@ -76,7 +75,7 @@ void	cmd(int argc, char **argv, char **envp, int prev, int *fd_prev)
 	next = is_pipe(argv);
 	if (argv[0])
 	{
-		if (next && pipe(fd_next) < 0)
+		if (next && pipe(fd_next)<0)
 			exit(put_error(ERR3));
 		if (!strncmp(argv[0], "cd", 3))
 			ft_cd(argv);
@@ -84,9 +83,9 @@ void	cmd(int argc, char **argv, char **envp, int prev, int *fd_prev)
 			exit(put_error(ERR3));
 		else if (!pid)
 		{
-			if (prev && dup2(fd_prev[0], 0) < 0)
+			if (prev && dup2(fd_prev[0], 0)<0)
 				exit(2);
-			if (next && dup2(fd_next[1], 1) < 0)
+			if (next && dup2(fd_next[1], 1)<0)
 				exit(2);
 			if (execve(argv[0], argv, envp) < 0)
 			{

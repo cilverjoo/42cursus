@@ -26,6 +26,19 @@ std::ostream	&operator<<(std::ostream &os, const Fixed &fixed)
 }
 ```
 << 연산자의 앞에 오는 인자를 첫번째로, 뒤에 오는 인자를 두번째 파라미터로 넣어서 연산자 오버로딩 함수를 구현한다. output을 담당하는 ostream에 << 연산자를 통해 값을 전달할 수 있도록 이미 구현되어 있으므로 우리는 클래스에서 어떤 값을 뽑아서 넣어줄지만 구현해주면 된다. 중요한 것은 클래스 밖에다 선언하는 것!!
+연산자는 엄밀히 따지면 다음과 같이 기능한다.
+```
+NUMBOX operator+(NUMBOX &ref)
+{
+	return NUMBOX(num1+ref.num1, num2+ref.num2);
+}
+
+//이항 연산자의 왼쪽에 오는 객체의 operator + 함수를 호출 하면서, 이항연산자의 오른쪽의 피연산자를 인자로 전달한다
+nb1 + nb2 = nb1.operator+(nb2)
+
+
+```
+
 
 
 # Fixed Point Value
@@ -61,7 +74,7 @@ integers lack precision. Dividing both 5 and 4 by 2, for instance, will both yie
 
 ```
      0 | 0000111 | 10100000
-부호비트 | 정수부    | 소수부
+부호비트 |   정수부  |  소수부
 ```
 
 맨 앞 1자리는 부호 비트 (Sign Bit) 라고 해서 0이면 양수, 1이면 음수라는 뜻이다. 나머지 비트들은 소수점을 기준으로 정수부랑 소수부를 표현하는 비트로 각각 나누게 되는데, 소수점의 위치는 미리 정해둔다.
