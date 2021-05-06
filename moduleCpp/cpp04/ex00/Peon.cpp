@@ -1,6 +1,7 @@
 #include "Peon.hpp"
+#include "Victim.hpp"
 
-Peon::Peon()
+Peon::Peon() : Victim()
 {
 	std::cout << "Zog zog." << std::endl;
 }
@@ -10,21 +11,19 @@ Peon::~Peon()
 	std::cout << "Bleuark..." << std::endl;
 }
 
-Peon::Peon(std::string _name) : name(_name)
+Peon::Peon(std::string _name) : Victim(_name)
 {
 	std::cout << "Zog zog." << std::endl;
 }
 
-Peon::Peon(const Peon &ref)
+Peon::Peon(const Peon &ref) : Victim(ref)
 {
-	this->name = ref.name;
-    *this = ref;
-	std::cout << "Zog zog." << std::endl;
 }
 
 Peon	&Peon::operator=(const Peon & ref)
 {
 	this->name = ref.name;
+	std::cout << "Zog zog." << std::endl;
     return (*this);
 }
 

@@ -8,8 +8,6 @@
 
 class Peon : public Victim
 {
-private:
-	std::string name;
 
 public:
 
@@ -19,6 +17,7 @@ public:
 	Peon(const Peon &ref);
 	Peon &operator=(const Peon &ref);
 	void    getPolymorphed() const;
+
 };
 
 #endif
