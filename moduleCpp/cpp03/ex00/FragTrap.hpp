@@ -32,6 +32,8 @@ public:
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
     unsigned int vaulthunter_dot_exe(std::string const & target);
+    
+    void    show_status();
 
 };
 

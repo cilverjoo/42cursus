@@ -10,11 +10,18 @@ int     main(void)
 
     ekim.takeDamage(unknown.rangedAttack(ekim._name));
     unknown.takeDamage(ekim2.meleeAttack(unknown._name));
+    
+    ekim.show_status();
+    unknown.show_status();
 
     ekim.beRepaired(50);
     unknown.beRepaired(100);
 
-    ekim.takeDamage(unknown.vaulthunter_dot_exe(ekim._name));
-
+    for (int i = 0; i < 5; i++)
+    {
+        ekim.takeDamage(unknown.vaulthunter_dot_exe(ekim._name));
+    }
+    ekim.show_status();
+    unknown.show_status();
     return (0);
 }

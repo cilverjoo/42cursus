@@ -10,6 +10,7 @@ int				main(void)
 	SuperTrap	samurai("samurai");
 	SuperTrap	sinsen("sinsen");
 
+	samurai.show_status();
 	Ninja.ninjaShoebox(Ishikawa);
 	Ninja.ninjaShoebox(Hattori);
 	Ninja.ninjaShoebox(Jinichi);
@@ -19,6 +20,11 @@ int				main(void)
 	samurai.vaulthunter_dot_exe(sinsen._name);
 	samurai.ninjaShoebox(Hattori);
 	samurai.ninjaShoebox(Jinichi);
+
+	samurai.beRepaired(30);
+	
+	samurai.show_status();
+	sinsen.show_status();
 	
 	return (0);
 }

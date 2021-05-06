@@ -98,3 +98,12 @@ void ScavTrap::challengeNewcomer(void)
     idx = rand() % 5;
     std::cout << "[ " << challenge[idx] << " ]" << std::endl;
 }
+
+void    ScavTrap::show_status(void)
+{
+    std::cout << "----------------------------------" << std::endl;
+    std::cout << "        " << _name << "'s status" << std::endl;
+    std::cout << "HP : "<< _hitPoint << std::endl;
+    std::cout << "Energy Point : " << _energyPoint << std::endl;
+    std::cout << "----------------------------------" << std::endl;
+}

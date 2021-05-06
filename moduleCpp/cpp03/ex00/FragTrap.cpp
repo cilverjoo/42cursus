@@ -81,7 +81,8 @@ unsigned int FragTrap::vaulthunter_dot_exe(std::string const & target)
 
     if (_energyPoint >= 25)
     {
-        srand(time(NULL));
+        srand(clock());
+        usleep(100);
         rd = rand() % 4;
         std::cout << "[ " << randAttack[rd] << " ]" << " attacks " <<  _name << " with damage " << randDamage[rd] << " ! o_o\n";
         _energyPoint -= 25;
@@ -89,4 +90,13 @@ unsigned int FragTrap::vaulthunter_dot_exe(std::string const & target)
     else
         std::cout << "Energe is not enough for \"vaulthunter_dot_exe\"!\n";
     return (randDamage[rd]);
+}
+
+void    FragTrap::show_status(void)
+{
+    std::cout << "----------------------------------" << std::endl;
+    std::cout << "        " << _name << "'s status" << std::endl;
+    std::cout << "HP : "<< _hitPoint << std::endl;
+    std::cout << "Energy Point : " << _energyPoint << std::endl;
+    std::cout << "----------------------------------" << std::endl;
 }

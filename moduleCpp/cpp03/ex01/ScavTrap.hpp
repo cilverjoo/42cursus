@@ -32,6 +32,7 @@ public:
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
     void challengeNewcomer(void);
+    void show_status(void);
 
 };
 
