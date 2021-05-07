@@ -1,13 +1,11 @@
 #include "Enemy.hpp"
 
-Enemy::Enemy(int hp, std::string const & type)
+Enemy::Enemy(int hp, std::string const & type) : _hitPoint(hp), _type(type)
 {
-	
 }
 
 Enemy::~Enemy()
-{
-	
+{	
 }
 
 Enemy::Enemy(const Enemy &ref)

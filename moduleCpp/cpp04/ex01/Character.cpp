@@ -28,14 +28,12 @@ void 			Character::attack(Enemy *enemy)
 {
 	if (_weapon == NULL || _ap < _weapon->getAPCost())
 		return ;
-	else
-	{
-		_weapon->attack();
-		enemy->setHP(enemy->getHP() - _weapon->getDamage());
-		std::cout << _name << " attacks " << enemy->getType() << " with a " << _weapon->getName() << std::endl;
-		if (enemy->getHP() <= 0)
-			enemy->~Enemy();
-	}
+	std::cout << _name << " attacks " << enemy->getType() << " with a " << _weapon->getName() << std::endl;
+	_weapon->attack();
+	_ap -= _weapon->getAPCost();
+	enemy->takeDamage(_weapon->getDamage());
+	if (enemy->getHP() <= 0)
+		enemy->~Enemy();
 }
 
 void 			Character::equip(AWeapon *newWep)

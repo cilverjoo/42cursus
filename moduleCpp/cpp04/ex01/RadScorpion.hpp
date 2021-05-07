@@ -14,7 +14,6 @@ public:
 	~RadScorpion();
 	RadScorpion(const RadScorpion &ref);
 	RadScorpion &operator=(const RadScorpion &ref);
-	virtual void	takeDamage(int);
 
 };
 

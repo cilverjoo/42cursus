@@ -13,7 +13,7 @@ protected:
 public:
 	Enemy();
 	Enemy(int hp, std::string const & type);
-	~Enemy();
+	virtual ~Enemy();
 	Enemy(const Enemy &ref);
 	Enemy &operator=(const Enemy &ref);
 	std::string		getType(void) const;

@@ -16,7 +16,7 @@ PlasmaRifle &PlasmaRifle::operator=(const PlasmaRifle &ref)
 {
 	_name = ref.getName();
 	_damage = ref.getDamage();
-	_ap= ref.getAPCost();
+	_apcost= ref.getAPCost();
 	return (*this);
 }
 

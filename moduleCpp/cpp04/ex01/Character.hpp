@@ -11,12 +11,11 @@ class Character
 {
 private:
 	std::string _name;
-	int _ap;
-	AWeapon *_weapon;
+	int			_ap;
+	AWeapon		*_weapon;
 	Character();
-	
-public:
 
+public:
 	Character(std::string const & name);
 	~Character();
 	Character(const Character &ref);

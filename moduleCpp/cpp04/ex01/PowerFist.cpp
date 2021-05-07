@@ -17,7 +17,7 @@ PowerFist &PowerFist::operator=(const PowerFist &ref)
 {
 	_name = ref._name;
 	_damage = ref._damage;
-	_ap = ref._ap;
+	_apcost = ref._apcost;
 	return (*this);
 }
 
