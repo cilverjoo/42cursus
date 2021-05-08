@@ -37,15 +37,12 @@ Person* hong = new Student;
 ...
 delete hong;
 ```
-위의 예제에서 Person 클래스는 Student 클래스의 기초 클래스이므로, hong이라는 Student 객체가 동적으로 할당됩니다.
+hong이라는 객체가 업캐스팅되어 받기 때문에 Person으로 인식되고, Student라는 클래스의 소멸자는 불리지 않게 되어 Student 객체에 동적으로 할당된 메모리는 정상적으로 해제되지 않게 된다. Person 클래스의 소멸자를 가상으로 선언한다면, 위의 구문은 정상적으로 ~Student() 소멸자를 호출할 것입니다.
 
-하지만 마지막 구문의 delete 키워드는 ~Student() 소멸자를 호출하지 않고, ~Person() 소멸자를 호출할 것입니다.
-
-그러므로 Student 객체에 동적으로 할당된 메모리는 정상적으로 해제되지 않을 것입니다.
+기본 클래스의 소멸자를 가상 함수로 선언하면 파생 클래스의 소멸자도 모두 가상 함수가 됩니다. 이 때, 파생 클래스 소멸자에는 virtual 키워드를 생략할 수 있습니다.
 
 
-하지만 **Person 클래스의 소멸자를 가상으로 선언한다면, 위의 구문은 정상적으로 ~Student() 소멸자를 호출**할 것입니다.
+참고 
+http://tcpschool.com/cpp/cpp_polymorphism_virtual
+https://wonjayk.tistory.com/243 [배고파서 까먹고 만든 블로그]
 
-따라서 기초 클래스는 명시적으로 소멸자를 선언할 필요가 없더라도, 아무 일도 하지 않는 가상 소멸자를 선언해야 합니다.
-
-참고 : http://tcpschool.com/cpp/cpp_polymorphism_virtual
