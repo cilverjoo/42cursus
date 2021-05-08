@@ -1,16 +1,14 @@
 #include "Ice.hpp"
 
-Ice::Ice()
+Ice::Ice() : AMateria("ice")
 {
-    std::cout << "Tactical Marine ready for battle!\n";
 }
 
 Ice::~Ice()
 {
-    std::cout << "Aaargh...\n";
 }
 
-Ice::Ice(const Ice &ref)
+Ice::Ice(const Ice &ref) : AMateria("ice")
 {
 	*this = ref;
 }
@@ -21,7 +19,7 @@ Ice         &Ice::operator=(const Ice &ref)
 	return (*this);	
 }
 
-Ice*        Ice::clone() const
+AMateria*        Ice::clone() const
 {
     return (new Ice(*this));
 }
@@ -29,5 +27,5 @@ Ice*        Ice::clone() const
 void        Ice::use(ICharacter& target)
 {
     AMateria::use(target);
-    std::cout << "* heals " << target.getName() << "’s wounds *" << std::endl;
+    std::cout <<  "* shoots an ice bolt at "<<target.getName()<<" *\n";
 }

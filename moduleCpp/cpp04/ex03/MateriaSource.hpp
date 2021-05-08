@@ -1,5 +1,5 @@
-#ifndef MateriaSource_HPP
-# define MateriaSource_HPP
+#ifndef MATERIASOURCE_HPP
+# define MATERIASOURCE_HPP
 
 #include <iostream>
 #include <string>
@@ -10,16 +10,17 @@ class MateriaSource : public IMateriaSource
 {
 
 private:
-
+	int			_count;
+	AMateria*	_materia[4];
+	
 public:
 	MateriaSource();
 	~MateriaSource();
 	MateriaSource(const MateriaSource &ref);
 	MateriaSource &operator=(const MateriaSource &ref);
 
-	virtual ~IMateriaSource();
-	void learnMateria(AMateria*);
-	AMateria* createMateria(std::string const & type);
+	void		learnMateria(AMateria*);
+	AMateria*	createMateria(std::string const & type);
 
 };
 

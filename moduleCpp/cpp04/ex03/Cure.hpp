@@ -6,15 +6,14 @@
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
 
-class CURE : public AMateria
+class Cure : public AMateria
 {
-private:
 
 public:
-	CURE();
-	~CURE();
-	CURE(const CURE &ref);
-	CURE &operator=(const CURE &ref);
+	Cure();
+	~Cure();
+	Cure(const Cure &ref);
+	Cure &operator=(const Cure &ref);
 
     AMateria* clone() const;
     void use(ICharacter& target);

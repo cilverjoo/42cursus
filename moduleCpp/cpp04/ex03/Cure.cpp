@@ -1,16 +1,14 @@
 #include "Cure.hpp"
 
-Cure::Cure()
+Cure::Cure() : AMateria("cure")
 {
-    std::cout << "Tactical Marine ready for battle!\n";
 }
 
 Cure::~Cure()
 {
-    std::cout << "Aaargh...\n";
 }
 
-Cure::Cure(const Cure &ref)
+Cure::Cure(const Cure &ref) : AMateria("cure")
 {
 	*this = ref;
 }
@@ -21,7 +19,7 @@ Cure         &Cure::operator=(const Cure &ref)
 	return (*this);	
 }
 
-Cure*        Cure::clone() const
+AMateria*        Cure::clone() const
 {
     return (new Cure(*this));
 }
@@ -29,5 +27,5 @@ Cure*        Cure::clone() const
 void        Cure::use(ICharacter& target)
 {
     AMateria::use(target);
-    std::cout << "* shoots an Cure bolt at " << target.getName() << "*\n";
+    std::cout << "* heals "<<target.getName()<<"’s wounds *\n";
 }
