@@ -15,14 +15,15 @@ private:
 
 public:
     Character(std::string name);
-	~Character();
+	virtual ~Character();
 	Character(const Character &ref);
 	Character &operator=(const Character &ref);
 
 	std::string const & getName() const;
-	void equip(AMateria* m);
-	void unequip(int idx);
-	void use(int idx, ICharacter& target);
+	int		getCount(void);
+	void	equip(AMateria* m);
+	void	unequip(int idx);
+	void	use(int idx, ICharacter& target);
 };
 
 #endif

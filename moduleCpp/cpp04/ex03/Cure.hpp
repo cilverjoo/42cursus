@@ -11,7 +11,7 @@ class Cure : public AMateria
 
 public:
 	Cure();
-	~Cure();
+	virtual ~Cure();
 	Cure(const Cure &ref);
 	Cure &operator=(const Cure &ref);
 

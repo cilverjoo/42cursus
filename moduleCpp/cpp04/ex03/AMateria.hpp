@@ -19,9 +19,9 @@ public:
     AMateria(const AMateria &ref);
     AMateria& operator=(const AMateria &ref);
     std::string const & getType() const;
-    unsigned int getXP() const;
-    virtual AMateria* clone() const = 0;
-    virtual void use(ICharacter& target);
+    unsigned int        getXP() const;
+    virtual             AMateria* clone() const = 0;
+    virtual void        use(ICharacter& target);
 };
 
 #endif

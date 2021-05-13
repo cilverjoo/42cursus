@@ -11,9 +11,15 @@ Character::~Character()
 
 Character::Character(const Character &ref)
 {
+	*this = ref;
+}
+
+Character		&Character::operator=(const Character &ref)
+{
 	this->_ap = ref.getAP();
 	this->_name = ref.getName();
 	this->_weapon = ref.getWeapon();
+	return (*this);
 }
 
 void 			Character::recoverAP()
@@ -26,12 +32,12 @@ void 			Character::recoverAP()
 
 void 			Character::attack(Enemy *enemy)
 {
-	if (_weapon == NULL || _ap < _weapon->getAPCost())
+	if (this->_weapon == NULL || this->_ap < this->_weapon->getAPCost())
 		return ;
-	std::cout << _name << " attacks " << enemy->getType() << " with a " << _weapon->getName() << std::endl;
-	_weapon->attack();
-	_ap -= _weapon->getAPCost();
-	enemy->takeDamage(_weapon->getDamage());
+	std::cout << this->_name << " attacks " << enemy->getType() << " with a " << this->_weapon->getName() << std::endl;
+	this->_weapon->attack();
+	this->_ap -= this->_weapon->getAPCost();
+	enemy->takeDamage(this->_weapon->getDamage());
 	if (enemy->getHP() <= 0)
 		enemy->~Enemy();
 }
@@ -61,6 +67,6 @@ std::ostream 	&operator<<(std::ostream &os, const Character &ref)
 	if (ref.getWeapon() == NULL)
 		os << ref.getName() << " has " << ref.getAP() << " AP and is unarmed\n";
 	else
-		os << ref.getName() << " has " << ref.getAP() << " AP and wields a " << ref.getWeapon()->getName() << std::endl;	
+		os << ref.getName() << " has " << ref.getAP() << " AP and wields a " << ref.getWeapon()->getName() << std::endl;
 	return (os);
 }

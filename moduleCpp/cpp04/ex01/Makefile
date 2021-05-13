@@ -1,6 +1,6 @@
 NAME = Character
 CC = clang++
-FLAGS = -Wall -Wextra -Werror -I./ --std-c
+FLAGS = -Wall -Wextra -Werror -I./
 
 SRCS = AWeapon.cpp PlasmaRifle.cpp PowerFist.cpp Enemy.cpp RadScorpion.cpp \
 		SuperMutant.cpp Character.cpp main.cpp

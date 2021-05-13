@@ -13,19 +13,21 @@ Cure::Cure(const Cure &ref) : AMateria("cure")
 	*this = ref;
 }
 
-Cure         &Cure::operator=(const Cure &ref)
+Cure                &Cure::operator=(const Cure &ref)
 {
-    (void)ref;
+    this->_xp = ref.getXP();
+    this->_type = ref.getType();
 	return (*this);	
 }
 
-AMateria*        Cure::clone() const
+AMateria*           Cure::clone() const
 {
-    return (new Cure(*this));
+    Cure *clone = new Cure(*this);
+    return (clone);
 }
 
-void        Cure::use(ICharacter& target)
+void                Cure::use(ICharacter& target)
 {
     AMateria::use(target);
-    std::cout << "* heals "<<target.getName()<<"’s wounds *\n";
+    std::cout << "* heals " << target.getName() << "’s wounds *\n";
 }

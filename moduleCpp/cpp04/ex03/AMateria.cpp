@@ -17,7 +17,7 @@ AMateria&           AMateria::operator=(const AMateria &ref)
 {
     this->_xp = ref._xp;
     this->_type = ref._type;
-	return (*this);	
+	return (*this);
 }
 
 std::string const&	AMateria::getType() const
@@ -33,5 +33,5 @@ unsigned int 		AMateria::getXP() const
 void                AMateria::use(ICharacter& target)
 {
     (void)target;
-    _xp += 10;
+    this->_xp += 10;
 }

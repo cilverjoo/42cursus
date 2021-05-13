@@ -2,7 +2,7 @@ NAME = Sorcerer
 CC = clang++
 FLAGS = -Wall -Wextra -Werror -I./
 
-SRCS = Sorcerer.cpp Victim.cpp Peon.cpp main.cpp
+SRCS = Sorcerer.cpp Victim.cpp Peon.cpp Peon2.cpp main.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 $(NAME) : $(OBJS)

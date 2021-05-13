@@ -8,9 +8,10 @@
 
 class Ice : public AMateria
 {
+
 public:
 	Ice();
-	~Ice();
+	virtual ~Ice();
 	Ice(const Ice &ref);
 	Ice &operator=(const Ice &ref);
 

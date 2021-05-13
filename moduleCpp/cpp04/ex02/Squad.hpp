@@ -14,7 +14,7 @@ private:
 
 public:
 	Squad();
-	virtual ~Squad();
+	~Squad();
 	Squad(const Squad &ref);
 	Squad &operator=(const Squad &ref);
 

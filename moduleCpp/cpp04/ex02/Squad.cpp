@@ -1,6 +1,6 @@
 #include "Squad.hpp"
 
-Squad::Squad() : _units(nullptr), _count(0)
+Squad::Squad() : _units(NULL), _count(0)
 {
 }
 
@@ -10,7 +10,7 @@ Squad::~Squad()
     {
         for (int i = 0; i < this->_count; i++)
             delete this->_units[i];
-        delete this->_units;
+        delete[] this->_units;
     }
 }
 
