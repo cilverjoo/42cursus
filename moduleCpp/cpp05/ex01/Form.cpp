@@ -12,12 +12,12 @@ Form::~Form()
 {
 }
 
-Form::Form(const Form &ref)
+Form::Form(const Form &ref) : _name(ref.getName()), _signed(ref.getSigned()), _signGrade(ref.getSignGrade()), _executeGrade(ref.getExecuteGrade())
 {
 	*this = ref;
-}
+} 
 
-Form& Form::operator=(const Form &ref) : _name(ref.getName()), _signed(ref.getSigned()), _signGrade(ref.getSignGrade()), _executeGrade(ref.getExecuteGrade())
+Form& Form::operator=(const Form &ref)
 {
 	return (*this);
 }
@@ -44,25 +44,30 @@ int			Form::getExecuteGrade() const
 
 void        Form::beSigned(Bureaucrat& ref)
 {
-	if (_signGrade >= ref.getGrade())
-		_signed = true;
+	if (_signGrade <= ref.getGrade())
+		this->_signed = true;
 	else
 		throw(Form::GradeTooLowException());
 }
 
 const char *Form::GradeTooLowException::what() const throw()
 {
-	return ("Error: Grade is lower than Minimun.");
+	return ("Error: Grade is Too low.");
 }
 
 const char *Form::GradeTooHighException::what() const throw()
 {
-	return ("Error: Grade is higher than Maximum.");
+	return ("Error: Grade is Too high.");
+}
+
+const char* Form::FormAlreadySignedException::what() const throw()
+{
+	return ("FormException: The Form is already signed");
 }
 
 std::ostream& operator<<(std::ostream &os, const Form &ref)
 {
-	os << "<" << ref.getName() << ", Form  signed " << ref.getSigned() << " and SignGrade is " 
-		<< ref.getSignGrade() << "and Execute Grade is " << ref.getExecuteGrade() << std::endl;
+	os << "<" << ref.getName() << ">, Form  sign state is " << ref.getSigned() << " and SignGrade is " 
+		<< ref.getSignGrade() << " and Execute Grade is " << ref.getExecuteGrade() << std::endl;
 	return (os);
 }

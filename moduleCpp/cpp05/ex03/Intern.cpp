@@ -25,22 +25,20 @@ const char*     Intern::InvalidTypeException::what() const throw()
 
 Form*           Intern::makeForm(std::string formName, std::string target)
 {
-    std::string targets[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
+    std::string targets[3] = {"Shrubbery Creation", "Robotomy Request", "Presidential Pardon"};
     Form        *forms[3];
-	Form        *result = 0;
-    int         target;
+	Form        *result = NULL;
 
-    forms[0] = new ShrubberyCreationForm(target);
-    forms[1] = new RobotomyRequestForm(target);
-    forms[2] = new PresidentialPardonForm(target);
+    forms[0] = new ShrubberyCreationForm("target");
+    forms[1] = new RobotomyRequestForm("target");
+    forms[2] = new PresidentialPardonForm("target");
     for (int i = 0; i < 3; i++)
     {
         if (formName == targets[i])
         {
-            target = i;
             std::cout << "Intern creates " << formName << " form.\n";
             result = forms[i];
-            continue ;
+            continue;
         }
         delete forms[i];
     }

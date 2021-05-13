@@ -1,25 +1,120 @@
-#include "Bureaucrat.hpp"
+#include <iostream>
+#include "Intern.hpp"
 #include "Form.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
+#include "Bureaucrat.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
-int     main(void)
+int main(void)
 {
-	ShrubberyCreationForm	s("42 cluster");
-	Bureaucrat				jinbkim1("jinbkim", 130);  // 130등급이라 승인과 실행 둘다 가능
-	jinbkim1.signForm(s);  // 승인가능
-	jinbkim1.executeForm(s);  // 실행가능
+	srand(time(NULL));
+	Intern someIntern;
 
-	std::cout<<"=======================================\n";
-	RobotomyRequestForm r("dog");
-	Bureaucrat			jinbkim2("jinbkim", 50);  // 50등급이라 승인은 가능하지만 실행은 불가능
-	jinbkim2.signForm(r);  // 승인가능
-	jinbkim2.executeForm(r);  // 실행불가능
+	Bureaucrat supervisor("Supervisor", 1);
+	std::cout << supervisor << std::endl;
+	Bureaucrat francis("Francis", 25);
+	std::cout << francis << std::endl;
 
-	std::cout<<"=======================================\n";
-	PresidentialPardonForm p("moon");
-    Bureaucrat jinbkim3("jinbkim", 30);  // 30등급이라 승인과 실행 둘다 불가능
-    jinbkim3.signForm(p);  // 승인 불가능
-    jinbkim3.executeForm(p);  // 실행 불가능
+	Form *shrub = someIntern.makeForm("Shrubbery Creation", "home");
+	std::cout << *shrub << std::endl;
+	shrub->beSigned(supervisor);
+	std::cout << *shrub << std::endl;
+	try
+	{
+		shrub->execute(francis);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
+	Form *pres = someIntern.makeForm("Presidential Pardon", "Francis");
+	std::cout << *pres << std::endl;
+	supervisor.signForm(*pres);
+	try
+	{
+		pres->execute(supervisor);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
+	Form *robot = someIntern.makeForm("Robotomy Request", "Bender");
+	std::cout << *robot << std::endl;
+	robot->beSigned(supervisor);
+	robot->execute(francis);
+	francis.executeForm(*robot);
+	francis.executeForm(*robot);
+
+	std::cout << "---" << std::endl;
+
+	try
+	{
+		Form *ran = someIntern.makeForm("Random Form", "nobody");
+		std::cout << ran << std::endl;
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << "---" << std::endl;
+
+	try
+	{
+		francis.executeForm(*pres);
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << "---" << std::endl;
+
+	try
+	{
+		RobotomyRequestForm robot = RobotomyRequestForm("Bender");
+		std::cout << robot << std::endl;
+		robot.execute(supervisor);
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << "---" << std::endl;
+
+	try
+	{
+		PresidentialPardonForm pres = PresidentialPardonForm("Francis");
+		std::cout << pres << std::endl;
+		supervisor.signForm(pres);
+		pres.execute(francis);
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << "---" << std::endl;
+
+	try
+	{
+		PresidentialPardonForm pres = PresidentialPardonForm("Francis");
+		std::cout << pres << std::endl;
+		supervisor.signForm(pres);
+		francis.executeForm(pres);
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+	delete shrub;
+	delete pres;
+	delete robot;
+	
+	return (0);
 }

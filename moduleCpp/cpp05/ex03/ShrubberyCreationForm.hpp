@@ -24,6 +24,12 @@ public:
     ShrubberyCreationForm(const ShrubberyCreationForm& ref);
 	ShrubberyCreationForm& operator=(const ShrubberyCreationForm& ref);
 
+    class TargetFileOpenException : public std::exception
+    {
+    public:
+        virtual const char* what() const throw();
+    };
+
     void execute(Bureaucrat const & executor) const;
 
 };

@@ -1,35 +1,58 @@
+#include <iostream>
 #include "Bureaucrat.hpp"
 
-int				main(void)
+int main(void)
 {
-	Bureaucrat		*bob;
-	Bureaucrat		*joe;
-	Bureaucrat		*kevin;
+	Bureaucrat francis("Francis", 100);
+	std::cout << francis << std::endl;
+	francis.IncrementGrade();
+	std::cout << francis << std::endl;
+	francis.DecrementGrade();
+	std::cout << francis << std::endl;
 
 	try
 	{
-		bob = new Bureaucrat("bob", 150);
-		joe = new Bureaucrat("joe", 1);
-		kevin = new Bureaucrat("kevin", 151);
+		Bureaucrat jack("Jack", 0);
+		std::cout << jack << std::endl;
 	}
-	catch (std::exception &e)
+	catch(std::exception const &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
-	std::cout << *bob;
-	std::cout << *joe;
+
 	try
 	{
-		bob->IncrementGrade();
-		joe->IncrementGrade();
+		Bureaucrat jack("Jack", 1000);
+		std::cout << jack << std::endl;
 	}
-	catch (std::exception &e)
+	catch(std::exception const &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
-	std::cout << *bob;
-	std::cout << *joe;
-	delete(bob);
-	delete(joe);
+
+	try
+	{
+		Bureaucrat jack("Jack", 1);
+		std::cout << jack << std::endl;
+		jack.IncrementGrade();
+		std::cout << jack << std::endl;
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+	try
+	{
+		Bureaucrat jack("Jack", 150);
+		std::cout << jack << std::endl;
+		jack.DecrementGrade();
+		std::cout << jack << std::endl;
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
 	return (0);
 }
