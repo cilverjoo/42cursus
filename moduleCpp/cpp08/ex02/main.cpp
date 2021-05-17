@@ -13,7 +13,7 @@ int main(void)
 	std::cout << "size: " << mstack.size() << std::endl;
 	std::cout << "top: " << mstack.top() << std::endl;
 
-	std::cout << "---" << std::endl;
+	std::cout << "----------------------------------" << std::endl;
 
 	mstack.push(3);
 	mstack.push(5);
@@ -94,19 +94,6 @@ int main(void)
 			else
 				std::cout << ", ";
 		}
-	}
-
-	std::cout << "---" << std::endl;
-
-	{
-		std::stack<int> s(mstack);
-		MutantStack<int> st = mstack;
-
-		std::cout << "size: " << st.size() << " (" << mstack.size() << ")" << std::endl;
-		std::cout << "top: " << st.top() << " (" << mstack.top() << ")" << std::endl;
-		st.pop();
-		std::cout << "size: " << st.size() << " (" << mstack.size() << ")" << std::endl;
-		std::cout << "top: " << st.top() << " (" << mstack.top() << ")" << std::endl;
 	}
 
 	return (0);
