@@ -21,7 +21,7 @@ int main(void)
 	jolly.getPolymorphed();
 	robert.polymorph(static_cast<Victim>(joe));
 
-	std::cout << "---" << std::endl;
+	std::cout << "-------------------" << std::endl;
 
 	Sorcerer blank(robert);
 
@@ -38,7 +38,7 @@ int main(void)
 	blank.polymorph(jean);
 	jean.getPolymorphed();
 
-	std::cout << "---" << std::endl;
+	std::cout << "-------------------" << std::endl;
 
 	return (0);
 }
