@@ -12,7 +12,7 @@ int		main(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cerr << "Not found" << std::endl;
+		std::cout << "Not found" << std::endl;
 	}
 	vec.push_back(10);
 	vec.push_back(42);
@@ -24,7 +24,7 @@ int		main(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cerr << "Not found" << std::endl;
+		std::cout << "Not found" << std::endl;
 	}	
 	std::cout << "try to find unexistent values" << std::endl;
 	try
@@ -33,7 +33,7 @@ int		main(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cerr << "Not found" << std::endl;
+		std::cout << "Not found" << std::endl;
 	}
 	return (0);
 }
