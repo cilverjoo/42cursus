@@ -18,19 +18,20 @@ wordpress의 데이터가 담겨있는 mysql 을 구동하고 wordpress와 phpmy
 여기서 중요했던 점은, yaml 파일로 설정해 둔 service의 이름을 wordpress 설정 파일 내의 host로 넣어줘야 찾아서 연결해준다는 것이다.
 wordpress를 실행하면 연동된 데이터베이스에 필요한 테이블들을 형성하는데, 과제에 맞게 몇 가지 내용만 수정한 다음 wordpress.db파일로 만들어서 빼 줬다.
 
-참고 : https://wiki.alpinelinux.org/wiki/Nginx
-참고 : https://wiki.alpinelinux.org/wiki/Wordpress
-참고 : https://wiki.alpinelinux.org/wiki/PhpMyAdmin
+참고
+* https://wiki.alpinelinux.org/wiki/Nginx
+* https://wiki.alpinelinux.org/wiki/Wordpress
+* https://wiki.alpinelinux.org/wiki/PhpMyAdmin
 
 ## ftp
 
  ```
-  mkdir -p /ftps/ekim                 //ekim 사용자의 home directory 생성
-  adduser --home=/ftps/ekim -D ekim   // 유저 추가
-  echo "ekim:password" | chpasswd     // 비밀번호 수정
+  mkdir -p /ftps/ekim                          //ekim 사용자의 home directory 생성
+  adduser --home=/ftps/ekim -D ekim            // 유저 추가
+  echo "ekim:password" | chpasswd              // 비밀번호 수정
 
-  apk install vsftpd                  // alpine linux에 vsftpd 설치
- /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf // userlist에 ekim이 추가된 conf파일을 인자로 넘겨준다.
+  apk install vsftpd                           // alpine linux에 vsftpd 설치
+ /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf      // userlist에 ekim이 추가된 conf파일을 인자로 넘겨준다.
  curl ftp://EXTERNAL-IP:21 --ssl -k --user ekim -T filename  //파일을 다음과 같이 보내주면 끝!
  ```
 
