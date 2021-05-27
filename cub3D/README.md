@@ -13,5 +13,7 @@ https://lodev.org/cgtutor/raycasting.html
 
 ## 플레이 방법
 
+```
   >> make
   >> ./cub3D map.cub
+```
