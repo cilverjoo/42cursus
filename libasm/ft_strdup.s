@@ -15,9 +15,9 @@ _ft_strdup:
     je      exit
     pop     r9          ;give rdi's string(src) to r9
     mov     rdi, rax    ;give malloc space's address
-	mov		rsi, r9
+    mov     rsi, r9
     call    _ft_strcpy  ;rdi : dest(malloc space), rsi : src
-	ret
+    ret
 
 exit:
     ret
