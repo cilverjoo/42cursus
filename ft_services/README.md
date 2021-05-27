@@ -3,6 +3,8 @@
 - nginx 파드 따로, phpmyadmin와 wordpress 파드 내 nginx 설치를 별도로 실행하여 nginx 파드에서 phpmyadmin으로의 접근은 리다이렉트로, wordpress로의 접근은 포트를 통해서 진행되도록 할 것.
 - influxdb, mysql의 데이터는 파드를 죽였다가 다시 생성해 보아도 유지되어야 한다.
 
+#
+<img width="787" alt="스크린샷 2021-05-27 오후 5 32 53" src="https://user-images.githubusercontent.com/64128985/119793977-0b031500-bf12-11eb-819e-ecce3e7feff3.png">
 
 
 ## metallb
