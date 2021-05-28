@@ -10,6 +10,7 @@ cub3d는 레이캐스팅을 이용해 3D 게임을 구현하는 과제입니다.
 
 ## raycasting 알고리즘 참고 사이트
 https://lodev.org/cgtutor/raycasting.html
+번역본 : https://github.com/365kim/raycasting_tutorial
 
 ## 플레이 방법
 
