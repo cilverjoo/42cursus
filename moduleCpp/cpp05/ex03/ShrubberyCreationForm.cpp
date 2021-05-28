@@ -29,14 +29,13 @@ const char *ShrubberyCreationForm::TargetFileOpenException::what() const throw()
 void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
     Form::execute(executor);
-    std::ofstream outfile;
-    std::string     title;
+    std::ofstream	outfile;
+    std::string		title;
     
     title = this->_target + std::string("_shrubbery");
     outfile.open(title);
     if (!outfile.is_open() || outfile.bad())
 		throw (ShrubberyCreationForm::TargetFileOpenException());
-    
     outfile << "                                        ////(,.###%(                             \n";       
     outfile << "                     .,.  ,****        /////*///(((((%%%%.                       \n";           
     outfile << "                 ,*,**/*/(//*(((/ *(##  ///(((###(((#%%%&&                       \n";           
@@ -71,4 +70,5 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
     outfile << "                              .*//*,******(/((*,**                               \n";           
     outfile << "                                 ,##(#(.,((#((                                   \n";
     outfile.close();
+	return ;
 }

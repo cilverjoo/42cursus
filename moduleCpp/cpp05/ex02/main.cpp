@@ -8,9 +8,9 @@ int main(void)
 {
 	srand(time(NULL));
 
-	Bureaucrat supervisor("Supervisor", 1);
+	Bureaucrat supervisor("Supervisor_1", 1);
 	std::cout << supervisor << std::endl;
-	Bureaucrat francis("Francis", 25);
+	Bureaucrat francis("fransis_25", 25);
 	std::cout << francis << std::endl;
 
 	Form *shrub = new ShrubberyCreationForm("Target");
@@ -18,11 +18,11 @@ int main(void)
 	
 	try
 	{
-		shrub->beSigned(supervisor);		
+		shrub->beSigned(supervisor);
 	}
 	catch (const std::exception &e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cout << e.what() << '\n';
 	}
 	
 	std::cout << *shrub << std::endl;
@@ -34,10 +34,10 @@ int main(void)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cout << e.what() << '\n';
 	}
 	
-	Form *pres = new PresidentialPardonForm("Francis");
+	Form *pres = new PresidentialPardonForm("Presidential_25_5");
 	std::cout << *pres << std::endl;
 	
 	try
@@ -47,22 +47,23 @@ int main(void)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cout << e.what() << '\n';
 	}
 	
-	Form *robot = new RobotomyRequestForm("Bender");
+	Form *robot = new RobotomyRequestForm("Robodomy_72_45");
 	std::cout << *robot << std::endl;
 	
 	try
 	{
 		robot->beSigned(supervisor);
+		std::cout << *robot << std::endl;
 		robot->execute(francis);
 		francis.executeForm(*robot);
 		francis.executeForm(*robot);
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cout << e.what() << '\n';
 	}
 	
 	std::cout << "=============================" << std::endl;
@@ -73,55 +74,52 @@ int main(void)
 	}
 	catch(std::exception const &e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 
 	std::cout << "=============================" << std::endl;
 
 	try
 	{
-		RobotomyRequestForm robot = RobotomyRequestForm("Bender");
+		RobotomyRequestForm robot = RobotomyRequestForm("Bender_72_45");
 		std::cout << robot << std::endl;
 		robot.execute(supervisor);
 	}
 	catch(std::exception const &e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 
 	std::cout << "=============================" << std::endl;
 
 	try
 	{
-		PresidentialPardonForm pres = PresidentialPardonForm("Francis");
+		PresidentialPardonForm pres = PresidentialPardonForm("Jeff_25_5");
 		std::cout << pres << std::endl;
 		supervisor.signForm(pres);
-		pres.execute(francis);
+		pres.execute(supervisor);
 	}
 	catch(std::exception const &e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 
 	std::cout << "=============================" << std::endl;
 
 	try
 	{
-		PresidentialPardonForm pres = PresidentialPardonForm("Francis");
+		PresidentialPardonForm pres = PresidentialPardonForm("Pres_25_5");
 		std::cout << pres << std::endl;
 		supervisor.signForm(pres);
 		francis.executeForm(pres);
 	}
 	catch(std::exception const &e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 	
-	
-
 	delete shrub;
 	delete pres;
 	delete robot;
-
 	return (0);
 }

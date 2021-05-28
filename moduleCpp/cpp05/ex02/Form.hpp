@@ -22,17 +22,18 @@ public:
 	virtual ~Form();
 	Form& operator=(const Form& ref);
 
-	std::string 		getName() const;
-	bool				getSigned() const;
-	int					getSignGrade() const;
-	int					getExecuteGrade() const;
-	void				beSigned(Bureaucrat& ref);
-	virtual void		execute(Bureaucrat const & executor) const = 0;
+	std::string		getName() const;
+	bool			getSigned() const;
+	int				getSignGrade() const;
+	int				getExecuteGrade() const;
+	void			beSigned(Bureaucrat const &ref);
+	virtual void	execute(Bureaucrat const & executor) const = 0;
 
 	class GradeTooHighException : public std::exception
 	{
 	public:
 		virtual const char* what() const throw();
+
 	};
 	class GradeTooLowException : public std::exception
 	{

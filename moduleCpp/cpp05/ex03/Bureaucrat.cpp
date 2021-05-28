@@ -18,14 +18,15 @@ Bureaucrat::~Bureaucrat()
 
 Bureaucrat::Bureaucrat(const Bureaucrat &ref)
 {
-	this->_name = ref._name;
-	this->_grade = ref._grade;
+	*this = ref;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &ref)
 {
-	this->_name = ref._name;
-	this->_grade = ref._grade;
+	if (this == &ref)
+		return (*this);
+	this->_name = ref.getName();
+	this->_grade = ref.getGrade();
 	return (*this);
 }
 
@@ -63,18 +64,20 @@ void		Bureaucrat::IncrementGrade(void)
 		this->_grade--;
 	else
 		throw(Bureaucrat::GradeTooHighException());
-	
 }
 
-void		Bureaucrat::signForm(const Form &form)
+void		Bureaucrat::signForm(Form &form) const
 {
 	if (form.getSigned() == true)
+		std::cout << "<" << this->getName() << "> cannot sign <" << form.getName() << "> because it is already signed.\n";
+	else if (this->getGrade() <= form.getSignGrade())
 		std::cout << "<" << this->getName() << "> signs <" << form.getName() << ">.\n";
 	else
-		std::cout << "<" << this->getName() << "> cannot sign <" << form.getName() << "> because Bureaucrat's grade is not proper.\n";
+		std::cout << "<" << this->getName() << "> cannot sign <" << form.getName() << "> because grade is too low :(\n";
+	form.beSigned(*this);
 }
 
-void		Bureaucrat::executeForm(Form const & form)
+void		Bureaucrat::executeForm(Form const & form) const
 {
 	try
 	{

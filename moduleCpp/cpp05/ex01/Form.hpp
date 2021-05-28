@@ -23,10 +23,11 @@ public:
 	Form& operator=(const Form& ref);
 
 	std::string getName() const;
-	bool        getSigned() const;
-	int         getSignGrade() const;
-	int         getExecuteGrade() const;
-	void        beSigned(Bureaucrat& ref);
+	bool		getSigned() const;
+	int			getSignGrade() const;
+	int			getExecuteGrade() const;
+	void		beSigned(Bureaucrat const &ref);
+
 
 	class GradeTooHighException : public std::exception
 	{

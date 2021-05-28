@@ -11,6 +11,7 @@ Intern::Intern(const Intern& ref)
 
 Intern&         Intern::operator=(const Intern& ref)
 {
+    (void)ref;
     return (*this);
 }
 
@@ -29,9 +30,9 @@ Form*           Intern::makeForm(std::string formName, std::string target)
     Form        *forms[3];
 	Form        *result = NULL;
 
-    forms[0] = new ShrubberyCreationForm("target");
-    forms[1] = new RobotomyRequestForm("target");
-    forms[2] = new PresidentialPardonForm("target");
+    forms[0] = new ShrubberyCreationForm(target);
+    forms[1] = new RobotomyRequestForm(target);
+    forms[2] = new PresidentialPardonForm(target);
     for (int i = 0; i < 3; i++)
     {
         if (formName == targets[i])

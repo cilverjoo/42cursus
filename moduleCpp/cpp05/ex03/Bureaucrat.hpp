@@ -10,11 +10,11 @@ class Form;
 class Bureaucrat
 {
 private:
-	int			_grade;
-	std::string	_name;
+	int _grade;
+	std::string _name;
+	Bureaucrat();
 
 public:
-	Bureaucrat();
 	Bureaucrat(std::string name, int grade);
 	~Bureaucrat();
 	Bureaucrat(const Bureaucrat &ref);
@@ -24,9 +24,9 @@ public:
 	int			getGrade() const;
 	void		IncrementGrade();
 	void		DecrementGrade();
-	void		signForm(const Form &form);
-	void		executeForm(Form const & form);
-
+	void		signForm(Form &form) const;
+	void		executeForm(Form const &form) const;
+	
 	class GradeTooHighException : public std::exception
 	{
 		public:

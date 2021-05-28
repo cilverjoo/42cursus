@@ -17,7 +17,7 @@ int main(void)
 	}
 	catch(std::exception const &e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 
 	try
@@ -27,7 +27,7 @@ int main(void)
 	}
 	catch(std::exception const &e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 
 	try
@@ -39,7 +39,7 @@ int main(void)
 	}
 	catch(std::exception const &e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 
 	try
@@ -51,7 +51,7 @@ int main(void)
 	}
 	catch(std::exception const &e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 
 	return (0);

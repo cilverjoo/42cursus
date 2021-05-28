@@ -2,7 +2,7 @@
 
 Form::Form(std::string name, int signGrade, int executeGrade) : _name(name), _signed(false), _signGrade(signGrade), _executeGrade(executeGrade)
 {
-	if (_signGrade > 150 || _executeGrade > 150 )
+	if (_signGrade > 150 ||_executeGrade > 150 )
 		throw(Form::GradeTooLowException());
 	else if (_signGrade < 1 || _executeGrade < 1)
 		throw(Form::GradeTooHighException());
@@ -12,18 +12,16 @@ Form::~Form()
 {
 }
 
-Form::Form(Form const &ref):
-	_name(ref.getName()), _signed(ref.getSigned()), _signGrade(ref.getSignGrade()), _executeGrade(ref.getExecuteGrade())
+Form::Form(const Form &ref) : _name(ref.getName()), _signed(ref.getSigned()), _signGrade(ref.getSignGrade()), _executeGrade(ref.getExecuteGrade())
 {
-	if (_signGrade < 1 || _executeGrade < 1)
-		throw (Form::GradeTooHighException());
-	else if (_signGrade > 150 || _executeGrade > 150)
-		throw (Form::GradeTooLowException());
-}
+	*this = ref;
+} 
 
 Form& Form::operator=(const Form &ref)
 {
-	this->_signed = ref.getSigned();
+	if (this == &ref)
+		return (*this);
+	this->_signed = ref._signed;
 	return (*this);
 }
 
@@ -47,14 +45,21 @@ int			Form::getExecuteGrade() const
 	return (this->_executeGrade);
 }
 
-void        Form::beSigned(Bureaucrat& ref)
+void		Form::beSigned(Bureaucrat const &ref)
 {
-	if (this->_signGrade < ref.getGrade())
+	if (ref.getGrade() > this->getSignGrade())
 		throw (Form::GradeTooLowException());
-	else if (this->_signed)
+	else if (this->getSigned() == true)
 		throw (Form::FormAlreadySignedException());
 	this->_signed = true;
-	return ;
+}
+
+void		Form::execute(Bureaucrat const & executor) const
+{
+	if (executor.getGrade() > this->_executeGrade)
+		throw (Form::GradeTooLowException());
+	if (this->_signed == false)
+		throw (Form::FormUnsignedException());
 }
 
 const char *Form::GradeTooLowException::what() const throw()
@@ -69,20 +74,12 @@ const char *Form::GradeTooHighException::what() const throw()
 
 const char* Form::FormAlreadySignedException::what() const throw()
 {
-	return ("FormException: The Form is already signed");
+	return ("Error: This Form is already signed");
 }
 
 const char* Form::FormUnsignedException::what() const throw()
 {
-	return ("FormException: This form is unsigned");
-}
-
-void		Form::execute(Bureaucrat const & executor) const
-{
-	if (executor.getGrade() > this->_executeGrade)
-		throw (Form::GradeTooLowException());
-	if (this->_signed == false)
-		throw (Form::FormUnsignedException());
+	return ("Error: This form is unsigned");
 }
 
 std::ostream& operator<<(std::ostream &os, const Form &ref)

@@ -7,9 +7,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 	else if (grade < 1)
 		throw(Bureaucrat::GradeTooHighException());
 	else
-	{
 		this->_grade = grade;
-	}
 }
 
 Bureaucrat::~Bureaucrat()
@@ -18,14 +16,15 @@ Bureaucrat::~Bureaucrat()
 
 Bureaucrat::Bureaucrat(const Bureaucrat &ref)
 {
-	this->_name = ref._name;
-	this->_grade = ref._grade;
+	*this = ref;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &ref)
 {
-	this->_name = ref._name;
-	this->_grade = ref._grade;
+	if (this == &ref)
+		return (*this);
+	this->_name = ref.getName();
+	this->_grade = ref.getGrade();
 	return (*this);
 }
 
