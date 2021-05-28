@@ -8,7 +8,7 @@ Converter::Converter(std::string str) : _str(str), _numeric(0)
     }
     catch(const std::exception& e)
     {
-        std::cerr << "Wrong Argument! :(\n";
+        std::cout << "Wrong Argument! :(\n";
     }   
 }
 
@@ -103,7 +103,7 @@ void        Converter::display(void)
     }
     catch(const std::exception& e)
     {
-        std::cerr << "char: " << e.what() << '\n';
+        std::cout << "char: " << e.what() << '\n';
     }
 
     try
@@ -112,7 +112,7 @@ void        Converter::display(void)
     }
     catch(const std::exception& e)
     {
-        std::cerr << "int: " << e.what() << '\n';
+        std::cout << "int: " << e.what() << '\n';
     }
 
     try
@@ -121,7 +121,7 @@ void        Converter::display(void)
     }
     catch(const std::exception& e)
     {
-        std::cerr << "float: " << e.what() << '\n';
+        std::cout << "float: " << e.what() << '\n';
     }
     
     try
@@ -130,6 +130,6 @@ void        Converter::display(void)
     }
     catch(const std::exception& e)
     {
-        std::cerr << "double : " << e.what() << '\n';
+        std::cout << "double : " << e.what() << '\n';
     }
 }

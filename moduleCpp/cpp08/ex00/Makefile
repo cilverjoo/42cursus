@@ -1,8 +1,8 @@
-NAME = generator
+NAME = iter
 CC = clang++
 FLAGS = -Wall -Wextra -Werror -I./ -std=c++98
 
-SRCS = A.cpp B.cpp C.cpp main.cpp
+SRCS = main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -21,3 +21,4 @@ fclean : clean
 	rm -f $(NAME)
 
 re : fclean all
+

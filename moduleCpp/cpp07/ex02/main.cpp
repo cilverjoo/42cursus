@@ -45,7 +45,7 @@ int		main(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cerr << "exception catched" << std::endl;
+		std::cout << "exception catched" << std::endl;
 	}
 	return (0);
 }
