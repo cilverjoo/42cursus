@@ -117,11 +117,8 @@ int main(void)
 		std::cerr << e.what() << std::endl;
 	}
 	
-	
-
 	delete shrub;
 	delete pres;
 	delete robot;
-
 	return (0);
 }
