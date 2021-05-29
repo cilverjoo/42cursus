@@ -52,5 +52,5 @@
 - QWORD : 8 byte (double)
 
 다음과 같은 링크에서 도움을 받았습니다.
-https://www.notion.so/Libasm-3c94bbc7df234499b012f6ae82b84dc2
-https://www.notion.so/Libasm-f4869fe5de17402b9054a7ca06bfc79c
+> https://www.notion.so/Libasm-3c94bbc7df234499b012f6ae82b84dc2
+> https://www.notion.so/Libasm-f4869fe5de17402b9054a7ca06bfc79c
