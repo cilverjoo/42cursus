@@ -16,6 +16,7 @@ all : $(NAME)
 
 clean :
 	rm -f $(OBJS)
+	rm -f tree_shrubbery
 
 fclean : clean
 	rm -f $(NAME)
