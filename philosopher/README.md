@@ -151,9 +151,8 @@ struct timeval
 
 * 반환값 : 성공하면 0, 실패하면 errno
 
-<pre>
-<code>
-
+#### ex01)
+```C
 int value = 0;
 void *runner(void *param);
 
@@ -185,15 +184,15 @@ void 				*runner(void *param)
 	pthread_exit(0);
 }
 
-</code>
-</pre>
-
+```
+Return :
+```
 	CHILD : value = 5;
 	PARENT : value = 0;
+```
 
-<pre>
-<code>
-
+#### ex02)
+```C
 void			*runner(void *param);
 
 int 			main(int ac, char **av)
@@ -231,9 +230,10 @@ void		*runner(void *param)
 	printf("I'm a thread\n");
 	pthread_exit(0);
 }
-</code>
-</pre>
+```
 
+Return:
+```C
 	A = 18937
 	I'm a thread!
 	D = 18941
@@ -242,6 +242,7 @@ void		*runner(void *param)
 	D = 18943
 	B = 18938
 	D = 18944
+```
 
 * Thread Pools
 create a number of threads in a pool where they await work.
@@ -279,9 +280,10 @@ explicit threading, but an excellent candidate for implicit threading.
 * 헤더 : <phtread.h>
 
 * 사용법
-
+```
 	thr_id = pthread_create(&p_thread, NULL, t_function, (void *)&a);
 	pthread_join(p_thread, (void *)&result);
+```
 
 * 매개변수
 
@@ -293,8 +295,9 @@ explicit threading, but an excellent candidate for implicit threading.
 
 ## 6. pthread_mutex_init
 
+```C++
 	int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr);
-
+```
 * 헤더 : <pthread.h>
 
 * pthread_mutex_init는 첫 번째 인자로 주어지는 mutex를 초기화하고, 두 번째 인자를 통해서 그 속성을 변경시킬 수 있다.
@@ -317,7 +320,9 @@ explicit threading, but an excellent candidate for implicit threading.
 
 ## 7. phread_mutex_destroy
 
+```C++
 	int pthread_mutex_destroy(pthread_mutex_t *mutex);
+```
 
 * 헤더 : <phtread.h>
 
@@ -330,7 +335,9 @@ explicit threading, but an excellent candidate for implicit threading.
 
 ## 8. phread_mutex_lock
 
+```C++
 	int pthread_mutex_lock(pthread_mutex_t *mutex);
+```
 
 * 임계 구역에 진입하기 위해 mutex 잠금을 요청. 임계 구역에 이미 다른 쓰레드가 진입해 lock을 건 상태라면 임계 구역을 나올 때까지 (pthread_mutex_unlock이 호출될 때까지) 기다린다.
 
@@ -344,6 +351,7 @@ explicit threading, but an excellent candidate for implicit threading.
 	
 * 예제
 
+```C++
 	#include <pthread.h>
 	#include <stdio.h>
 	#include <unistd.h>
@@ -385,6 +393,7 @@ explicit threading, but an excellent candidate for implicit threading.
 
 		pthread_mutex_destroy(&mutex);
 	}
+```
 
 
 ## 9. pthread_mutex_unlock
