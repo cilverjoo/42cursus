@@ -43,7 +43,7 @@ public:
     {
         this->len = ref.size();
         this->array = new T[ref.size()];
-        for (int i = 0; i < ref.size(); i++)
+        for (size_t i = 0; i < ref.size(); i++)
             this->array[i] = ref.array[i];
         return (*this);
     }

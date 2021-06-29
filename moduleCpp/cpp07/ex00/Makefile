@@ -1,4 +1,4 @@
-NAME = iter
+NAME = whatever
 CC = clang++
 FLAGS = -Wall -Wextra -Werror -I./ -std=c++98
 
@@ -21,4 +21,3 @@ fclean : clean
 	rm -f $(NAME)
 
 re : fclean all
-z
