@@ -35,6 +35,7 @@ int main(void)
 
 	for (int i = 0; i < 50; i++)
 	{
+		std::cout << "\n==================\n";
 		Base *base = generate();
 		std::cout << "Test " << i << ": ";
 		identify_from_pointer(base);

@@ -1,4 +1,4 @@
-NAME = conversion
+NAME = convert
 CC = clang++
 FLAGS = -Wall -Wextra -Werror -I./ -std=c++98
 

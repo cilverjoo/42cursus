@@ -7,10 +7,10 @@ int main(int ac, char** av)
         std::cout << "Arguments error!\n";
         return (0);
     }
-    std::string arg = std::string(av[1]);
+    std::string input = std::string(av[1]);
     try
     {
-        Converter convert(arg);
+        Converter convert(input);
         convert.display();
     }
     catch (const std::exception& e)

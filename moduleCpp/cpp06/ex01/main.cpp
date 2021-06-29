@@ -19,6 +19,5 @@ int main(void)
 		delete static_cast<char*>(raw);
 		delete dt;
 	}
-
 	return (0);
 }

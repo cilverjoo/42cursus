@@ -1,6 +1,7 @@
 #ifndef CONVERTER_HPP
 # define CONVERTER_HPP
 
+#include <stdlib.h>
 #include <iostream>
 #include <string>
 #include <limits>
@@ -11,11 +12,10 @@ class Converter
 {
 private:
     Converter();
-    std::string _str;
     double      _numeric;
 
 public:
-    Converter(std::string value);
+    Converter(std::string input);
     ~Converter();
     Converter(const Converter &ref);
     Converter& operator=(const Converter &ref);

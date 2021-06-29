@@ -1,15 +1,8 @@
 #include "Converter.hpp"
 
-Converter::Converter(std::string str) : _str(str), _numeric(0)
+Converter::Converter(std::string input)
 {
-    try
-    {
-        this->_numeric = std::stod(str);
-    }
-    catch(const std::exception& e)
-    {
-        std::cout << "Wrong Argument! :(\n";
-    }   
+    this->_numeric = atof(input.c_str());
 }
 
 Converter::~Converter()
@@ -21,40 +14,38 @@ Converter::Converter(const Converter &ref)
     *this = ref;
 }
 
-Converter& Converter::operator=(const Converter &ref)
-{
-    this->_numeric = ref.getNumeric();
-    this->_str = ref.getStr();
-    return (*this);
-}
-
-double     Converter::getNumeric(void) const
+double      Converter::getNumeric(void) const
 {
     return (this->_numeric);
 }
 
-std::string Converter::getStr(void) const
+Converter& Converter::operator=(const Converter &ref)
 {
-    return (this->_str);
+    if (this == &ref)
+        return (*this);
+    this->_numeric = ref.getNumeric();
+    return (*this);
 }
 
 void Converter::ConvertToChar(void) const
 {
-    double numeric = this->_numeric;
-    int integer = static_cast<int>(numeric);
-    if (this->_numeric - integer != 0)
+    if (std::isinf(this->_numeric) || std::isnan(this->_numeric))
         throw (ImpossibleToConvert());
-    else if (integer < 32 || integer > 126)
+    int ivalue = static_cast<int>(this->_numeric);
+    if (this->_numeric - ivalue != 0)
+        throw (ImpossibleToConvert());
+    else if (ivalue < 32 || ivalue > 126)
         throw (ImpossibleToDisplay());
     else
-        std::cout << "char: '" << static_cast<char>(integer) << "'\n";
+        std::cout << "char: '" << static_cast<char>(ivalue) << "'\n";
 }
 
 void Converter::ConvertToInt(void) const
 {
-    if (std::isnan(_numeric) || std::isinf(_numeric))
+    if (std::isinf(this->_numeric) || std::isnan(this->_numeric))
         throw (ImpossibleToConvert());
-    else if (_numeric < INT_MIN|| _numeric > INT_MAX)
+    else if (this->_numeric < std::numeric_limits<int>::min()
+            ||this->_numeric > std::numeric_limits<int>::max())
         throw (ImpossibleToConvert());
     else
         std::cout << "int : " << static_cast<int>(_numeric) << std::endl;
@@ -62,12 +53,26 @@ void Converter::ConvertToInt(void) const
 
 void Converter::ConvertToFloat(void) const
 {
-    if (_numeric > FLT_MAX || _numeric < FLT_MIN)
+    if (std::isnan(this->_numeric))
+    {
+        std::cout << "float: nanf\n";
+        return ;
+    }
+    else if (std::isinf(this->_numeric))
+    {
+        if (this->_numeric > 0)
+            std::cout << "float: +inff" << std::endl;
+        else
+            std::cout << "float: -inff" << std::endl;
+        return ;
+    }
+    if (this->_numeric > std::numeric_limits<float>::max()
+        || this->_numeric < std::numeric_limits<float>::lowest())
         throw (ImpossibleToConvert());
-    float num = static_cast<float>(_numeric);
-    int integer = static_cast<int>(_numeric);
-    std::cout << "float: " << num;
-    if (num - integer == 0)
+    float fvalue = static_cast<float>(_numeric);
+    int ivalue = static_cast<int>(_numeric);
+    std::cout << "float: " << fvalue;
+    if (fvalue - ivalue == 0)
         std::cout << ".0f" << std::endl;
     else
         std::cout << "f" << std::endl;
@@ -75,8 +80,19 @@ void Converter::ConvertToFloat(void) const
 
 void Converter::ConvertToDouble(void) const
 {
-    if (_numeric > DBL_MAX || _numeric < DBL_MIN)
-        throw (ImpossibleToConvert());
+    if (std::isnan(this->_numeric))
+    {
+        std::cout << "double: nan\n";
+        return ;
+    }
+    else if (std::isinf(this->_numeric))
+    {
+        if (this->_numeric > 0)
+            std::cout << "double: +inff" << std::endl;
+        else
+            std::cout << "double: -inff" << std::endl;
+        return ;
+    }
     double num = static_cast<double>(_numeric);
     int integer = static_cast<int>(_numeric);
     std::cout << "double: " << num;
@@ -85,15 +101,6 @@ void Converter::ConvertToDouble(void) const
     std::cout << std::endl;
 }
 
-const char* Converter::ImpossibleToDisplay::what() const throw()
-{
-    return ("Non displayable");
-}
-
-const char* Converter::ImpossibleToConvert::what() const throw()
-{
-    return ("impossible");
-}
 
 void        Converter::display(void)
 {
@@ -132,4 +139,14 @@ void        Converter::display(void)
     {
         std::cout << "double : " << e.what() << '\n';
     }
+}
+
+const char* Converter::ImpossibleToDisplay::what() const throw()
+{
+    return ("Non displayable");
+}
+
+const char* Converter::ImpossibleToConvert::what() const throw()
+{
+    return ("impossible");
 }
