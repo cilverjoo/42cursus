@@ -19,7 +19,8 @@ public:
 	~Span();
 	Span(const Span &ref);
 	Span& operator=(const Span &ref);
-	std::vector<int>	getNums(void);
+	std::vector<int>	getNums(void) const;
+	unsigned int		getSize(void) const;
 	void				addNumber(int num);
 	void				addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 	unsigned int		shortestSpan(void);

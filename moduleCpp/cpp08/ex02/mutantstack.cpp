@@ -13,6 +13,9 @@ MutantStack<T>::~MutantStack()
 template <typename T>
 MutantStack<T>::MutantStack(const MutantStack<T> &ref)
 {
+	if (this == &ref)
+		return ;
+	*this = ref;
 }
 
 template <typename T>

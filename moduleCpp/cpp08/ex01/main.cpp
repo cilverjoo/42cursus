@@ -30,14 +30,25 @@ int main()
     std::cout << sp.shortestSpan() << '\n';
     std::cout << sp.longestSpan() << '\n';
 	
-
+	std::cout << "====================\n";
+	
 	std::vector<int>	temp;
-	Span sp2(10000);
+	Span sp2(100);
 
-	for(int i=0; i<10000; i++)
-		temp.push_back(i * 3);  // 0부터 29997이 들어감
-	sp2.addNumber(temp.begin(), temp.end());  // addNumber 한번호출로 원소 10000개 다넣음
-    std::cout<<sp2.shortestSpan()<<'\n';
-    std::cout<<sp2.longestSpan()<<'\n'; 
+	for(int i = 1; i < 100; i++)
+		temp.push_back(rand() % 1000);
+	sp2.addNumber(temp.begin(), temp.end());
+
+	std::sort(temp.begin(), temp.end());
+	std::vector<int>::iterator iter;	
+	std::cout << "random vector : [";	
+	for (iter = temp.begin(); iter != temp.end(); iter++)
+	{
+		std::cout << *iter << " ";
+	}
+	std::cout << "]" << std::endl;
+	
+    std::cout << sp2.shortestSpan() << '\n';
+    std::cout << sp2.longestSpan() << '\n'; 
 	return (0);
 }

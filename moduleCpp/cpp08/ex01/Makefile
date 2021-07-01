@@ -2,7 +2,7 @@ NAME = iter
 CC = clang++
 FLAGS = -Wall -Wextra -Werror -I./ -std=c++98
 
-SRCS = main.cpp
+SRCS = main.cpp span.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

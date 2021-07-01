@@ -14,13 +14,21 @@ Span::Span(const Span &ref) : _size(ref._size), _nums(ref._nums)
 
 Span&					Span::operator=(const Span &ref)
 {
-	*this = Span(ref);
+	if (this == &ref)
+		return (*this);
+	this->_nums = ref.getNums();
+	this->_size = ref.getSize();
 	return (*this);
 }
 
-std::vector<int>		Span::getNums()
+std::vector<int>		Span::getNums() const
 {
 	return (this->_nums);
+}
+
+unsigned int			Span::getSize() const
+{
+	return (this->_size);
 }
 
 const char*				Span::NoSpaceException::what() const throw()
@@ -30,7 +38,7 @@ const char*				Span::NoSpaceException::what() const throw()
 
 const char*				Span::NumberIsLessThanTwoException::what() const throw()
 {
-	return ("Not enough number(s) exist(s) :(");
+	return ("There are less than 2 elements : Cannot compare :(");
 }
 
 void					Span::addNumber(int num)
@@ -49,20 +57,20 @@ void					Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::ite
 
 unsigned int			Span::shortestSpan(void)
 {
-	std::vector<int>::iterator iter1;
+	std::vector<int>::iterator iter;
 	std::vector<int>::iterator iter2;
-	unsigned int min;
+	std::vector<int> copy;
+	int min;
 	
-	min = std::numeric_limits<unsigned int>::max();
+	min = std::numeric_limits<int>::max();
 	if (this->_nums.size() <= 1)
 		throw (NumberIsLessThanTwoException());
-	for (iter1 = _nums.begin(); iter1 != _nums.end(); iter1++)
+	copy = this->_nums;
+	std::sort(copy.begin(), copy.end());
+	for (iter = copy.begin(); iter != copy.end(); iter++)
 	{
-		for (iter2 = _nums.end(); iter2 != _nums.begin(); iter2--)
-		{
-			if (min > (std::max(*iter1, *iter2) - (std::min(*iter1, *iter2))))
-				min = (std::max(*iter1, *iter2) - (std::min(*iter1, *iter2)));
-		}
+		if (min > (std::max(*iter, *(iter + 1)) - (std::min(*iter, *(iter + 1)))))
+			min = (std::max(*iter, *(iter + 1)) - (std::min(*iter, *(iter + 1))));
 	}
 	return (min);
 }
@@ -77,5 +85,5 @@ unsigned int			Span::longestSpan(void)
 		throw(NumberIsLessThanTwoException());
 	copy = this->_nums;
 	std::sort(copy.begin(), copy.end());
-	return (std::abs(copy.at(0) - copy.at(copy.size() - 1)));
+	return ((unsigned int)(std::abs(copy.at(0) - copy.at(copy.size() - 1))));
 }
