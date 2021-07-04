@@ -1,4 +1,4 @@
-NAME = iter
+NAME = whatever
 CC = clang++
 FLAGS = -Wall -Wextra -Werror -I./ -std=c++98
 
