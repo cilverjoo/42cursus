@@ -1,4 +1,4 @@
-# 1. push_swap Instructions
+# push_swap Instructions
 
 * 이 프로젝트는 사람에 의해서만 평가되므로 파일을 원하는대로 작성해도 된다.
 * 실행가능한 파일은 checker, push_swap이 있어야 한다.
@@ -9,7 +9,7 @@
 * 사용가능 함수 : write, read, malloc, free, exit
 
 
-# 2. Mandatory part
+# Mandatory part
 ## 1. checker
 * int 리스트 형태의 stack A를 인자로 받는다. (순서주의 - 첫 숫자가 스택의 top이다.) 아무 인자도 주어지지 않는다면 checker는 아무것도 하지 않고 종료.
 * standard input에 instructions를 입력받으며, 각 인자 다음에 \n 이 온다.

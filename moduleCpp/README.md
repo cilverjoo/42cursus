@@ -1,4 +1,4 @@
-## module cpp에서 학습할 수 있는 내용
+# module cpp에서 학습할 수 있는 내용
 
 ## module cpp 00
 - 클래스
@@ -48,6 +48,5 @@
 ## module cpp 08
 - stack<T>의 iterator를 구현한다.
 
-```
-자세한 내용은 cpp 폴더 내 README를 참고 바랍니다.
-```
+
+> 자세한 내용은 cpp 폴더 내 README를 참고 바랍니다.
