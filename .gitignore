@@ -1,1 +1,5 @@
-pft_2019/
+DS_Store
+.vscode
+*.o
+CPP.md
+GIT.md
