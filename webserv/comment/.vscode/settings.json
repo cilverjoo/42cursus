@@ -1,0 +1,9 @@
+{
+	"files.associations": {
+		"queue": "cpp",
+		"__config": "cpp",
+		"chrono": "cpp",
+		"vector": "cpp",
+		"cstdlib": "cpp"
+	}
+}
