@@ -1,1 +1,4 @@
-pft_2019/
+.DS_Store
+.vscode
+*.o
+webserv/withoutComment
