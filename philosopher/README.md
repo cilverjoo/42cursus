@@ -510,14 +510,12 @@ explicit threading, but an excellent candidate for implicit threading.
 
 
 * status는 다음과 같은 방식으로 정의된다.
- 	
+ ```
 	options 매개 변수는 다음 옵션의 비트 단위 OR을 포함합니다. 
-	
 	WNOHANG 옵션은 상태를 보고하려는 프로세스가 없는 경우에도 block하지 않는다.
-	WNOHANG 옵션이 지정되었고, 상태를 보고하려는 프로세스가 없는 경우 0을 리턴한다.
-	
+	WNOHANG 옵션이 지정되었고, 상태를 보고하려는 프로세스가 없는 경우 0을 리턴한다.	
 	WUNTRACED 옵션이 설정된 경우 SIGTTIN, SIGTTOU, SIGTSTP 또는 SIGSTOP 신호로 인해 중지 된 현재 프로세스의 하위도 상태가 보고된다.
-
+```
 * 프로세스에서 exit된 방법을 테스트하기 위해 다음의 매크로들이 사용된다.
 
 
