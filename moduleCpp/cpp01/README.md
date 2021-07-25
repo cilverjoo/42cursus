@@ -116,21 +116,18 @@ Something(): m_value { 5 }
 #### 정적(static) 멤버
 - 전역변수나 함수와 같다.
 - 정적 멤버 함수는 인스턴스를 선언하지 않고 직접 호출할 수 있다. 그러나 this 포인터를 사용할 수 없으며 정적 변수는 반드시 선언과 정의를 분리해야 한다.
-=======
 ex01)
 
 
 ex07 )
 
-1. open(const char *fileName, ios_bash::openmode mode = ios_bash::in) : 첫번째 인자로는 open할 파일 이름이 들어가고 두번째 인자로는 open mode가 들어간다
-
+* open(const char *fileName, ios_bash::openmode mode = ios_bash::in) : 첫번째 인자로는 open할 파일 이름이 들어가고 두번째 인자로는 open mode가 들어간다
+```
     ios_base::in - 파일을 read할 목적으로 open
-
     ios_base::out - 파일을 write할 목적으로 opne
-
     ios_base::binary - 파일을 바이너리 형태로 open ..etc.
-
-2. bool is_open() : 파일이 열렸는지 확인하는 함수
-3. void close() : 파일을 닫는 함수
-4. getline(char *str, streamize len) : '\n'을 만날 때까지 문장 끝까지 읽어주는 함수
-5. bool eof() : 파일의 끝이 나오면 true를 반환하고 아니면 false를 반환
+```
+* bool is_open() : 파일이 열렸는지 확인하는 함수
+* void close() : 파일을 닫는 함수
+* getline(char *str, streamize len) : '\n'을 만날 때까지 문장 끝까지 읽어주는 함수
+* bool eof() : 파일의 끝이 나오면 true를 반환하고 아니면 false를 반환
