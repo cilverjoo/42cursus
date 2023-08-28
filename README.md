@@ -21,8 +21,9 @@
 - 플레이어가 이동하면서 발생할 수 있는 모든 에러를 방지해야 합니다.
 
 ## ft_server
-- docker를 활용하여 wordpress, phpmyadmin, nginx, mysql을 연결해보는 과제입니다.
-- Dockerfile을 만들어 생성된 이미지를 기반으로 컨테이너를 실행시켰을 때 localhost에서 wordpress, phpmyadmin이 nginx를 기반으로 잘 연결되는지 확인되어야 합니다.
+- Kubernetes를 활용하여 wordpress, phpmyadmin, nginx, mysql을 연결해보는 과제입니다.
+- Docker로 생성한 이미지로 컨테이너를 실행시켰을 때 localhost에서 wordpress, phpmyadmin이 nginx를 기반으로 잘 연결되는지 확인되어야 합니다.
+
 
 ## minishell
 - 경량 bash를 구현해보는 과제입니다.
@@ -34,8 +35,10 @@
 - intel 어셈블리어를 활용하여 문자열 처리 함수를 구현해보는 과제입니다.
 
 ## ft_services
-- 쿠버네티스를 활용하여 nginx, phpmyadmin, wordpress, grafana, influxdb, mysql, ftps를 파드별로 상태관리를 하고 연결해보는 과제입니다.
+- Kubernetes를 활용하여 nginx, phpmyadmin, wordpress, grafana, influxdb, mysql, ftps를 파드별로 상태관리를 하고 연결해보는 과제입니다.
 - mysqld, influxd는 파드가 죽어도 이전에 저장되었던 데이터의 내용이 휘발되면 안 되므로 적절한 처리가 필요합니다. 저는 supervisord를 실행시켜두고 volume의 타입을 Retain으로 고정해주었습니다.
+- ClusterIP, NodePort 등 서비스 타입에 대한 이해가 필요하며, 외부에 노출할 서비스와 내부에서만 ClusterIP로 연결되는 서비스를 엄밀하게 분리해줘야 합니다.
+- Pod, Service, Deployment의 개념을 이해하고, Kubernetes 내부에서 생성되는 메트릭 정보를 grafana로 모니터링하며 Volume의 특성을 이해하고 휘발되지 않는 데이터를 저장하려면 어떻게 해야하는지 적절한 처리를 해 줘야 합니다.
 
 ## pushswap
 - 임의의 int 배열이 stack으로 주어질 때, 최소한의 명령어를 사용하여 stack 내의 element들을 정렬시키는 알고리즘을 짜는 과제입니다.
@@ -43,7 +46,8 @@
 ## philosophers
 - 임의의 수의 철학자들과, 그 철학자들의 수와 동일한 포크가 주어지고 테이블 가운데에는 스파게티가 놓여져있다고 할 때, 모든 철학자들이 주어진 시간 내에 두개의 포크로 식사를 마치고 다른 철학자에게 포크를 넘겨주며 무한 반복할 수 있는 thread / process 구조를 짜는 과제입니다.
 - semaphore, mutex, pthread, process에 대한 이해가 필요합니다.
+- 라이브러리를 사용하지 않고 직접 MultiThreading, MultiProcessing을 직접 구현해 보면서 병행 처리의 이해를 높일 수 있는 과제입니다.
 
 ## moduleCPP(00~08)
 - C++를 통해 객체지향프로그래밍을 이해하는 것이 목표인 과제셋입니다.
-- 과제 넘버 별로 class, 예외처리, template, 상속 등 주제가 정해져있으므로 순서대로 클리어 해 가면서 oop에 대한 감을 잡을 수 있습니다.
+- 과제 넘버 별로 class, 예외처리, template, 상속 등 주제가 정해져있으므로 순서대로 클리어 해 가면서 객체지향 프로그래밍에 대한 감을 잡을 수 있습니다.
